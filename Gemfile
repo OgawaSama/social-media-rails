@@ -68,4 +68,5 @@ gem "capybara"
 gem "rspec"
 
 
-gem 'coveralls_reborn', require: false
+gem "coveralls_reborn", require: false
+
