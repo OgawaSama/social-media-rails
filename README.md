@@ -10,9 +10,9 @@ Esta plataforma serve como um meio simples, eficiente e elegante para ajudar via
 Andre Jun Hirata - 4818552  
 Davi Moura Araujo - 14677130  
 Guilherme Santos Gabriel - 12554925  
-Isabela de Andrade Lima Brendel Braga -  
+Isabela de Andrade Lima Brendel Braga - 14579440  
 Mateus Dvorzak Ogawa - 14656895  
-Reynaldo Pedro Bom Mendes -  
+Reynaldo Pedro Bom Mendes - 14605932  
 
 ## Como usar
 
