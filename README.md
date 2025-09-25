@@ -19,7 +19,7 @@ Reynaldo Pedro Bom Mendes - 14605932
 
 
 ## Heroku
-(Link aqui)
+[Aplicação no Heroku](https://tabi-planner-8fed89242f80.herokuapp.com/)
 
 ## Pivotal
 (Link aqui)
