@@ -1,0 +1,21 @@
+<div id="<%= dom_id profile %>">
+
+  <p>
+    <div><%= image_tag(profile.header, :size => "800x200") if profile.header.attached? %></div>
+  </p>
+
+  <h2>
+    <strong>User:</strong>
+    <%= profile.user.username %>
+  </h2>
+  
+  <p>
+    <div><%= image_tag(profile.avatar, :size => "150x160") if profile.avatar.attached? %></div>
+  </p>
+
+  <p>
+    <strong>Bio:</strong>
+    <%= profile.bio %>
+  </p>
+
+</div>
