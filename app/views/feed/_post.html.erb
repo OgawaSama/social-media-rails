@@ -1,0 +1,10 @@
+
+<div class="h-96 w-full bg-gray-200 rounded-lg overflow-hidden">
+    <p class="text-xl"> <b> <%= link_to post.caption, post %> </b>  </p>
+    <div class="p-2">
+        <%= image_tag(post.images.first, :size => "250x250", class: "w-full h-80 object-cover") if post.images.any? %>
+        <p class="text-xl"> <%= post.body&.body&.to_plain_text&.first(144) %> </p>
+        <p class="text-md text-gray-700"> Post by <%= post.user.username %> </p>
+        <p class="text-sm text-gray-600"> posted <%= time_ago_in_words(post.created_at) %> ago </p>
+    </div>
+</div>
