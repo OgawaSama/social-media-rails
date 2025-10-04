@@ -6,7 +6,7 @@ module Posts
             @comment = current_user.comments.create(post: @post, name: params[:name])
             @comment.user = current_user
             @comment.update(comment_params)
-            redirect_to root_path
+            redirect_to feed_path
         end
 
         def count 
