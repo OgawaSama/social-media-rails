@@ -1,4 +1,8 @@
 class PagesController < ApplicationController
-  def show
+  def userindex
+    @users = User.all
+  end
+
+  def barindex
   end
 end

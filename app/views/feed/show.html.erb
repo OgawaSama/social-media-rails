@@ -1,6 +1,8 @@
 <%= button_to "Sign out", destroy_user_session_path, method: :delete %> 
-<%= button_to "Edit account", edit_user_registration_path %>
-<%= button_to "Go to my profile", profile_path(id: current_user.profile.id) %>
+<%= button_to "Edit account", edit_user_registration_path, method: :get %>
+<%= button_to "Go to my profile", profile_path(id: current_user.profile.id, :trailing_slash => true), method: :get %>
+
+<%= button_to "Show user list", userindex_path, method: :get %>
 
 <%= form_with url: search_users_path, method: :get, local: true do |f| %>
   <div class="flex items-center mt-4">
