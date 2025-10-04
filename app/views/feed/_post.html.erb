@@ -3,8 +3,21 @@
     <p class="text-xl"> <b> <%= link_to post.caption, post %> </b>  </p>
     <div class="p-2">
         <%= image_tag(post.images.first, :size => "250x250", class: "w-full h-80 object-cover") if post.images.any? %>
-        <p class="text-xl"> <%= post.body&.body&.to_plain_text&.first(144) %> </p>
-        <p class="text-md text-gray-700"> Post by <%= post.user.username %> </p>
+        <p class="text-xl"> <%= post.feed_body %> <%= "..." if post.feed_body_truncated? %> </p>
+        <p class="text-md text-gray-700"> Post by <%= post.user.username %> </p> 
         <p class="text-sm text-gray-600"> posted <%= time_ago_in_words(post.created_at) %> ago </p>
     </div>
+
+    <div class="absolute bottom-4 right-5">
+        <%= button_to "♡", post_reactions_path(post, name: "heart"), data:  {'turbo-method' => :post} %>
+        <%= post.reactions.count %>
+    </div>
+<!-- ♥ -->
+    <%= turbo_frame_tag :comments do %>
+        <div class="w-full flex justify-between">
+            <%= link_to "View #{post.comments.count} comments", post_comments_path(post), class: "text-lg" %> 
+            <%= link_to "Leave a comment", new_post_comment_path(post), class: "text-lg" %>
+        </div>
+    <% end %>
+    <br>
 </div>
