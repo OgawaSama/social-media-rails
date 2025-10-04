@@ -1,0 +1,11 @@
+<h1> Registered users </h1>
+
+<%= button_to "Back to feed", root_path, method: :get %>
+
+<div id="posts">
+  <% @users.each do |user| %>
+    <p>
+      USER: <%= user.email %>
+    </p>
+  <% end %>
+</div>

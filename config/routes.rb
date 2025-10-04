@@ -1,13 +1,19 @@
 Rails.application.routes.draw do
   resources :profiles
-  # get "profile/show"
-  # get "profile/edit"
-  resources :posts
-
+  resources :posts do
+    scope module: :posts do
+      resources :reactions, only: [:create]
+      resources :comments, only: [:new, :create, :index]
+    end
+  end
+  
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     registrations: 'users/registrations'
   }
+  
+  get "pages/userindex", as: "userindex"
+  get "pages/barindex", as: "barindex"
 
   get "feed", to: "feed#show", as: :feed
 
