@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
 
-  get "feed/show"
+  get "feed", to: "feed#show", as: :feed
 
   get "up" => "rails/health#show", as: :rails_health_check
 
