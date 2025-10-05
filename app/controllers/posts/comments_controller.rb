@@ -1,12 +1,20 @@
 module Posts
     class CommentsController < ApplicationController
-        def new; end
+        before_action :set_post
+
+        def new
+            @comment = @post.comments.new
+        end
 
         def create
-            @comment = current_user.comments.create(post: @post, name: params[:name])
+            @comment = @post.comments.new(comment_params)
             @comment.user = current_user
-            @comment.update(comment_params)
-            redirect_to feed_path
+
+            if @comment.save
+                redirect_to feed_path
+            else
+                render :new
+            end
         end
 
         def count 
@@ -14,6 +22,10 @@ module Posts
         end
 
         private
+
+        def set_post
+            @post = Post.find(params[:post_id])
+        end
 
         def comment_params
            params.require(:comment).permit(:content) 
