@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :posts do
     scope module: :posts do
       resources :reactions, only: [:create, :destroy]
-      resources :comments, only: [:new, :create, :index]
+      resources :comments, only: [:new, :create, :index, :destroy]
     end
   end
 
