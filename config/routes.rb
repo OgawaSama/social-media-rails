@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resource :business_registration, only: [:new, :create, :edit, :update]
   resources :profiles
   resources :posts do
     scope module: :posts do

@@ -11,6 +11,12 @@
   </div>
 <% end %>
 
+<% if user_signed_in? && current_user.type != "BusinessUser" %>
+  <%= link_to "É uma empresa? Cadastre-se aqui", new_business_registration_path, class: "btn btn-outline-primary" %>
+<% elsif user_signed_in? && current_user.type == "BusinessUser" && current_user.try(:business).present? %>
+  <%= link_to "Editar perfil empresarial", edit_business_registration_path, class: "btn btn-outline-primary" %>
+<% end %>
+
 <div class="fle flex-col items-center pt-24">
     <h1>My Feed</h1>
 
