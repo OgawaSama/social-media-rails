@@ -8,5 +8,11 @@ module Posts
         def count 
             @count = Post.reactions.count
         end
+
+        def destroy
+            @Reaction = Reaction.find_by(id: params[:id])
+            @Reaction.destroy!
+
+        end
     end
 end
