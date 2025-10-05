@@ -7,6 +7,8 @@ Rails.application.routes.draw do
       resources :comments, only: [:new, :create, :index]
     end
   end
+
+  resources :friendships
   
   devise_for :users, controllers: {
     sessions: 'users/sessions',

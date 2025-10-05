@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_10_04_234724) do
+ActiveRecord::Schema[8.0].define(version: 2025_10_04_240014) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -78,6 +78,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_04_234724) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
+  create_table "friendships", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "other_user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["other_user_id"], name: "index_friendships_on_other_user_id"
+    t.index ["user_id", "other_user_id"], name: "index_friendships_on_user_id_and_other_user_id", unique: true
+    t.index ["user_id"], name: "index_friendships_on_user_id"
+  end
+
   create_table "posts", force: :cascade do |t|
     t.string "caption"
     t.datetime "created_at", null: false
@@ -102,6 +112,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_04_234724) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["post_id"], name: "index_reactions_on_post_id"
+    t.index ["user_id", "post_id"], name: "index_reactions_on_user_id_and_post_id", unique: true
     t.index ["user_id"], name: "index_reactions_on_user_id"
   end
 
@@ -139,6 +150,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_04_234724) do
   add_foreign_key "businesses", "users"
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
+  add_foreign_key "friendships", "users"
+  add_foreign_key "friendships", "users", column: "other_user_id"
   add_foreign_key "posts", "users"
   add_foreign_key "profiles", "users"
   add_foreign_key "reactions", "posts"
