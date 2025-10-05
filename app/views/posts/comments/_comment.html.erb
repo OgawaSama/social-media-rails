@@ -4,4 +4,7 @@
     <span class="text-gray-700"> <%= comment.user.username %> </span>
     <span class="text-gray-500 text-sm"> <%= time_ago_in_words comment.created_at %> ago </span>
   </div>
+  <% if current_user == comment.user %>
+    <%= button_to "Delete comment", post_comment_path(id: comment.id), method: :delete %>
+  <% end %>
 </div>

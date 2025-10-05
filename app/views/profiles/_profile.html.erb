@@ -13,7 +13,11 @@
   </p>
 
   <p>
-    <%= profile.user.friendships.count %> friends
+    <%= profile.user.friendships.count %> following
+  </p>
+
+  <p>
+    <%= Friendship.where(other_user_id: profile.user.id).count %> followers
   </p>
 
   <p>
@@ -28,9 +32,9 @@
 <div>
 <% if current_user != profile.user %>
   <% if current_user.friendships.find_by(other_user_id: profile.user.id).present? %>
-    <%= button_to "Remove friend", friendship_path(user_id: profile.user.id), method: :delete %>
+    <%= button_to "Unfollow this person", friendship_path(user_id: profile.user.id), method: :delete %>
   <% else %>
-    <%= button_to "Add friend", friendships_path(user_id: profile.user.id), data: {turbo_method: :post} %>
+    <%= button_to "Follow this person", friendships_path(user_id: profile.user.id), data: {turbo_method: :post} %>
   <% end %>
   <% end %>
 </div>
