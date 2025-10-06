@@ -20,12 +20,12 @@ class PostTest < ActiveSupport::TestCase
     @post.body = "a" * 200
     assert_equal 144, @post.feed_body.length
   end
-#
-#  test "feed_body should return up to 50 chars when there is an image" do
-#    @post.body = "a" * 200
-#    attach_image(@post, "test/fixtures/files/sample.jpg", "image/jpeg")
-#    assert_equal 50, @post.feed_body.length
-#  end
+  #
+  #  test "feed_body should return up to 50 chars when there is an image" do
+  #    @post.body = "a" * 200
+  #    attach_image(@post, "test/fixtures/files/sample.jpg", "image/jpeg")
+  #    assert_equal 50, @post.feed_body.length
+  #  end
 
   test "feed_body_truncated? returns true when text is longer than truncated version" do
     @post.body = "a" * 200
@@ -36,30 +36,30 @@ class PostTest < ActiveSupport::TestCase
     @post.body = "short text"
     refute @post.feed_body_truncated?
   end
-# Later
-#  test "attached files should all be images" do
-#    # Attach valid image files
-#    attach_image(@post, "test/fixtures/files/sample.jpg", "image/jpeg")
-#    attach_image(@post, "test/fixtures/files/sample.png", "image/png")
-#
-#    @post.images.each do |image|
-#      extension = File.extname(image.filename.to_s).downcase
-#      assert_includes [ ".jpg", ".jpeg", ".png", ".gif" ], extension,
-#                       "Attached file #{image.filename} is not a valid image format"
-#    end
-#  end
-#
-#  test "should reject non-image attachments" do
-#    # This simulates adding a non-image file (e.g., .pdf)
-#    file_path = "test/fixtures/files/sample.pdf"
-#    @post.images.attach(io: File.open(file_path), filename: "sample.pdf", content_type: "application/pdf")
-#
-#    invalid_files = @post.images.reject do |image|
-#      [ ".jpg", ".jpeg", ".png", ".gif" ].include?(File.extname(image.filename.to_s).downcase)
-#    end
-#
-#    assert_not invalid_files.empty?, "Non-image attachments should be detected"
-#  end
+  # Later
+  #  test "attached files should all be images" do
+  #    # Attach valid image files
+  #    attach_image(@post, "test/fixtures/files/sample.jpg", "image/jpeg")
+  #    attach_image(@post, "test/fixtures/files/sample.png", "image/png")
+  #
+  #    @post.images.each do |image|
+  #      extension = File.extname(image.filename.to_s).downcase
+  #      assert_includes [ ".jpg", ".jpeg", ".png", ".gif" ], extension,
+  #                       "Attached file #{image.filename} is not a valid image format"
+  #    end
+  #  end
+  #
+  #  test "should reject non-image attachments" do
+  #    # This simulates adding a non-image file (e.g., .pdf)
+  #    file_path = "test/fixtures/files/sample.pdf"
+  #    @post.images.attach(io: File.open(file_path), filename: "sample.pdf", content_type: "application/pdf")
+  #
+  #    invalid_files = @post.images.reject do |image|
+  #      [ ".jpg", ".jpeg", ".png", ".gif" ].include?(File.extname(image.filename.to_s).downcase)
+  #    end
+  #
+  #    assert_not invalid_files.empty?, "Non-image attachments should be detected"
+  #  end
 
   private
 
