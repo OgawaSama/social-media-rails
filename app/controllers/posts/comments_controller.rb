@@ -17,7 +17,7 @@ module Posts
             end
         end
 
-        def count 
+        def count
             @count = Post.comments.count
         end
 
@@ -33,7 +33,7 @@ module Posts
         end
 
         def comment_params
-           params.require(:comment).permit(:body) 
+           params.require(:comment).permit(:body)
         end
     end
 end

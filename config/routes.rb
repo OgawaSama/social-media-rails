@@ -1,20 +1,20 @@
 Rails.application.routes.draw do
-  resource :business_registration, only: [:new, :create, :edit, :update]
+  resource :business_registration, only: [ :new, :create, :edit, :update ]
   resources :profiles
   resources :posts do
     scope module: :posts do
-      resources :reactions, only: [:create, :destroy]
-      resources :comments, only: [:new, :create, :index, :destroy]
+      resources :reactions, only: [ :create, :destroy ]
+      resources :comments, only: [ :new, :create, :index, :destroy ]
     end
   end
 
   resources :friendships
-  
+
   devise_for :users, controllers: {
-    sessions: 'users/sessions',
-    registrations: 'users/registrations'
+    sessions: "users/sessions",
+    registrations: "users/registrations"
   }
-  
+
   get "pages/userindex", as: "userindex"
   get "pages/barindex", as: "barindex"
 

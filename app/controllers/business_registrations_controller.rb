@@ -1,6 +1,6 @@
 class BusinessRegistrationsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_business, only: [:edit, :update]
+  before_action :set_business, only: [ :edit, :update ]
 
   def new
     @business = Business.new
@@ -42,7 +42,7 @@ class BusinessRegistrationsController < ApplicationController
   def business_params
     params.require(:business).permit(
       :company_name, :cnpj,
-      business_addresses_attributes: [:id, :street, :city, :state, :zip, :_destroy]
+      business_addresses_attributes: [ :id, :street, :city, :state, :zip, :_destroy ]
     )
   end
 end
