@@ -1,12 +1,36 @@
 class ProfilesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_profile, only: %i[ show edit update ]
+  before_action :set_profile, only: %i[show edit update destroy]
+
+  # GET /profiles
+  def index
+    @profiles = Profile.all
+  end
+
+  # GET /profiles/1
+  def show
+  end
+
+  # GET /profiles/new
+  def new
+    @profile = Profile.new
+  end
+
+  # POST /profiles
+  def create
+    @profile = current_user.build_profile(profile_params)
+    if @profile.save
+      redirect_to @profile, notice: "Profile was successfully created!"
+    else
+      render :new
+    end
+  end
 
   # GET /profiles/1/edit
   def edit
   end
 
-  # PATCH/PUT /profiles/1 or /profiles/1.json
+  # PATCH/PUT /profiles/1
   def update
     if @profile.update(profile_params)
       redirect_to @profile, notice: "Profile was successfully updated!"
@@ -15,14 +39,19 @@ class ProfilesController < ApplicationController
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_profile
-      @profile = Profile.find(params[:id])
-    end
+  # DELETE /profiles/1
+  def destroy
+    @profile.destroy
+    redirect_to profiles_url, notice: "Profile was successfully destroyed!"
+  end
 
-    # Only allow a list of trusted parameters through.
-    def profile_params
-      params.expect(profile: [ :bio, :header, :avatar, :user_id ])
-    end
+  private
+
+  def set_profile
+    @profile = Profile.find(params[:id])
+  end
+
+  def profile_params
+    params.require(:profile).permit(:bio, :header, :avatar)
+  end
 end

@@ -2,8 +2,8 @@ class Post < ApplicationRecord
   belongs_to :user
   has_rich_text :body
   has_many_attached :images
-  has_many :reactions
-  has_many :comments
+  has_many :reactions, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
   def feed_body
       # if there is an image, smaller char limit
