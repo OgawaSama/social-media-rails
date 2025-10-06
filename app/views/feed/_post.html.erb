@@ -1,0 +1,28 @@
+
+<div class="h-96 w-full bg-gray-200 rounded-lg overflow-hidden">
+    <p class="text-xl"> <b> <%= link_to post.caption, post %> </b>  </p>
+    <div class="p-2">
+        <%= image_tag(post.images.first, :size => "250x250", class: "w-full h-80 object-cover") if post.images.any? %>
+        <p class="text-xl"> <%= post.feed_body %> <%= "..." if post.feed_body_truncated? %> </p>
+        <p class="text-md text-gray-700"> Post by <%= link_to post.user.username, profile_path(post.user.profile) %> </p> 
+        <%= image_tag(post.user.profile.avatar, :size => "30x30") if post.user.profile.avatar.attached? %>
+        <p class="text-sm text-gray-600"> posted <%= time_ago_in_words(post.created_at) %> ago </p>
+    </div>
+
+    <div class="absolute bottom-4 right-5">
+    <% if current_user.reactions.find_by(post: post, name: "heart").present? %>  
+        <%= button_to "♥", post_reaction_path(id: Reaction.find_by(user: current_user, post: post, name: "heart").id, post_id: post.id), method: :delete %>
+    <% else %> 
+        <%= button_to "♡", post_reactions_path(post, name: "heart"), data:  {'turbo-method' => :post} %>
+    <% end %>
+    <%= post.reactions.count %>
+    </div>
+<!-- ♥ -->
+    <%= turbo_frame_tag :comments do %>
+        <div class="w-full flex justify-between">
+            <%= link_to "View #{post.comments.count} comments", post_comments_path(post), class: "text-lg" %> 
+            <%= link_to "Leave a comment", new_post_comment_path(post), class: "text-lg" %>
+        </div>
+    <% end %>
+    <br>
+</div>

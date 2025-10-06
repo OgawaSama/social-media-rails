@@ -1,0 +1,16 @@
+<div class="w-full flex flex-col items-center pt-24">
+  <div class="max-w-5xl w-full mx-auto">
+    <%= turbo_frame_tag :comments do %>
+      <%= form_with model: [@post, @post.comments.new] do |f| %>
+        <div>
+          <%= f.label :body, style: "display: block" %>
+          <%= f.rich_text_area :body %>
+        </div>
+        <div>
+          <%= f.submit "Post comment" %>
+          <%= link_to "Cancel", "/" %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>

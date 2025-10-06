@@ -1,0 +1,17 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @profile %>
+
+<div>
+  <%= link_to "Edit profile", edit_profile_path(@profile) %> |
+  <%= link_to "Back to feed", feed_path %>
+
+</div>
+
+<div class="mt-6 max-w-2xl w-full mx-auto flex items-center justify-between">
+    <%= link_to "Create new post", new_post_path %>
+</div>
+
+<div class="max-w-5xl w-full grid gap-8 mt-8">
+  <%= render partial: "post", collection: @profile.user.posts %>
+</div>
