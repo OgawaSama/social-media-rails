@@ -37,7 +37,7 @@ class ProfilesTest < ApplicationSystemTestCase
 #    assert_text "Profile was successfully updated"
 #    click_on "Back to profile"
 #  end
-#lugar errado
+# lugar errado
 #  test "should destroy Profile" do
 #    visit profile_url(@profile)
 #    click_on "Destroy this profile", match: :first
