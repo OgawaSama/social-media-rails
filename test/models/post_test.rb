@@ -36,7 +36,7 @@ class PostTest < ActiveSupport::TestCase
     @post.body = "short text"
     refute @post.feed_body_truncated?
   end
-#Later
+# Later
 #  test "attached files should all be images" do
 #    # Attach valid image files
 #    attach_image(@post, "test/fixtures/files/sample.jpg", "image/jpeg")

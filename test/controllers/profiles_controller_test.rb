@@ -10,7 +10,7 @@ class ProfilesControllerTest < ActionDispatch::IntegrationTest
     @profile.user = @user
     @profile.save
   end
-#Nao era pra existir
+# Nao era pra existir
 #  test "should get index" do
 #    get profiles_url, as: :html
 #    assert_response :success
@@ -20,7 +20,7 @@ class ProfilesControllerTest < ActionDispatch::IntegrationTest
 #    get new_profile_url, as: :html
 #    assert_response :success
 #  end
-#[Bookmark] ver como fazer action text ser aceito no teste
+# [Bookmark] ver como fazer action text ser aceito no teste
 #  test "should create profile" do
 #    assert_difference("Profile.count") do
 #      post profiles_url, params: { profile: { bio: "Meu bio", header: "Header" } }, as: :html
@@ -39,7 +39,7 @@ class ProfilesControllerTest < ActionDispatch::IntegrationTest
     get edit_profile_url(@profile), as: :html
     assert_response :success
   end
-#[Bookmark] ver como fazer action text ser aceito no teste
+# [Bookmark] ver como fazer action text ser aceito no teste
 #  test "should update profile" do
 #    patch profile_url(@profile), params: { profile: { bio: "Atualizado" } }, as: :html
 #    @profile.reload
