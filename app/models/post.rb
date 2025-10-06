@@ -6,7 +6,7 @@ class Post < ApplicationRecord
   has_many :comments, dependent: :destroy
 
   def feed_body
-      # if there is an image, smaller char limit
+    # if there is an image, smaller char limit
     char_limit = images.any? ? 50 : 144
     body&.body&.to_plain_text&.first(char_limit)
   end
@@ -16,5 +16,4 @@ class Post < ApplicationRecord
     feed_body_count = feed_body&.chars&.count || 0
     body_chars > feed_body_count
   end
-
 end
