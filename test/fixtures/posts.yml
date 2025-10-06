@@ -2,6 +2,8 @@
 
 one:
   caption: MyString
+  user: one
 
 two:
   caption: MyString
+  user: two

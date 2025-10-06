@@ -1,8 +1,15 @@
 require "application_system_test_case"
 
 class PostsTest < ApplicationSystemTestCase
+  include Devise::Test::IntegrationHelpers
+
   setup do
+    @user = users(:one)
+    sign_in @user
+
     @post = posts(:one)
+    @post.user = @user
+    @post.save
   end
 
   test "visiting the index" do
