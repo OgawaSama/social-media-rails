@@ -37,4 +37,3 @@
 #TEMP
 # se precisar, tira do .gitignore dps
 .coveralls.yml
-/vendor/*
