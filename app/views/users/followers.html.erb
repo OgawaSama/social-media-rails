@@ -8,7 +8,6 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title"><%= follower.username %></h5>
-              <p class="card-text"><%= follower.email %></p>
               <% if follower.profile %>
                 <%= link_to "Ver Perfil", profile_path(follower.profile), class: "btn btn-primary btn-sm" %>
               <% else %>

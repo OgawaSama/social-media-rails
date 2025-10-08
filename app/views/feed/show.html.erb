@@ -24,7 +24,13 @@
         <%= link_to "Create new post", new_post_path %>
     </div>
 
-    <div class="max-w-5xl w-full grid gap-8 mt-8">
-        <%= render partial: "post", collection: @posts %>
-    </div>
+    <% if @posts.any? %>
+      <div class="max-w-5xl w-full grid gap-8 mt-8">
+          <%= render partial: "post", collection: @posts %>
+      </div>
+    <% else %>
+      <h3>
+        Vazio aqui... Comece a seguir alguém para ver posts no seu feed!
+      </h3>
+    <% end %>
 </div>

@@ -1,16 +1,13 @@
 <div id="<%= dom_id post %>">
-  <p>
-    <strong>Caption:</strong>
+  <strong>
     <%= post.caption %>
-  </p>
+  </strong>
 
   <p>
-    <strong>Body:</strong>
     <%= post.body %>
   </p>
 
   <p>
-    <strong>Images:</strong>
     <% post.images.each do |image| %>
       <div><%= image_tag(post.images.first, :size => "500x500") if post.images.any? %></div>
     <% end %>

@@ -7,7 +7,8 @@ Rails.application.routes.draw do
       resources :comments, only: [ :new, :create, :index, :destroy ]
     end
   end
-
+  
+  resources :groups
   resources :friendships
   resources :relationships, only: [ :create, :destroy ]
 
@@ -23,9 +24,13 @@ Rails.application.routes.draw do
       get :following
       post :follow, to: "relationships#create"
       delete :unfollow, to: "relationships#destroy"
+
+      get :groups
     end
   end
 
+  post :add_member, to: "groups#add_member"
+  post :remove_member, to: "groups#remove_member"
   get "pages/userindex", as: "userindex"
   get "pages/barindex", as: "barindex"
 

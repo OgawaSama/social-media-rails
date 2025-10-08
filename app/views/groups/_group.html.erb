@@ -1,0 +1,47 @@
+<div id="<%= dom_id group %>">
+  <p>
+    <div><%= image_tag(group.header, :size => "800x200") if group.header.attached? %></div>
+  </p>
+
+  <h1>
+    <%= group.name %>
+  </h1>
+
+  <p>
+    <div><%= image_tag(group.avatar, :size => "150x160") if group.avatar.attached? %></div>
+  </p>
+
+  <p>
+    <strong>Bio:</strong>
+    <%= group.bio %>
+  </p>
+
+  <div>
+    <h2> Participants </h2>
+    <% @group.participants.each do |participant| %>
+      <p>
+        <% if participant.profile %>
+          <%= link_to participant.username, profile_path(participant.profile) %>
+        <% else %>
+          <% participant.username %> (No profile set yet)
+        <% end %>
+      </p>
+      <!-- link_to "Make this guy the owner", owner_group_path(participant)  -->
+    <% end %> 
+  </div>
+
+  <div>
+    <%= form_with url: add_member_path(id: @group.id), method: :post do |f| %>
+      <%= f.text_field :participant, placeholder: "New member's username" %>
+      <%= f.submit "Add to group" %>
+    <% end %>
+  </div>
+  <div>
+    <%= form_with url: remove_member_path(id: @group.id), method: :post do |f| %>
+      <%= f.text_field :participant, placeholder: "Member's username" %>
+      <%= f.submit "Remove from group" %>
+    <% end %>
+  </div>
+
+
+</div>

@@ -1,0 +1,16 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @group %>
+
+<div>
+  <p>
+    <%= link_to "Edit this group", edit_group_path(@group) %> |
+    <%= link_to "Back to feed", feed_path %>
+
+    <%= button_to "Destroy this group", @group, method: :delete %>
+  </p>
+</div>
+
+<div>
+  <!-- Feed from this group's member's posts -->
+</div>
