@@ -1,18 +1,15 @@
 class FeedController < ApplicationController
+  before_action :authenticate_user!
+
   def show
-    @posts = Post.all
+    # Pega os posts do usuário atual + posts de quem ele segue
+    @posts = current_user.feed.includes(:user, :reactions, :comments)
   end
 
-  # [bookmark] editar a query para aceitar outras coisas
   def search
-    if params[:query].present?
-      query = "%#{params[:query]}%"
-      @users = User.joins(:profile).where(
-        "users.username LIKE :q",
-        q: query
-      )
-    else
-      @users = User.none
-    end
+    @users = User.where("username LIKE ? OR email LIKE ?", 
+                       "%#{params[:query]}%", 
+                       "%#{params[:query]}%")
+                 .where.not(id: current_user.id)
   end
 end
