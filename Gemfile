@@ -10,7 +10,7 @@ group :development, :test do
 end
 # Produção com Postgres
 group :production do
-  gem 'pg'
+  gem "pg"
 end
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
