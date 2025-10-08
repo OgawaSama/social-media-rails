@@ -3,15 +3,25 @@
 <%= render @profile %>
 
 <div>
-  <%= link_to "Edit profile", edit_profile_path(@profile) %> |
+  <% if current_user == @profile.user %>
+    <%= link_to "Edit profile", edit_profile_path(@profile) %> |
+  <% end %>
   <%= link_to "Back to feed", feed_path %>
-
 </div>
 
-<div class="mt-6 max-w-2xl w-full mx-auto flex items-center justify-between">
-    <%= link_to "Create new post", new_post_path %>
-</div>
-
+<!-- CORREÇÃO: Mostrar posts para QUALQUER usuário, não apenas o dono -->
 <div class="max-w-5xl w-full grid gap-8 mt-8">
-  <%= render partial: "post", collection: @profile.user.posts %>
+  <% if @posts.any? %>
+    <h3>Posts de <%= @profile.user.username %></h3>
+    <%= render partial: "posts/post", collection: @posts %>
+  <% else %>
+    <p class="text-muted">Nenhum post ainda.</p>
+  <% end %>
 </div>
+
+<!-- CORREÇÃO: Botão de criar post APENAS para o dono do perfil -->
+<% if current_user == @profile.user %>
+  <div class="mt-6 max-w-2xl w-full mx-auto flex items-center justify-between">
+    <%= link_to "Create new post", new_post_path %>
+  </div>
+<% end %>

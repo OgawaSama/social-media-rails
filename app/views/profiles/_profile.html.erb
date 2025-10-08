@@ -1,5 +1,4 @@
 <div id="<%= dom_id profile %>">
-
   <p>
     <div><%= image_tag(profile.header, :size => "800x200") if profile.header.attached? %></div>
   </p>
@@ -12,29 +11,34 @@
     <div><%= image_tag(profile.avatar, :size => "150x160") if profile.avatar.attached? %></div>
   </p>
 
-  <p>
-    <%= profile.user.friendships.count %> following
-  </p>
-
-  <p>
-    <%= Friendship.where(other_user_id: profile.user.id).count %> followers
-  </p>
+  <!-- CORREÇÃO: Usar relationships em vez de friendships -->
+  <div class="follow-stats mb-3">
+    <%= link_to followers_user_path(profile.user), class: "btn btn-outline-secondary me-2" do %>
+      <strong><%= profile.user.followers.count %></strong> seguidores
+    <% end %>
+    
+    <%= link_to following_user_path(profile.user), class: "btn btn-outline-secondary me-2" do %>
+      <strong><%= profile.user.following.count %></strong> seguindo
+    <% end %>
+  </div>
 
   <p>
     <strong>Bio:</strong>
     <%= profile.bio %>
   </p>
-
-  
-
 </div>
 
+<!-- CORREÇÃO: Usar relationships em vez de friendships -->
 <div>
-<% if current_user != profile.user %>
-  <% if current_user.friendships.find_by(other_user_id: profile.user.id).present? %>
-    <%= button_to "Unfollow this person", friendship_path(user_id: profile.user.id), method: :delete %>
-  <% else %>
-    <%= button_to "Follow this person", friendships_path(user_id: profile.user.id), data: {turbo_method: :post} %>
-  <% end %>
+  <% if user_signed_in? && current_user != profile.user %>
+    <% if current_user.following?(profile.user) %>
+      <%= button_to "Deixar de seguir", unfollow_user_path(profile.user), 
+                    method: :delete, 
+                    class: "btn btn-danger" %>
+    <% else %>
+      <%= button_to "Seguir", follow_user_path(profile.user), 
+                    method: :post, 
+                    class: "btn btn-primary" %>
+    <% end %>
   <% end %>
 </div>

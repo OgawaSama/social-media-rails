@@ -1,0 +1,28 @@
+<div class="container mt-4">
+  <h1><%= @user.username %> está seguindo</h1>
+  
+  <% if @following.any? %>
+    <div class="row">
+      <% @following.each do |user| %>
+        <div class="col-md-6 mb-3">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title"><%= user.username %></h5>
+              <p class="card-text"><%= user.email %></p>
+              <% if user.profile %>
+                <%= link_to "Ver Perfil", profile_path(user.profile), class: "btn btn-primary btn-sm" %>
+              <% else %>
+                <span class="text-muted">Perfil não disponível</span>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="text-muted">Não está seguindo ninguém ainda.</p>
+  <% end %>
+  
+  <!-- CORREÇÃO: Voltar sempre para o perfil do usuário -->
+  <%= link_to "Voltar para Perfil", profile_path(@user.profile), class: "btn btn-secondary mt-3" %>
+</div>

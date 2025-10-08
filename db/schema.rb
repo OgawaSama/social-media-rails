@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_10_04_240014) do
+ActiveRecord::Schema[8.0].define(version: 2025_10_08_113049) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -116,6 +116,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_04_240014) do
     t.index ["user_id"], name: "index_reactions_on_user_id"
   end
 
+  create_table "relationships", force: :cascade do |t|
+    t.integer "follower_id", null: false
+    t.integer "followed_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["followed_id"], name: "index_relationships_on_followed_id"
+    t.index ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
+  end
+
   create_table "trips", force: :cascade do |t|
     t.string "destination"
     t.string "date"
@@ -156,4 +165,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_04_240014) do
   add_foreign_key "profiles", "users"
   add_foreign_key "reactions", "posts"
   add_foreign_key "reactions", "users"
+  add_foreign_key "relationships", "users", column: "followed_id"
+  add_foreign_key "relationships", "users", column: "follower_id"
 end
