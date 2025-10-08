@@ -4,12 +4,12 @@ class RelationshipsController < ApplicationController
   def create
     # Debug: veja quais parâmetros estão chegando
     puts "Params recebidos: #{params.inspect}"
-    
+
     # Tente encontrar o usuário de várias formas
-    @user = User.find_by(id: params[:user_id]) || 
+    @user = User.find_by(id: params[:user_id]) ||
             User.find_by(id: params[:id]) ||
             (params[:relationship] && User.find_by(id: params[:relationship][:followed_id]))
-    
+
     if @user.nil?
       redirect_back fallback_location: root_path, alert: "Usuário não encontrado."
       return
@@ -28,9 +28,9 @@ class RelationshipsController < ApplicationController
   def destroy
     # Debug: veja quais parâmetros estão chegando
     puts "Params recebidos (destroy): #{params.inspect}"
-    
+
     # Tente encontrar o usuário de várias formas
-    @user = User.find_by(id: params[:user_id]) || 
+    @user = User.find_by(id: params[:user_id]) ||
             User.find_by(id: params[:id]) ||
             Relationship.find_by(id: params[:id])&.followed
 

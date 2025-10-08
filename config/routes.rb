@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   end
 
   resources :friendships
-  resources :relationships, only: [:create, :destroy]
+  resources :relationships, only: [ :create, :destroy ]
 
   devise_for :users, controllers: {
     sessions: "users/sessions",
@@ -21,8 +21,8 @@ Rails.application.routes.draw do
     member do
       get :followers
       get :following
-      post :follow, to: 'relationships#create'
-      delete :unfollow, to: 'relationships#destroy'
+      post :follow, to: "relationships#create"
+      delete :unfollow, to: "relationships#destroy"
     end
   end
 
