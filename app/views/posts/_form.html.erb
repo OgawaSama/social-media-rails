@@ -18,12 +18,12 @@
 
   <div>
     <%= form.label :body, style: "display: block" %>
-    <%= form.rich_textarea :body %>
+    <%= form.rich_textarea :body, direct_upload: true %>
   </div>
 
   <div>
     <%= form.label :images, style: "display: block" %>
-    <%= form.file_field :images, multiple: true %>
+    <%= form.file_field :images, multiple: true, direct_upload: true %>
   </div>
 
   <div>

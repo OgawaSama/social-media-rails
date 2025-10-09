@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_10_08_221319) do
+ActiveRecord::Schema[8.0].define(version: 2025_10_09_113116) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -88,9 +88,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_08_221319) do
     t.index ["user_id"], name: "index_friendships_on_user_id"
   end
 
-  create_table "group_participations", primary_key: ["user_id", "group_id"], force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "group_id", null: false
+  create_table "group_participations", force: :cascade do |t|
+    t.integer "group_id"
+    t.integer "user_id"
     t.datetime "join_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -142,13 +142,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_08_221319) do
     t.index ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
   end
 
-  create_table "trips", force: :cascade do |t|
-    t.string "destination"
-    t.string "date"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "username", default: "", null: false
     t.string "first_name", default: ""
@@ -179,8 +172,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_08_221319) do
   add_foreign_key "comments", "users"
   add_foreign_key "friendships", "users"
   add_foreign_key "friendships", "users", column: "other_user_id"
-  add_foreign_key "group_participations", "groups"
-  add_foreign_key "group_participations", "users"
   add_foreign_key "posts", "users"
   add_foreign_key "profiles", "users"
   add_foreign_key "reactions", "posts"

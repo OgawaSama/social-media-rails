@@ -13,17 +13,17 @@
 
   <div>
     <%= form.label :bio, style: "display: block" %>
-    <%= form.rich_textarea :bio %>
+    <%= form.rich_textarea :bio, direct_upload: true %>
   </div>
 
   <div>
     <%= form.label :header, style: "display: block" %>
-    <%= form.file_field :header %>
+    <%= form.file_field :header, direct_upload: true %>
   </div>
 
   <div>
     <%= form.label :avatar, style: "display: block" %>
-    <%= form.file_field :avatar %>
+    <%= form.file_field :avatar, direct_upload: true %>
   </div>
 
   <div>
