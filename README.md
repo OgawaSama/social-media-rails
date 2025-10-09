@@ -1,10 +1,11 @@
-# Tabi Planner
+# Social Media on Rails
 
+!!LINKS ABAIXO ESTAO ERRADOS!!
 [![CI](https://github.com/OgawaSama/tabi-planner/actions/workflows/ci.yml/badge.svg)](https://github.com/OgawaSama/tabi-planner/actions/workflows/ci.yml)  
 [![Maintainability](https://qlty.sh/gh/OgawaSama/projects/tabi-planner/maintainability.svg)](https://qlty.sh/gh/OgawaSama/projects/tabi-planner)  
 [![Coverage Status](https://coveralls.io/repos/github/OgawaSama/tabi-planner/badge.svg)](https://coveralls.io/github/OgawaSama/tabi-planner)  
 
-Esta plataforma serve como um meio simples, eficiente e elegante para ajudar viajantes a planejarem suas viagens e suas especificidades.
+[]
 
 ## Equipe
 André Jun Hirata - 4818552  
@@ -20,6 +21,3 @@ Reynaldo Pedro Bom Mendes - 14605932
 
 ## Heroku
 [Aplicação no Heroku](https://tabi-planner-8fed89242f80.herokuapp.com/)
-
-## Pivotal
-(Link aqui)

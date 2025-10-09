@@ -1,74 +1,43 @@
 {
   "Unit Tests": {
     "coverage": {
-      "/home/guilherme/tabi-planner/app/models/business_address.rb": {
+      "/home/sui/uni/social-media-rails/app/models/business_address.rb": {
         "lines": [
-          1,
-          1,
-          1
-        ]
-      },
-      "/home/guilherme/tabi-planner/app/models/application_record.rb": {
-        "lines": [
-          1,
-          1,
-          null
-        ]
-      },
-      "/home/guilherme/tabi-planner/app/models/business.rb": {
-        "lines": [
-          1,
-          1,
-          null,
-          1,
-          1,
-          null,
-          1,
-          1,
-          null,
-          1,
-          null,
-          1,
-          0,
-          0,
-          0,
-          null
-        ]
-      },
-      "/home/guilherme/tabi-planner/app/models/comment.rb": {
-        "lines": [
-          1,
           1,
           1,
           1,
           null
         ]
       },
-      "/home/guilherme/tabi-planner/app/models/post.rb": {
+      "/home/sui/uni/social-media-rails/app/models/application_record.rb": {
         "lines": [
           1,
           1,
+          null
+        ]
+      },
+      "/home/sui/uni/social-media-rails/app/models/business.rb": {
+        "lines": [
           1,
           1,
+          null,
+          1,
+          1,
+          null,
           1,
           1,
           null,
           1,
           null,
-          0,
-          0,
-          null,
-          null,
           1,
           0,
           0,
           0,
-          null,
           null,
           null
         ]
       },
-      "/home/guilherme/tabi-planner/app/models/friendship.rb": {
+      "/home/sui/uni/social-media-rails/app/models/comment.rb": {
         "lines": [
           1,
           1,
@@ -77,7 +46,58 @@
           null
         ]
       },
-      "/home/guilherme/tabi-planner/app/models/profile.rb": {
+      "/home/sui/uni/social-media-rails/app/models/post.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          8,
+          8,
+          null,
+          null,
+          1,
+          4,
+          4,
+          4,
+          null,
+          null
+        ]
+      },
+      "/home/sui/uni/social-media-rails/app/models/friendship.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          null
+        ]
+      },
+      "/home/sui/uni/social-media-rails/app/models/group.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          0,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null
+        ]
+      },
+      "/home/sui/uni/social-media-rails/app/models/profile.rb": {
         "lines": [
           1,
           1,
@@ -87,7 +107,7 @@
           null
         ]
       },
-      "/home/guilherme/tabi-planner/app/models/reaction.rb": {
+      "/home/sui/uni/social-media-rails/app/models/reaction.rb": {
         "lines": [
           1,
           1,
@@ -96,44 +116,283 @@
           null
         ]
       },
-      "/home/guilherme/tabi-planner/app/models/trip.rb": {
+      "/home/sui/uni/social-media-rails/app/models/trip.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/home/guilherme/tabi-planner/app/models/user.rb": {
+      "/home/sui/uni/social-media-rails/app/models/user.rb": {
         "lines": [
           1,
           null,
           null,
           1,
           null,
-          1,
+          null,
           1,
           1,
           1,
           1,
           1,
           null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          null,
+          null,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          1,
+          null,
+          3,
+          null,
+          null,
           1,
           1,
           0,
+          null,
+          null
+        ]
+      },
+      "/home/sui/uni/social-media-rails/app/controllers/users_controller.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          0,
+          0,
+          null,
+          null,
+          1,
+          0,
+          0,
+          null,
+          null
+        ]
+      },
+      "/home/sui/uni/social-media-rails/app/controllers/application_controller.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          null
+        ]
+      },
+      "/home/sui/uni/social-media-rails/app/helpers/application_helper.rb": {
+        "lines": [
+          1,
+          null
+        ]
+      },
+      "/home/sui/uni/social-media-rails/app/helpers/feed_helper.rb": {
+        "lines": [
+          1,
+          null
+        ]
+      },
+      "/home/sui/uni/social-media-rails/app/helpers/groups_helper.rb": {
+        "lines": [
+          1,
+          null
+        ]
+      },
+      "/home/sui/uni/social-media-rails/app/helpers/pages_helper.rb": {
+        "lines": [
+          1,
+          null
+        ]
+      },
+      "/home/sui/uni/social-media-rails/app/helpers/posts_helper.rb": {
+        "lines": [
+          1,
+          null
+        ]
+      },
+      "/home/sui/uni/social-media-rails/app/helpers/profile_helper.rb": {
+        "lines": [
+          1,
+          null
+        ]
+      },
+      "/home/sui/uni/social-media-rails/app/helpers/profiles_helper.rb": {
+        "lines": [
+          1,
+          null
+        ]
+      },
+      "/home/sui/uni/social-media-rails/app/helpers/users_helper.rb": {
+        "lines": [
+          1,
+          null
+        ]
+      },
+      "/home/sui/uni/social-media-rails/app/models/group_participation.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null,
+          1,
+          null
+        ]
+      },
+      "/home/sui/uni/social-media-rails/app/models/relationship.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          null
+        ]
+      },
+      "/home/sui/uni/social-media-rails/app/controllers/groups_controller.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          0,
+          0,
+          0,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          null,
+          1,
+          4,
+          null,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          2,
+          1,
+          null,
+          0,
+          0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          2,
+          1,
+          null,
+          0,
+          0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          2,
+          1,
+          null,
+          null,
+          null,
+          1,
+          null,
+          1,
+          7,
+          null,
+          null,
+          null,
+          1,
+          2,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null
+        ]
+      },
+      "/home/sui/uni/social-media-rails/app/controllers/feed_controller.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          null,
+          3,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
           null,
           null,
           null
         ]
       },
-      "/home/guilherme/tabi-planner/app/controllers/application_controller.rb": {
-        "lines": [
-          0,
-          null,
-          0,
-          0
-        ],
-        "branches": {}
-      },
-      "/home/guilherme/tabi-planner/app/controllers/business_registrations_controller.rb": {
+      "/home/sui/uni/social-media-rails/app/controllers/business_registrations_controller.rb": {
         "lines": [
           0,
           0,
@@ -186,30 +445,7 @@
         ],
         "branches": {}
       },
-      "/home/guilherme/tabi-planner/app/controllers/feed_controller.rb": {
-        "lines": [
-          0,
-          0,
-          0,
-          0,
-          null,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0
-        ],
-        "branches": {}
-      },
-      "/home/guilherme/tabi-planner/app/controllers/friendships_controller.rb": {
+      "/home/sui/uni/social-media-rails/app/controllers/friendships_controller.rb": {
         "lines": [
           0,
           0,
@@ -237,7 +473,7 @@
         ],
         "branches": {}
       },
-      "/home/guilherme/tabi-planner/app/controllers/pages_controller.rb": {
+      "/home/sui/uni/social-media-rails/app/controllers/pages_controller.rb": {
         "lines": [
           0,
           0,
@@ -250,7 +486,7 @@
         ],
         "branches": {}
       },
-      "/home/guilherme/tabi-planner/app/controllers/posts/base_controller.rb": {
+      "/home/sui/uni/social-media-rails/app/controllers/posts/base_controller.rb": {
         "lines": [
           0,
           0,
@@ -266,7 +502,7 @@
         ],
         "branches": {}
       },
-      "/home/guilherme/tabi-planner/app/controllers/posts/comments_controller.rb": {
+      "/home/sui/uni/social-media-rails/app/controllers/posts/comments_controller.rb": {
         "lines": [
           0,
           0,
@@ -310,11 +546,10 @@
         ],
         "branches": {}
       },
-      "/home/guilherme/tabi-planner/app/controllers/posts/reactions_controller.rb": {
+      "/home/sui/uni/social-media-rails/app/controllers/posts/reactions_controller.rb": {
         "lines": [
           0,
           0,
-          null,
           0,
           0,
           0,
@@ -326,14 +561,13 @@
           0,
           0,
           0,
-          null,
           0,
           0,
           0
         ],
         "branches": {}
       },
-      "/home/guilherme/tabi-planner/app/controllers/posts_controller.rb": {
+      "/home/sui/uni/social-media-rails/app/controllers/posts_controller.rb": {
         "lines": [
           0,
           0,
@@ -408,7 +642,7 @@
         ],
         "branches": {}
       },
-      "/home/guilherme/tabi-planner/app/controllers/profiles_controller.rb": {
+      "/home/sui/uni/social-media-rails/app/controllers/profiles_controller.rb": {
         "lines": [
           0,
           0,
@@ -417,6 +651,31 @@
           null,
           0,
           0,
+          0,
+          null,
+          null,
+          0,
+          0,
+          0,
+          null,
+          null,
+          0,
+          0,
+          0,
+          null,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          null,
+          0,
+          0,
           null,
           null,
           0,
@@ -427,12 +686,17 @@
           0,
           0,
           null,
+          null,
+          0,
+          0,
+          0,
+          0,
+          null,
           0,
           null,
           0,
           0,
           0,
-          null,
           null,
           0,
           0,
@@ -441,215 +705,63 @@
         ],
         "branches": {}
       },
-      "/home/guilherme/tabi-planner/app/controllers/users/confirmations_controller.rb": {
+      "/home/sui/uni/social-media-rails/app/controllers/relationships_controller.rb": {
         "lines": [
+          0,
+          0,
           null,
+          0,
           null,
           0,
           null,
           null,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          null,
+          0,
           null,
           null,
+          0,
+          0,
+          0,
           null,
+          0,
+          0,
+          0,
+          0,
           null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
           0
         ],
         "branches": {}
       },
-      "/home/guilherme/tabi-planner/app/controllers/users/omniauth_callbacks_controller.rb": {
-        "lines": [
-          null,
-          null,
-          0,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          0
-        ],
-        "branches": {}
-      },
-      "/home/guilherme/tabi-planner/app/controllers/users/passwords_controller.rb": {
-        "lines": [
-          null,
-          null,
-          0,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          0
-        ],
-        "branches": {}
-      },
-      "/home/guilherme/tabi-planner/app/controllers/users/registrations_controller.rb": {
-        "lines": [
-          null,
-          null,
-          0,
-          0,
-          0,
-          null,
-          null,
-          0,
-          0,
-          0,
-          null,
-          null,
-          0,
-          0,
-          0,
-          null,
-          null,
-          0,
-          0,
-          0,
-          null,
-          null,
-          0,
-          0,
-          0,
-          null,
-          null,
-          0,
-          0,
-          0,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          0,
-          0,
-          0,
-          null,
-          null,
-          null,
-          null,
-          0,
-          0,
-          0,
-          null,
-          null,
-          0,
-          0,
-          0,
-          null,
-          null,
-          0,
-          0,
-          0,
-          null,
-          null,
-          null,
-          null,
-          null,
-          0
-        ],
-        "branches": {}
-      },
-      "/home/guilherme/tabi-planner/app/controllers/users/sessions_controller.rb": {
-        "lines": [
-          null,
-          null,
-          0,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          0
-        ],
-        "branches": {}
-      },
-      "/home/guilherme/tabi-planner/app/controllers/users/unlocks_controller.rb": {
+      "/home/sui/uni/social-media-rails/app/controllers/users/confirmations_controller.rb": {
         "lines": [
           null,
           null,
@@ -684,56 +796,215 @@
         ],
         "branches": {}
       },
-      "/home/guilherme/tabi-planner/app/helpers/application_helper.rb": {
+      "/home/sui/uni/social-media-rails/app/controllers/users/omniauth_callbacks_controller.rb": {
         "lines": [
+          null,
+          null,
           0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
           0
         ],
         "branches": {}
       },
-      "/home/guilherme/tabi-planner/app/helpers/feed_helper.rb": {
+      "/home/sui/uni/social-media-rails/app/controllers/users/passwords_controller.rb": {
         "lines": [
+          null,
+          null,
           0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
           0
         ],
         "branches": {}
       },
-      "/home/guilherme/tabi-planner/app/helpers/pages_helper.rb": {
+      "/home/sui/uni/social-media-rails/app/controllers/users/registrations_controller.rb": {
         "lines": [
+          null,
+          null,
           0,
+          0,
+          0,
+          null,
+          null,
+          0,
+          0,
+          0,
+          null,
+          null,
+          0,
+          0,
+          0,
+          null,
+          null,
+          0,
+          0,
+          0,
+          null,
+          null,
+          0,
+          0,
+          0,
+          null,
+          null,
+          0,
+          0,
+          0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          0,
+          0,
+          0,
+          null,
+          null,
+          null,
+          null,
+          0,
+          0,
+          0,
+          null,
+          null,
+          0,
+          0,
+          0,
+          null,
+          null,
+          0,
+          0,
+          0,
+          null,
+          null,
+          null,
+          null,
+          null,
           0
         ],
         "branches": {}
       },
-      "/home/guilherme/tabi-planner/app/helpers/posts_helper.rb": {
+      "/home/sui/uni/social-media-rails/app/controllers/users/sessions_controller.rb": {
         "lines": [
+          null,
+          null,
           0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
           0
         ],
         "branches": {}
       },
-      "/home/guilherme/tabi-planner/app/helpers/profile_helper.rb": {
+      "/home/sui/uni/social-media-rails/app/controllers/users/unlocks_controller.rb": {
         "lines": [
+          null,
+          null,
           0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
           0
         ],
         "branches": {}
       },
-      "/home/guilherme/tabi-planner/app/helpers/profiles_helper.rb": {
-        "lines": [
-          0,
-          0
-        ],
-        "branches": {}
-      },
-      "/home/guilherme/tabi-planner/app/helpers/users_helper.rb": {
-        "lines": [
-          0,
-          0
-        ],
-        "branches": {}
-      },
-      "/home/guilherme/tabi-planner/app/jobs/application_job.rb": {
+      "/home/sui/uni/social-media-rails/app/jobs/application_job.rb": {
         "lines": [
           0,
           null,
@@ -745,7 +1016,7 @@
         ],
         "branches": {}
       },
-      "/home/guilherme/tabi-planner/app/mailers/application_mailer.rb": {
+      "/home/sui/uni/social-media-rails/app/mailers/application_mailer.rb": {
         "lines": [
           0,
           0,
@@ -754,7 +1025,7 @@
         ],
         "branches": {}
       },
-      "/home/guilherme/tabi-planner/app/models/business_user.rb": {
+      "/home/sui/uni/social-media-rails/app/models/business_user.rb": {
         "lines": [
           0,
           0,
@@ -768,6 +1039,6 @@
         "branches": {}
       }
     },
-    "timestamp": 1759707170
+    "timestamp": 1759979466
   }
 }

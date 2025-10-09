@@ -2,10 +2,6 @@
 
 one:
   name: MyString
-  owner: one
-  participant: one
 
 two:
-  name: MyString
-  owner: two
-  participant: two
+  name: MyString2

@@ -2,21 +2,17 @@ require "application_system_test_case"
 
 class GroupsTest < ApplicationSystemTestCase
   setup do
-    @group = groups(:one)
-  end
+  @user = users(:one)
+  sign_in @user
 
-  test "visiting the index" do
-    visit groups_url
-    assert_selector "h1", text: "Groups"
+  @group = groups(:one)
   end
 
   test "should create group" do
-    visit groups_url
-    click_on "New group"
+    visit groups_user_path(@user)
+    click_on "Novo grupo"
 
     fill_in "Name", with: @group.name
-    fill_in "Owner", with: @group.owner_id
-    fill_in "Participant", with: @group.participant_id
     click_on "Create Group"
 
     assert_text "Group was successfully created"
@@ -28,8 +24,6 @@ class GroupsTest < ApplicationSystemTestCase
     click_on "Edit this group", match: :first
 
     fill_in "Name", with: @group.name
-    fill_in "Owner", with: @group.owner_id
-    fill_in "Participant", with: @group.participant_id
     click_on "Update Group"
 
     assert_text "Group was successfully updated"
