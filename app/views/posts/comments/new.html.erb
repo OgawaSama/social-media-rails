@@ -4,7 +4,7 @@
       <%= form_with model: [@post, @post.comments.new] do |f| %>
         <div>
           <%= f.label :body, style: "display: block" %>
-          <%= f.rich_text_area :body %>
+          <%= f.rich_text_area :body, direct_upload: true %>
         </div>
         <div>
           <%= f.submit "Post comment" %>

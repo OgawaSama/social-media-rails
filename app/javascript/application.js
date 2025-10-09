@@ -3,3 +3,5 @@
 import "trix"
 import "@rails/actiontext"
 //import "./business_addresses"
+require("@rails/activestorage").start()
+
