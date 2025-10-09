@@ -12,7 +12,7 @@ class User < ApplicationRecord
 
   # Sistema de grupos
   has_many :group_participations
-  has_many :groups, :through => :group_participations
+  has_many :groups, through: :group_participations
 
   # Sistema de Followers/Following
   has_many :active_relationships, class_name: "Relationship",
