@@ -7,10 +7,10 @@ class ProfilesController < ApplicationController
     @profiles = Profile.all
   end
 
-# GET /profiles/1
-def show
-  @posts = @profile.user.posts.order(created_at: :desc)
-end
+  # GET /profiles/1
+  def show
+    @posts = @profile.user.posts.order(created_at: :desc)
+  end
 
   # GET /profiles/new
   def new

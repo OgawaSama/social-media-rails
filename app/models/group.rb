@@ -8,4 +8,8 @@ class Group < ApplicationRecord
   def owner
     group_participations.ownerships.map(&:user).first
   end
+
+  def feed
+    Post.where(user_id: participant_ids + [ id ]).order(created_at: :desc)
+  end
 end
