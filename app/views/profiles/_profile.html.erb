@@ -16,7 +16,7 @@
     <%= link_to followers_user_path(profile.user), class: "btn btn-outline-secondary me-2" do %>
       <strong><%= profile.user.followers.count %></strong> seguidores
     <% end %>
-    
+     | 
     <%= link_to following_user_path(profile.user), class: "btn btn-outline-secondary me-2" do %>
       <strong><%= profile.user.following.count %></strong> seguindo
     <% end %>

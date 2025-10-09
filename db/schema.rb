@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_10_08_113049) do
+ActiveRecord::Schema[8.0].define(version: 2025_10_08_221319) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -88,6 +88,23 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_08_113049) do
     t.index ["user_id"], name: "index_friendships_on_user_id"
   end
 
+  create_table "group_participations", primary_key: ["user_id", "group_id"], force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "group_id", null: false
+    t.datetime "join_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["group_id"], name: "index_group_participations_on_group_id"
+    t.index ["user_id", "group_id"], name: "index_group_participations_on_user_id_and_group_id", unique: true
+    t.index ["user_id"], name: "index_group_participations_on_user_id"
+  end
+
+  create_table "groups", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "posts", force: :cascade do |t|
     t.string "caption"
     t.datetime "created_at", null: false
@@ -151,6 +168,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_08_113049) do
     t.string "type"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["username"], name: "index_users_on_username", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
@@ -161,6 +179,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_08_113049) do
   add_foreign_key "comments", "users"
   add_foreign_key "friendships", "users"
   add_foreign_key "friendships", "users", column: "other_user_id"
+  add_foreign_key "group_participations", "groups"
+  add_foreign_key "group_participations", "users"
   add_foreign_key "posts", "users"
   add_foreign_key "profiles", "users"
   add_foreign_key "reactions", "posts"

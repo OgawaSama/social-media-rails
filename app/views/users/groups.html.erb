@@ -1,0 +1,16 @@
+<div class="container mt-4">
+
+
+
+<h1>Grupos de <%= @user.username %></h1>
+<%= button_to "Novo grupo", new_group_path, method: :get %> <br>
+    <% if @user.groups.any? %>
+        <% @user.groups.each do |group| %>
+            <p>
+                <%= link_to group.name, group_path(group.id) %>
+            </p>
+        <% end %>
+        <% else %>
+            <p class="text-muted">Não possui grupos ainda.</p>
+        <% end %>
+</div>

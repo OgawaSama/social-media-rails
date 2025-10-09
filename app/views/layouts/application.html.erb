@@ -26,16 +26,19 @@
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <% if user_signed_in? %>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container">
-      <span class="navbar-brand">Olá, <%= current_user.username %></span>
-      <div class="navbar-nav">
-        <%= link_to "Seguidores: #{current_user.followers.count}", followers_user_path(current_user), class: "nav-link" %>
-        <%= link_to "Seguindo: #{current_user.following.count}", following_user_path(current_user), class: "nav-link" %>
-        <!-- CORREÇÃO: usar method: :delete -->
+    <!--
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container">
+        <span class="navbar-brand">Olá, <%= current_user.username %></span>
+        <div class="navbar-nav">
+          <%= link_to "Seguidores: #{current_user.followers.count}", followers_user_path(current_user), class: "nav-link" %>
+          <%= link_to "Seguindo: #{current_user.following.count}", following_user_path(current_user), class: "nav-link" %>
+          <!-- CORREÇÃO: usar method: :delete -->
+        </div>
       </div>
-    </div>
-  </nav>
+    </nav>
+    -->
+    <%= link_to "Home", feed_path %>
 <% end %>
     <%= yield %>
   </body>

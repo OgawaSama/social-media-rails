@@ -5,8 +5,9 @@
 <div>
   <% if current_user == @profile.user %>
     <%= link_to "Edit profile", edit_profile_path(@profile) %> |
+    <%= link_to "Meus grupos", groups_user_path(current_user) %>
   <% end %>
-  <%= link_to "Back to feed", feed_path %>
+  <div>
 </div>
 
 <!-- CORREÇÃO: Mostrar posts para QUALQUER usuário, não apenas o dono -->

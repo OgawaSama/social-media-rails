@@ -1,0 +1,23 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @group %>
+
+<div>
+  <p>
+    <%= link_to "Edit this group", edit_group_path(@group) %> |
+    <%= link_to "Back to feed", feed_path %>
+
+    <%= button_to "Destroy this group", @group, method: :delete %>
+  </p>
+</div>
+
+<div>
+  <div class="max-w-5xl w-full grid gap-8 mt-8">
+  <% if @posts.any? %>
+    <h3>Posts de membros do grupo </h3>
+    <%= render partial: "feed/post", collection: @posts %>
+  <% else %>
+    <p class="text-muted">Nenhum post ainda.</p>
+  <% end %>
+</div>
+</div>
