@@ -76,3 +76,6 @@ gem "rspec"
 
 gem "coveralls_reborn", require: false
 gem "cloudinary"
+
+# CSS facil
+gem "tailwindcss-rails"
