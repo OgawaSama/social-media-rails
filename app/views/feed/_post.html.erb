@@ -1,19 +1,15 @@
 <div class="relative bg-white shadow-md rounded-lg overflow-hidden mb-6 hover:shadow-lg transition-transform transform hover:scale-[1.01]">
-  <!-- Caption / Título -->
   <p class="text-2xl font-bold mb-2 p-4 text-center">
     <%= link_to post.caption, post, class: "hover:underline text-blue-600" %>
   </p>
 
   <div class="p-6">
-    <!-- Imagem -->
     <% if post.images.any? %>
       <%= link_to image_tag(post.images.first, class: "w-full h-80 object-cover rounded-lg mb-4"), post %>
     <% end %>
 
-    <!-- Corpo do post -->
     <p class="text-gray-800 mb-4 text-center"><%= post.feed_body %> <%= "..." if post.feed_body_truncated? %></p>
 
-    <!-- Autor e avatar -->
     <div class="flex items-center space-x-2 mb-4">
       <% if post.user.profile.avatar.attached? %>
         <%= image_tag(post.user.profile.avatar, class: "w-8 h-8 rounded-full object-cover") %>
@@ -23,8 +19,15 @@
       </p>
     </div>
 
-    <!-- Likes / coração -->
     <div class="absolute bottom-4 right-5 flex items-center space-x-2">
+      <%= link_to "View #{post.comments.count} comments",
+            post_comments_path(post),
+            class: "text-blue-500 hover:underline" %>
+
+      <%= link_to "Leave a comment",
+          new_post_comment_path(post),
+          class: "text-blue-500 hover:underline" %>
+
       <% if current_user.reactions.find_by(post: post, name: "heart").present? %>
         <% reaction = Reaction.find_by(user: current_user, post: post, name: "heart") %>
         <%= button_to "♥", post_reaction_path(id: reaction.id, post_id: post.id), method: :delete, class: "text-red-500 text-xl hover:scale-110 transition-transform" %>
@@ -33,13 +36,5 @@
       <% end %>
       <span class="text-gray-700 font-semibold"><%= post.reactions.count %></span>
     </div>
-
-    <!-- Comentários -->
-    <%= turbo_frame_tag :comments do %>
-      <div class="flex justify-between mt-4 text-sm text-gray-600">
-        <%= link_to "View #{post.comments.count} comments", post_comments_path(post), class: "text-blue-500 hover:underline" %>
-        <%= link_to "Leave a comment", new_post_comment_path(post), class: "text-blue-500 hover:underline" %>
-      </div>
-    <% end %>
   </div>
 </div>

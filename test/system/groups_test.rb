@@ -13,7 +13,7 @@ class GroupsTest < ApplicationSystemTestCase
     click_on "Novo grupo"
 
     fill_in "Name", with: @group.name
-    click_on "Create Group"
+    click_on "Confirmar"
 
     assert_text "Group was successfully created"
     click_on "Back"
@@ -24,7 +24,7 @@ class GroupsTest < ApplicationSystemTestCase
     click_on "Edit this group", match: :first
 
     fill_in "Name", with: @group.name
-    click_on "Update Group"
+    click_on "Confirmar"
 
     assert_text "Group was successfully updated"
     click_on "Back"

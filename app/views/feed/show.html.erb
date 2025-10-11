@@ -13,12 +13,14 @@
 <% end %>
 
 <div class="bg-gray-100 min-h-screen pt-24">
-  <div class="flex flex-col items-center px-4 max-w-5xl mx-auto">
+  <div class="px-4 max-w-5xl mx-auto">
+    
     <h1 class="text-3xl font-bold mb-6 text-center">My Feed</h1>
 
-    <div class="mt-6 max-w-2xl w-full mx-auto flex items-center justify-between">
-      <%= link_to "Create new post", new_post_path, class: "mb-6 text-blue-500 font-semibold hover:underline" %>
-    </div>
+    <%= link_to new_post_path,
+                class: "bg-blue-500 text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:bg-blue-600 hover:shadow-lg transition transform hover:-translate-y-0.5 block mx-auto text-center mb-6" do %>
+      Create new post
+    <% end %>
 
     <% if @posts.any? %>
       <div class="grid gap-6 w-full">

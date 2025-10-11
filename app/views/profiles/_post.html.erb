@@ -1,10 +1,31 @@
-
-<div class="h-96 w-full bg-gray-200 rounded-lg overflow-hidden">
-    <p class="text-xl"> <b> <%= link_to post.caption, post %> </b>  </p>
-    <div class="p-2">
-        <%= image_tag(post.images.first, :size => "250x250", class: "w-full h-80 object-cover") if post.images.any? %>
-        <p class="text-xl"> <%= post.body&.body&.to_plain_text&.first(144) %> </p>
-        <p class="text-md text-gray-700"> Post by <%= post.user.username %> </p>
-        <p class="text-sm text-gray-600"> posted <%= time_ago_in_words(post.created_at) %> ago </p>
+<div class="bg-white shadow-md rounded-lg overflow-hidden max-w-md mx-auto mb-6 hover:shadow-lg transition-shadow duration-200">
+  
+  <!-- Caption -->
+  <% if post.caption.present? %>
+    <div class="px-4 py-2 bg-gray-100">
+      <h3 class="text-xl font-bold text-gray-800">
+        <%= link_to post.caption, post, class: "hover:underline" %>
+      </h3>
     </div>
+  <% end %>
+
+  <!-- Image -->
+  <% if post.images.any? %>
+    <div class="w-full h-80 overflow-hidden">
+      <%= image_tag post.images.first, class: "w-full h-full object-cover" %>
+    </div>
+  <% end %>
+
+  <!-- Body and info -->
+  <div class="p-4 flex flex-col gap-2">
+    <% if post.body.present? %>
+      <p class="text-gray-900 text-base break-words">
+        <%= post.body&.body&.to_plain_text&.truncate(144) %>
+      </p>
+    <% end %>
+
+    <p class="text-gray-700 font-medium">Post by <%= post.user.username %></p>
+    <p class="text-gray-500 text-sm">Posted <%= time_ago_in_words(post.created_at) %> ago</p>
+  </div>
+
 </div>

@@ -1,10 +1,11 @@
-<p style="color: green"><%= notice %></p>
+<div class="bg-white shadow-md rounded-lg p-6 mb-6">
+  <%= render @post %>
+</div>
 
-<%= render @post %>
+<div class="flex flex-wrap gap-6">
+  <%= link_to "Edit this post", edit_post_path(@post), class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded shadow transition duration-200" %>
 
-<div>
-  <%= link_to "Edit this post", edit_post_path(@post) %> |
-  <%= link_to "Back to feed", feed_path %>
+  <%= link_to "Back to feed", feed_path, class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded shadow transition duration-200" %>
 
-  <%= button_to "Destroy this post", @post, method: :delete %>
+  <%= button_to "Destroy this post", @post, method: :delete, class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded shadow transition duration-200", data: { confirm: "Are you sure?" } %>
 </div>

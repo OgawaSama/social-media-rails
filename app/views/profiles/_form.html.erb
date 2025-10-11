@@ -1,9 +1,9 @@
-<%= form_with(model: profile) do |form| %>
-  <% if profile.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(profile.errors.count, "error") %> prohibited this profile from being saved:</h2>
+<%= form_with(model: profile, local: true, class: "max-w-lg mx-auto bg-white shadow-md rounded-lg p-6 space-y-6") do |form| %>
 
-      <ul>
+  <% if profile.errors.any? %>
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+      <h2 class="font-semibold mb-2"><%= pluralize(profile.errors.count, "error") %> prohibited this profile from being saved:</h2>
+      <ul class="list-disc list-inside space-y-1">
         <% profile.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
@@ -11,22 +11,33 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :bio, style: "display: block" %>
-    <%= form.rich_textarea :bio, direct_upload: true %>
+  <!-- Bio -->
+  <div class="space-y-1">
+    <%= form.label :bio, "Bio", class: "block text-gray-700 font-medium" %>
+    <%= form.rich_text_area :bio, direct_upload: true, class: "w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" %>
   </div>
 
-  <div>
-    <%= form.label :header, style: "display: block" %>
-    <%= form.file_field :header, direct_upload: true %>
+  <!-- Header -->
+  <div class="space-y-1 mb-2">
+    <%= form.label :header, "Header Image", class: "block text-gray-700 font-medium mb-2" %>
+    <label class="inline-block bg-gray-100 border border-gray-300 rounded px-3 py-2 cursor-pointer hover:bg-gray-200">
+      Escolher arquivo
+      <%= form.file_field :header, direct_upload: true, class: "hidden" %>
+    </label>
   </div>
 
-  <div>
-    <%= form.label :avatar, style: "display: block" %>
-    <%= form.file_field :avatar, direct_upload: true %>
+  <!-- Avatar -->
+  <div class="space-y-1 mb-2">
+    <%= form.label :avatar, "Avatar", class: "block text-gray-700 font-medium mb-2" %>
+    <label class="inline-block bg-gray-100 border border-gray-300 rounded px-3 py-2 cursor-pointer hover:bg-gray-200">
+      Escolher arquivo
+      <%= form.file_field :avatar, direct_upload: true, class: "hidden" %>
+    </label>
   </div>
 
+  <!-- Submit -->
   <div>
-    <%= form.submit %>
+    <%= form.submit "Save Profile", class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-2 rounded-lg shadow transition duration-200" %>
   </div>
+
 <% end %>

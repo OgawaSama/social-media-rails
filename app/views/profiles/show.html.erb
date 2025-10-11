@@ -1,34 +1,43 @@
-<p style="color: green"><%= notice %></p>
-
-<%= render @profile %>
-
-<div>
-  <% if current_user == @profile.user %>
-    <%= link_to "Edit account", edit_user_registration_path, method: :get %>
-    <%= link_to "Edit profile", edit_profile_path(@profile) %> |
-    <%= link_to "Meus grupos", groups_user_path(current_user) %>
-  <% end %>
-  <% if user_signed_in? && current_user.type != "BusinessUser" %>
-    <%= link_to "É uma empresa? Cadastre-se aqui", new_business_registration_path, class: "btn btn-outline-primary" %>
-  <% elsif user_signed_in? && current_user.type == "BusinessUser" && current_user.try(:business).present? %>
-    <%= link_to "Editar perfil empresarial", edit_business_registration_path, class: "btn btn-outline-primary" %>
-  <% end %>
-  <div>
-</div>
-
-<!-- CORREÇÃO: Mostrar posts para QUALQUER usuário, não apenas o dono -->
-<div class="max-w-5xl w-full grid gap-8 mt-8">
-  <% if @posts.any? %>
-    <h3>Posts de <%= @profile.user.username %></h3>
-    <%= render partial: "posts/post", collection: @posts %>
-  <% else %>
-    <p class="text-muted">Nenhum post ainda.</p>
-  <% end %>
-</div>
-
-<!-- CORREÇÃO: Botão de criar post APENAS para o dono do perfil -->
-<% if current_user == @profile.user %>
-  <div class="mt-6 max-w-2xl w-full mx-auto flex items-center justify-between">
-    <%= link_to "Create new post", new_post_path %>
+<% if notice %>
+  <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-2 rounded mb-4">
+    <%= notice %>
   </div>
 <% end %>
+
+<div class="max-w-5xl w-full mx-auto">
+  <%= render @profile %>
+
+  <% if current_user == @profile.user %>
+    <div class="flex flex-wrap items-center gap-6 mt-4">
+      <%= link_to "Edit account", edit_user_registration_path, class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded shadow transition duration-200" %>
+      <%= link_to "Edit profile", edit_profile_path(@profile), class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded shadow transition duration-200" %>
+      <%= link_to "Meus grupos", groups_user_path(current_user), class: "bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold px-4 py-2 rounded shadow transition duration-200" %>
+    </div>
+    <% if user_signed_in? && current_user.type != "BusinessUser" %>
+      <div class="mt-4">
+        <%= link_to "É uma empresa? Cadastre-se aqui", new_business_registration_path, class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded shadow transition duration-200" %>
+      </div>
+    <% elsif user_signed_in? && current_user.type == "BusinessUser" && current_user.try(:business).present? %>
+      <div class="mt-4">
+        <%= link_to "Editar perfil empresarial", edit_business_registration_path, class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded shadow transition duration-200" %>
+      </div>
+    <% end %>
+  <%# else <%= link_to pagina de exibicao do perfil empresarial %>
+  <% end %>
+
+
+  <div class="mt-8 grid gap-8">
+    <% if @posts.any? %>
+      <h3 class="text-xl font-bold mb-4">Posts de <%= @profile.user.username %></h3>
+      <%= render partial: "posts/post", collection: @posts %>
+    <% else %>
+      <p class="text-gray-500 italic">Nenhum post ainda.</p>
+    <% end %>
+  </div>
+
+  <% if current_user == @profile.user %>
+    <div class="mt-6 flex justify-center">
+      <%= link_to "Create new post", new_post_path, class: "bg-green-500 hover:bg-green-600 text-white font-semibold px-6 py-3 rounded-lg shadow transition duration-200" %>
+    </div>
+  <% end %>
+</div>
