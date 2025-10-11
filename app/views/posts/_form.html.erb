@@ -1,9 +1,10 @@
-<%= form_with(model: post) do |form| %>
+<%= form_with(model: post, local: true, html: { class: "space-y-6" }) do |form| %>
   <% if post.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
-
-      <ul>
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+      <h2 class="font-semibold mb-2">
+        <%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:
+      </h2>
+      <ul class="list-disc list-inside space-y-1">
         <% post.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
@@ -11,22 +12,24 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :caption, style: "display: block" %>
-    <%= form.text_field :caption %>
+  <div class="space-y-1">
+    <%= form.label :caption, class: "block text-gray-700 font-medium" %>
+    <%= form.text_field :caption, class: "w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+  </div>
+
+  <div class="space-y-1 mb-2">
+    <%= form.label :body, class: "block text-gray-700 font-medium" %>
+    <%= form.rich_text_area :body, direct_upload: true, class: "w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+  </div>
+
+  <div class="space-y-1 mb-2">
+    <%= form.label :images, class: "block text-gray-700 font-medium mb-2" %>
+    <label class="inline-block bg-gray-100 border border-gray-300 rounded px-3 py-2 cursor-pointer hover:bg-gray-200">
+      Escolher arquivo
+      <%= form.file_field :images, direct_upload: true, class: "hidden" %>
   </div>
 
   <div>
-    <%= form.label :body, style: "display: block" %>
-    <%= form.rich_textarea :body, direct_upload: true %>
-  </div>
-
-  <div>
-    <%= form.label :images, style: "display: block" %>
-    <%= form.file_field :images, multiple: true, direct_upload: true %>
-  </div>
-
-  <div>
-    <%= form.submit %>
+    <%= form.submit "Save Post", class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-3 rounded-lg shadow-lg transition duration-200" %>
   </div>
 <% end %>

@@ -1,13 +1,27 @@
-<h1>Search Results</h1>
+<div class="pt-24 max-w-3xl mx-auto px-4">
+  <h1 class="text-3xl font-bold mb-6 text-center">Search Results</h1>
 
-<% if @users.any? %>
-  <ul>
-    <% @users.each do |user| %>
-      <li>
-        <%= link_to user.username, profile_path(user.profile) %>
-      </li>
-    <% end %>
-  </ul>
-<% else %>
-  <p>No users found.</p>
-<% end %>
+  <% if @users.any? %>
+    <ul class="space-y-4">
+      <% @users.each do |user| %>
+        <li class="bg-white shadow-md rounded-lg p-4 hover:shadow-lg transition flex items-center justify-between">
+          <div class="flex items-center space-x-3">
+            <% if user.profile.avatar.attached? %>
+              <%= image_tag user.profile.avatar, class: "w-10 h-10 rounded-full object-cover" %>
+            <% else %>
+              <div class="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center text-gray-600 font-semibold">
+                <%= user.username[0].upcase %>
+              </div>
+            <% end %>
+
+            <%= link_to user.username, profile_path(user.profile), class: "text-blue-500 font-semibold hover:underline text-lg" %>
+          </div>
+
+          <%= link_to "View Profile", profile_path(user.profile), class: "bg-blue-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue-600 hover:shadow-lg transition" %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p class="text-center text-gray-500 mt-12">No users found.</p>
+  <% end %>
+</div>

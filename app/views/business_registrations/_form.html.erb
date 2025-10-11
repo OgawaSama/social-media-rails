@@ -1,22 +1,35 @@
-<%= form_with model: @business, url: @business.persisted? ? business_registration_path : business_registration_path, local: true, method: @business.persisted? ? :patch : :post do |f| %>
+<%= form_with model: @business,
+              url: @business.persisted? ? business_registration_path : business_registration_path,
+              local: true,
+              method: @business.persisted? ? :patch : :post,
+              class: "max-w-2xl mx-auto bg-gray-100 shadow-md rounded-lg p-6 space-y-6 mt-16" do |f| %>
+
   <div>
-    <%= f.label :company_name, "Nome da Empresa" %>
-    <%= f.text_field :company_name %>
+    <%= f.label :company_name, "Nome da Empresa", class: "block font-semibold mb-1" %>
+    <%= f.text_field :company_name, class: "input", placeholder: "Digite o nome da empresa" %>
   </div>
 
   <div>
-    <%= f.label :cnpj, "CNPJ" %>
-    <%= f.text_field :cnpj %>
+    <%= f.label :cnpj, "CNPJ", class: "block font-semibold mb-1" %>
+    <%= f.text_field :cnpj, class: "input", placeholder: "00.000.000/0001-00" %>
   </div>
 
-  <h3>Endereço</h3>
-  <div id="addresses-container">
+  <h3 class="text-lg font-semibold mt-4">Endereço</h3>
+  <div id="addresses-container" class="space-y-4">
     <%= f.fields_for :business_addresses do |address_fields| %>
       <%= render 'business_address_fields', f: address_fields %>
     <% end %>
   </div>
 
-  <!-- button type="button" id="add-address" class="btn btn-outline-primary mt-2">Adicionar endereço</button -->
+  <!-- JS quebrado por enquanto -->
+  <!--
+  <button type="button" id="add-address" class="btn mt-2 btn-outline-primary">
+    Adicionar endereço
+  </button>
+  -->
 
-  <%= f.submit @business.persisted? ? "Atualizar Perfil" : "Cadastrar como Empresa", class: "btn btn-primary mt-3" %>
+  <div class="flex justify-end space-x-2 mt-4">
+    <%= f.submit @business.persisted? ? "Atualizar Perfil" : "Cadastrar como Empresa", class: "flex-1 bg-blue-500 text-white font-semibold py-3 rounded-lg shadow-md hover:bg-blue-600 hover:shadow-lg transition transform hover:-translate-y-0.5 text-center" %>
+    <%= link_to "Cancelar", root_path,class: "flex-1 bg-gray-200 text-gray-800 font-semibold py-3 rounded-lg shadow-md hover:bg-gray-300 hover:shadow-lg transition transform hover:-translate-y-0.5 text-center" %>
+  </div>
 <% end %>

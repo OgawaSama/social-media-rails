@@ -1,36 +1,35 @@
-<%= button_to "Sign out", destroy_user_session_path, method: :delete %> 
-<%= button_to "Edit account", edit_user_registration_path, method: :get %>
-<%= button_to "Go to my profile", profile_path(id: current_user.profile.id, :trailing_slash => true), method: :get %>
-
-<%= button_to "Show user list", userindex_path, method: :get %>
-
 <%= form_with url: search_users_path, method: :get, local: true do |f| %>
-  <div class="flex items-center mt-4">
-    <%= f.text_field :query, placeholder: "Search users...", class: "border rounded p-2 w-full" %>
-    <%= f.submit "Search", class: "ml-2 px-4 py-2 bg-blue-500 text-white rounded" %>
+  <div class="flex items-center mt-4 space-x-2 max-w-5xl mx-auto px-4">
+    <%= f.text_field :query,
+          placeholder: "Search users...",
+          class: "flex-1 border rounded p-2 focus:outline-none focus:ring-2 focus:ring-blue-400" %>
+    <%= f.submit "Search",
+          class: "px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600" %>
+    <%= button_to "Show user list",
+          userindex_path,
+          method: :get,
+          class: "px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600" %>
   </div>
 <% end %>
 
-<% if user_signed_in? && current_user.type != "BusinessUser" %>
-  <%= link_to "É uma empresa? Cadastre-se aqui", new_business_registration_path, class: "btn btn-outline-primary" %>
-<% elsif user_signed_in? && current_user.type == "BusinessUser" && current_user.try(:business).present? %>
-  <%= link_to "Editar perfil empresarial", edit_business_registration_path, class: "btn btn-outline-primary" %>
-<% end %>
+<div class="bg-gray-100 min-h-screen pt-24">
+  <div class="px-4 max-w-5xl mx-auto">
+    
+    <h1 class="text-3xl font-bold mb-6 text-center">My Feed</h1>
 
-<div class="fle flex-col items-center pt-24">
-    <h1>My Feed</h1>
-
-    <div class="mt-6 max-w-2xl w-full mx-auto flex items-center justify-between">
-        <%= link_to "Create new post", new_post_path %>
-    </div>
+    <%= link_to new_post_path,
+                class: "bg-blue-500 text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:bg-blue-600 hover:shadow-lg transition transform hover:-translate-y-0.5 block mx-auto text-center mb-6" do %>
+      Create new post
+    <% end %>
 
     <% if @posts.any? %>
-      <div class="max-w-5xl w-full grid gap-8 mt-8">
-          <%= render partial: "post", collection: @posts %>
+      <div class="grid gap-6 w-full">
+        <%= render partial: "post", collection: @posts %>
       </div>
     <% else %>
-      <h3>
+      <h3 class="text-gray-500 text-center mt-12">
         Vazio aqui... Comece a seguir alguém para ver posts no seu feed!
       </h3>
     <% end %>
+  </div>
 </div>

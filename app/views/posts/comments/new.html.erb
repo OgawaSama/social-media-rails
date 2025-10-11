@@ -1,15 +1,18 @@
 <div class="w-full flex flex-col items-center pt-24">
-  <div class="max-w-5xl w-full mx-auto">
+  <div class="max-w-2xl w-full mx-auto bg-white shadow-md rounded-lg p-6">
     <%= turbo_frame_tag :comments do %>
-      <%= form_with model: [@post, @post.comments.new] do |f| %>
-        <div>
-          <%= f.label :body, style: "display: block" %>
-          <%= f.rich_text_area :body, direct_upload: true %>
+      <%= form_with model: [@post, @post.comments.new], local: true, html: { class: "space-y-4" } do |f| %>
+        
+        <div class="space-y-1">
+          <%= f.label :body, "Add a comment", class: "block text-gray-700 font-medium" %>
+          <%= f.rich_text_area :body, direct_upload: true, class: "w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" %>
         </div>
-        <div>
-          <%= f.submit "Post comment" %>
-          <%= link_to "Cancel", "/" %>
+
+        <div class="flex items-center gap-6">
+          <%= f.submit "Post comment", class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-2 rounded-lg shadow transition duration-200" %>
+          <%= link_to "Cancel", "/", class: "text-gray-500 hover:text-gray-700 font-medium" %>
         </div>
+
       <% end %>
     <% end %>
   </div>

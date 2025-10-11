@@ -1,11 +1,11 @@
 <% content_for :title, "New group" %>
 
-<h1>New group</h1>
+<h1 class="text-3xl font-bold mb-6 text-center">New Group</h1>
 
-<%= render "form", group: @group %>
+<div class="max-w-3xl mx-auto bg-white shadow-md rounded-lg p-6 mb-6">
+  <%= render "form", group: @group %>
+</div>
 
-<br>
-
-<div>
-  <%= link_to "Back to feed", feed_path %>
+<div class="flex justify-center">
+  <%= link_to "Back to feed", feed_path, class: "bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium px-4 py-2 rounded shadow transition duration-200" %>
 </div>

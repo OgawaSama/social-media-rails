@@ -1,16 +1,17 @@
-<div id="<%= dom_id post %>">
-  <strong>
+<div id="<%= dom_id post %>" class="bg-white shadow-md rounded-lg p-6 mb-6">
+  <strong class="block text-lg font-semibold text-gray-800 mb-2">
     <%= post.caption %>
   </strong>
 
-  <p>
+  <p class="text-gray-700 mb-4">
     <%= post.body %>
   </p>
 
-  <p>
-    <% post.images.each do |image| %>
-      <div><%= image_tag(post.images.first, :size => "500x500") if post.images.any? %></div>
-    <% end %>
-  </p>
-
+  <% if post.images.any? %>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <% post.images.each do |image| %>
+        <%= image_tag image, class: "w-full h-auto rounded-lg object-cover" %>
+      <% end %>
+    </div>
+  <% end %>
 </div>

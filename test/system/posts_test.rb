@@ -22,10 +22,10 @@ class PostsTest < ApplicationSystemTestCase
     click_on "New post"
 
     fill_in "Caption", with: @post.caption
-    click_on "Create Post"
+    click_on "Save Post"
 
     assert_text "Post was successfully created"
-    click_on "Back"
+    click_on "Back to feed"
   end
 
   test "should update Post" do
@@ -33,7 +33,7 @@ class PostsTest < ApplicationSystemTestCase
     click_on "Edit this post", match: :first
 
     fill_in "Caption", with: @post.caption
-    click_on "Update Post"
+    click_on "Save Post"
 
     assert_text "Post was successfully updated"
     click_on "Back"

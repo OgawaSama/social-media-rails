@@ -1,23 +1,22 @@
-<p style="color: green"><%= notice %></p>
+<% if notice %>
+  <p class="text-green-600 font-medium mb-4"><%= notice %></p>
+<% end %>
 
-<%= render @group %>
-
-<div>
-  <p>
-    <%= link_to "Edit this group", edit_group_path(@group) %> |
-    <%= link_to "Back to feed", feed_path %>
-
-    <%= button_to "Destroy this group", @group, method: :delete %>
-  </p>
+<div class="bg-white shadow-md rounded-lg p-6 mb-6">
+  <%= render @group %>
 </div>
 
-<div>
-  <div class="max-w-5xl w-full grid gap-8 mt-8">
+<div class="flex flex-wrap gap-4 mb-6">
+  <%= link_to "Edit this group", edit_group_path(@group), class: "bg-blue-500 hover:bg-blue-600 text-white font-medium px-4 py-2 rounded shadow transition duration-200" %>
+  <%= link_to "Back to feed", feed_path, class: "bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium px-4 py-2 rounded shadow transition duration-200" %>
+  <%= button_to "Destroy this group", @group, method: :delete, class: "bg-red-500 hover:bg-red-600 text-white font-medium px-4 py-2 rounded shadow transition duration-200" %>
+</div>
+
+<div class="max-w-5xl mx-auto w-full mt-8 grid gap-8">
   <% if @posts.any? %>
-    <h3>Posts de membros do grupo </h3>
+    <h3 class="text-xl font-semibold mb-4">Posts de membros do grupo</h3>
     <%= render partial: "feed/post", collection: @posts %>
   <% else %>
-    <p class="text-muted">Nenhum post ainda.</p>
+    <p class="text-gray-500">Nenhum post ainda.</p>
   <% end %>
-</div>
 </div>
