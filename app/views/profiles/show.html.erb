@@ -4,8 +4,14 @@
 
 <div>
   <% if current_user == @profile.user %>
+    <%= link_to "Edit account", edit_user_registration_path, method: :get %>
     <%= link_to "Edit profile", edit_profile_path(@profile) %> |
     <%= link_to "Meus grupos", groups_user_path(current_user) %>
+  <% end %>
+  <% if user_signed_in? && current_user.type != "BusinessUser" %>
+    <%= link_to "É uma empresa? Cadastre-se aqui", new_business_registration_path, class: "btn btn-outline-primary" %>
+  <% elsif user_signed_in? && current_user.type == "BusinessUser" && current_user.try(:business).present? %>
+    <%= link_to "Editar perfil empresarial", edit_business_registration_path, class: "btn btn-outline-primary" %>
   <% end %>
   <div>
 </div>

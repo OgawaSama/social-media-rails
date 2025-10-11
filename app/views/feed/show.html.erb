@@ -1,20 +1,20 @@
-<%= button_to "Sign out", destroy_user_session_path, method: :delete %> 
-<%= button_to "Edit account", edit_user_registration_path, method: :get %>
-<%= button_to "Go to my profile", profile_path(id: current_user.profile.id, :trailing_slash => true), method: :get %>
-
-<%= button_to "Show user list", userindex_path, method: :get %>
-
 <%= form_with url: search_users_path, method: :get, local: true do |f| %>
-  <div class="flex items-center mt-4">
-    <%= f.text_field :query, placeholder: "Search users...", class: "border rounded p-2 w-full" %>
-    <%= f.submit "Search", class: "ml-2 px-4 py-2 bg-blue-500 text-white rounded" %>
-  </div>
-<% end %>
+  <div class="flex items-center mt-4 space-x-2">
+    <!-- Campo de busca ocupa todo o espaço restante -->
+    <%= f.text_field :query,
+          placeholder: "Search users...",
+          class: "flex-1 border rounded p-2" %>
 
-<% if user_signed_in? && current_user.type != "BusinessUser" %>
-  <%= link_to "É uma empresa? Cadastre-se aqui", new_business_registration_path, class: "btn btn-outline-primary" %>
-<% elsif user_signed_in? && current_user.type == "BusinessUser" && current_user.try(:business).present? %>
-  <%= link_to "Editar perfil empresarial", edit_business_registration_path, class: "btn btn-outline-primary" %>
+    <!-- Botão de Search -->
+    <%= f.submit "Search",
+          class: "px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600" %>
+
+    <!-- Botão Show User List -->
+    <%= button_to "Show user list",
+          userindex_path,
+          method: :get,
+          class: "px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600" %>
+  </div>
 <% end %>
 
 <div class="fle flex-col items-center pt-24">
