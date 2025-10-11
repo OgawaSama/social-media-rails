@@ -18,4 +18,9 @@ class ProfileControllerTest < ActionDispatch::IntegrationTest
     get edit_profile_url(@profile)
     assert_response :success
   end
+
+  test "should update profile" do
+    patch profile_url(@profile), params: { profile: { bio: "bio" } }
+    assert_redirected_to profile_url(@profile)
+  end
 end

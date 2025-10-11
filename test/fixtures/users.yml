@@ -7,11 +7,15 @@
 one: 
   email: user1@example.com
   username: user1
+  first_name: user
+  surnames: 1
   encrypted_password: <%= Devise::Encryptor.digest(User, ENV['TEST_PASSWORD']) %>
 # column: value
 #
 two:
   email: user2@example.com
   username: user2
+  first_name: user
+  surnames: 1
   encrypted_password: <alguma senha>
 # column: value

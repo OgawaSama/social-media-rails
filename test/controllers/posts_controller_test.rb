@@ -21,25 +21,25 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     get new_post_url, as: :html
     assert_response :success
   end
-  # [Bookmark] ver como fazer action text ser aceito no teste
-  # test "should create post" do
 
-  # assert_difference("Post.count") do
-  #  post posts_url,
-  #     params: { post: { content: "Meu novo post" } },
-  #     as: :html
-  # end
-  # assert_redirected_to post_url(Post.last)
-  # end
+  test "should create post" do
+    assert_difference("Post.count") do
+      post posts_url,
+        params: { post: { caption: "Title", body: "Meu novo post" } }
+      end
+    assert_redirected_to post_url(Post.last)
+  end
 
-  # test "should update post" do
-  # patch post_url(@post),
-  #      params: { post: { content: "Atualizado" } },
-  #      as: :html
-  # @post.reload
-  # assert_equal "Atualizado", @post.content.to_s
-  # assert_redirected_to post_url(@post)
-  # end
+  test "should update post" do
+    patch post_url(@post),
+      params: { post: { caption: "Title", body: "Atualizado" } }
+    @post.reload
+    assert_equal "<div class=\"trix-content\">
+  Atualizado
+</div>
+", @post.body.to_s
+    assert_redirected_to post_url(@post)
+  end
 
   test "should show post" do
     get post_url(@post), as: :html
