@@ -1,18 +1,26 @@
+<%= link_to post do %>
 <div class="relative bg-white shadow-md rounded-lg overflow-hidden mb-6 hover:shadow-lg transition-transform transform hover:scale-[1.01]">
   <p class="text-2xl font-bold mb-2 p-4 text-center">
-    <%= link_to post.caption, post, class: "hover:underline text-blue-600" %>
+    <%= post.caption %>
   </p>
 
   <div class="p-6">
     <% if post.images.any? %>
-      <%= link_to image_tag(post.images.first, class: "w-full h-80 object-cover rounded-lg mb-4"), post %>
+      <%= image_tag(post.images.first, class: "w-full max-h-96 object-contain rounded-lg mb-4") %>
     <% end %>
 
-    <p class="text-gray-800 mb-4 text-center"><%= post.feed_body %> <%= "..." if post.feed_body_truncated? %></p>
+    <p class="text-gray-800 mb-4 text-center break-words w-full">
+      <%= post.feed_body %>
+      <%= "..." if post.feed_body_truncated? %>
+    </p>
 
     <div class="flex items-center space-x-2 mb-4">
       <% if post.user.profile.avatar.attached? %>
         <%= image_tag(post.user.profile.avatar, class: "w-8 h-8 rounded-full object-cover") %>
+      <% else %>
+        <div class="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center text-gray-600 font-semibold">
+          <%= post.user.username[0].upcase %>
+        </div>
       <% end %>
       <p class="text-sm text-gray-500">
         Post by <%= link_to post.user.username, profile_path(post.user.profile), class: "text-blue-500 hover:underline" %> • <%= time_ago_in_words(post.created_at) %> ago
@@ -20,9 +28,9 @@
     </div>
 
     <div class="absolute bottom-4 right-5 flex items-center space-x-2">
-      <%= link_to "View #{post.comments.count} comments",
-            post_comments_path(post),
-            class: "text-blue-500 hover:underline" %>
+      <%= link_to "#{post.comments.count} comments",
+            post,
+            class: "text-gray-500" %>
 
       <%= link_to "Leave a comment",
           new_post_comment_path(post),
@@ -38,3 +46,4 @@
     </div>
   </div>
 </div>
+<% end %>

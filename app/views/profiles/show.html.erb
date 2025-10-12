@@ -8,13 +8,13 @@
   <%= render @profile %>
 
   <% if current_user == @profile.user %>
-    <div class="flex flex-wrap items-center gap-6 mt-4">
+    <div class="flex flex-wrap items-center gap-6 mt-4 p-6">
       <%= link_to "Edit account", edit_user_registration_path, class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded shadow transition duration-200" %>
       <%= link_to "Edit profile", edit_profile_path(@profile), class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded shadow transition duration-200" %>
       <%= link_to "Meus grupos", groups_user_path(current_user), class: "bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold px-4 py-2 rounded shadow transition duration-200" %>
     </div>
     <% if user_signed_in? && current_user.type != "BusinessUser" %>
-      <div class="mt-4">
+      <div class="mt-4 p-6">
         <%= link_to "É uma empresa? Cadastre-se aqui", new_business_registration_path, class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded shadow transition duration-200" %>
       </div>
     <% elsif user_signed_in? && current_user.type == "BusinessUser" && current_user.try(:business).present? %>
@@ -25,19 +25,18 @@
   <%# else <%= link_to pagina de exibicao do perfil empresarial %>
   <% end %>
 
-
-  <div class="mt-8 grid gap-8">
-    <% if @posts.any? %>
-      <h3 class="text-xl font-bold mb-4">Posts de <%= @profile.user.username %></h3>
-      <%= render partial: "posts/post", collection: @posts %>
-    <% else %>
-      <p class="text-gray-500 italic">Nenhum post ainda.</p>
-    <% end %>
-  </div>
-
   <% if current_user == @profile.user %>
     <div class="mt-6 flex justify-center">
       <%= link_to "Create new post", new_post_path, class: "bg-green-500 hover:bg-green-600 text-white font-semibold px-6 py-3 rounded-lg shadow transition duration-200" %>
     </div>
   <% end %>
+
+  <div class="mt-8 grid gap-8 p-6">
+    <% if @posts.any? %>
+      <h3 class="text-xl font-bold mb-4">Posts de <%= @profile.user.username %></h3>
+      <%= render partial: "feed/post", collection: @posts %>
+    <% else %>
+      <p class="text-gray-500 italic">Nenhum post ainda.</p>
+    <% end %>
+  </div>
 </div>

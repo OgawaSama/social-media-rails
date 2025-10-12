@@ -1,9 +1,8 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[ show edit update destroy ]
 
-  # GET /posts or /posts.json
   def index
-    @posts = Post.all
+    @posts = Post.all.order(created_at: :desc) # garante que @posts não seja nil
   end
 
   # GET /posts/1 or /posts/1.json

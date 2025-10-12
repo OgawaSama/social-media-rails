@@ -1,11 +1,21 @@
 <nav class="bg-white shadow-md">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between items-center h-16">
-
-      <!-- Logo / Greeting -->
-      <div class="text-lg font-semibold text-gray-700">
-        Olá, <%= current_user.username %>
-      </div>
+      <%= link_to profile_path(id: current_user.profile.id, trailing_slash: true), method: :get do %>
+        <div class="flex flex-lin-2 items-center gap-3">
+          <% if current_user.profile.avatar.attached? %>
+            <%= image_tag(current_user.profile.avatar, class: "w-10 h-10 rounded-full object-cover") %>
+          <% else %>
+            <div class="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center text-gray-600 font-semibold">
+              <%= current_user.username[0].upcase %>
+            </div>
+          <% end %>
+          <!-- Logo / Greeting -->
+          <div class="text-lg font-semibold text-gray-700">
+            Olá, <%= current_user.username %>
+          </div>
+        </div>
+      <% end %>
 
       <!-- Links como "cards" à direita -->
       <div class="flex space-x-4">
@@ -17,9 +27,10 @@
           My Profile
         <% end %>
 
-        <%= link_to destroy_user_session_path, data: { turbo_method: :delete }, class: "bg-white shadow-md rounded-lg px-4 py-2 hover:bg-red-50 transition duration-200 font-medium text-red-500 hover:text-red-700 flex items-center" do %>
-          Sign Out
-        <% end %>
+        <!-- Mouse não mostra que é clicável mais, mas agora funciona... -->
+        <div>
+          <%= button_to "Sign Out", destroy_user_session_path, method: :delete,  class: "bg-white shadow-md rounded-lg px-4 py-2 hover:bg-red-50 transition duration-200 font-medium text-red-500 hover:text-red-700 flex items-center"%>
+        </div>
       </div>
 
     </div>
