@@ -41,7 +41,7 @@
 
     <!-- Bio -->
     <% if profile.bio.present? %>
-      <p class="text-gray-700 text-center mb-4">
+      <p class="text-gray-700 text-center mb-4 break-words max-w-full">
         <strong>Bio:</strong> <%= profile.bio_limit_char %>
       </p>
     <% end %>

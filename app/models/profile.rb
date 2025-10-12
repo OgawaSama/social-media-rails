@@ -6,6 +6,6 @@ class Profile < ApplicationRecord
 
   def bio_limit_char
     char_limit = 512
-    bio&.bio&.to_plain_text&.first(char_limit)
+    bio&.to_plain_text&.first(char_limit)
   end
 end
