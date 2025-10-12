@@ -16,6 +16,6 @@ two:
   email: user2@example.com
   username: user2
   first_name: user
-  surnames: 1
+  surnames: 2
   encrypted_password: <alguma senha>
 # column: value

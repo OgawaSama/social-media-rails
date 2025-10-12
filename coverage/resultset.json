@@ -1,7 +1,7 @@
 {
   "Unit Tests": {
     "coverage": {
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/models/business_address.rb": {
+      "/home/sui/uni/social-media-rails/app/models/business_address.rb": {
         "lines": [
           1,
           1,
@@ -9,14 +9,14 @@
           null
         ]
       },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/models/application_record.rb": {
+      "/home/sui/uni/social-media-rails/app/models/application_record.rb": {
         "lines": [
           1,
           1,
           null
         ]
       },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/models/business.rb": {
+      "/home/sui/uni/social-media-rails/app/models/business.rb": {
         "lines": [
           1,
           1,
@@ -37,7 +37,7 @@
           null
         ]
       },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/models/comment.rb": {
+      "/home/sui/uni/social-media-rails/app/models/comment.rb": {
         "lines": [
           1,
           1,
@@ -46,7 +46,7 @@
           null
         ]
       },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/models/post.rb": {
+      "/home/sui/uni/social-media-rails/app/models/post.rb": {
         "lines": [
           1,
           1,
@@ -69,7 +69,7 @@
           null
         ]
       },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/models/friendship.rb": {
+      "/home/sui/uni/social-media-rails/app/models/friendship.rb": {
         "lines": [
           1,
           1,
@@ -78,7 +78,7 @@
           null
         ]
       },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/models/group.rb": {
+      "/home/sui/uni/social-media-rails/app/models/group.rb": {
         "lines": [
           1,
           1,
@@ -97,7 +97,7 @@
           null
         ]
       },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/models/profile.rb": {
+      "/home/sui/uni/social-media-rails/app/models/profile.rb": {
         "lines": [
           1,
           1,
@@ -107,7 +107,7 @@
           null
         ]
       },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/models/reaction.rb": {
+      "/home/sui/uni/social-media-rails/app/models/reaction.rb": {
         "lines": [
           1,
           1,
@@ -116,7 +116,13 @@
           null
         ]
       },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/models/user.rb": {
+      "/home/sui/uni/social-media-rails/app/models/trip.rb": {
+        "lines": [
+          1,
+          null
+        ]
+      },
+      "/home/sui/uni/social-media-rails/app/models/user.rb": {
         "lines": [
           1,
           null,
@@ -176,7 +182,7 @@
           null
         ]
       },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/controllers/users_controller.rb": {
+      "/home/sui/uni/social-media-rails/app/controllers/users_controller.rb": {
         "lines": [
           1,
           1,
@@ -198,7 +204,7 @@
           null
         ]
       },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/controllers/application_controller.rb": {
+      "/home/sui/uni/social-media-rails/app/controllers/application_controller.rb": {
         "lines": [
           1,
           null,
@@ -206,55 +212,55 @@
           null
         ]
       },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/helpers/application_helper.rb": {
+      "/home/sui/uni/social-media-rails/app/helpers/application_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/helpers/feed_helper.rb": {
+      "/home/sui/uni/social-media-rails/app/helpers/feed_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/helpers/groups_helper.rb": {
+      "/home/sui/uni/social-media-rails/app/helpers/groups_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/helpers/pages_helper.rb": {
+      "/home/sui/uni/social-media-rails/app/helpers/pages_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/helpers/posts_helper.rb": {
+      "/home/sui/uni/social-media-rails/app/helpers/posts_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/helpers/profile_helper.rb": {
+      "/home/sui/uni/social-media-rails/app/helpers/profile_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/helpers/profiles_helper.rb": {
+      "/home/sui/uni/social-media-rails/app/helpers/profiles_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/helpers/users_helper.rb": {
+      "/home/sui/uni/social-media-rails/app/helpers/users_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/models/group_participation.rb": {
+      "/home/sui/uni/social-media-rails/app/models/group_participation.rb": {
         "lines": [
           1,
           1,
@@ -264,7 +270,19 @@
           null
         ]
       },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/controllers/groups_controller.rb": {
+      "/home/sui/uni/social-media-rails/app/models/relationship.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          null
+        ]
+      },
+      "/home/sui/uni/social-media-rails/app/controllers/groups_controller.rb": {
         "lines": [
           1,
           1,
@@ -355,7 +373,7 @@
           null
         ]
       },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/controllers/feed_controller.rb": {
+      "/home/sui/uni/social-media-rails/app/controllers/feed_controller.rb": {
         "lines": [
           1,
           1,
@@ -374,19 +392,7 @@
           null
         ]
       },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/models/relationship.rb": {
-        "lines": [
-          1,
-          1,
-          1,
-          null,
-          1,
-          1,
-          1,
-          null
-        ]
-      },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/controllers/business_registrations_controller.rb": {
+      "/home/sui/uni/social-media-rails/app/controllers/business_registrations_controller.rb": {
         "lines": [
           0,
           0,
@@ -439,7 +445,7 @@
         ],
         "branches": {}
       },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/controllers/friendships_controller.rb": {
+      "/home/sui/uni/social-media-rails/app/controllers/friendships_controller.rb": {
         "lines": [
           0,
           0,
@@ -467,7 +473,7 @@
         ],
         "branches": {}
       },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/controllers/pages_controller.rb": {
+      "/home/sui/uni/social-media-rails/app/controllers/pages_controller.rb": {
         "lines": [
           0,
           0,
@@ -480,7 +486,7 @@
         ],
         "branches": {}
       },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/controllers/posts/base_controller.rb": {
+      "/home/sui/uni/social-media-rails/app/controllers/posts/base_controller.rb": {
         "lines": [
           0,
           0,
@@ -496,7 +502,7 @@
         ],
         "branches": {}
       },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/controllers/posts/comments_controller.rb": {
+      "/home/sui/uni/social-media-rails/app/controllers/posts/comments_controller.rb": {
         "lines": [
           0,
           0,
@@ -540,7 +546,7 @@
         ],
         "branches": {}
       },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/controllers/posts/reactions_controller.rb": {
+      "/home/sui/uni/social-media-rails/app/controllers/posts/reactions_controller.rb": {
         "lines": [
           0,
           0,
@@ -561,7 +567,7 @@
         ],
         "branches": {}
       },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/controllers/posts_controller.rb": {
+      "/home/sui/uni/social-media-rails/app/controllers/posts_controller.rb": {
         "lines": [
           0,
           0,
@@ -636,7 +642,7 @@
         ],
         "branches": {}
       },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/controllers/profiles_controller.rb": {
+      "/home/sui/uni/social-media-rails/app/controllers/profiles_controller.rb": {
         "lines": [
           0,
           0,
@@ -699,7 +705,7 @@
         ],
         "branches": {}
       },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/controllers/relationships_controller.rb": {
+      "/home/sui/uni/social-media-rails/app/controllers/relationships_controller.rb": {
         "lines": [
           0,
           0,
@@ -755,7 +761,7 @@
         ],
         "branches": {}
       },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/controllers/users/confirmations_controller.rb": {
+      "/home/sui/uni/social-media-rails/app/controllers/users/confirmations_controller.rb": {
         "lines": [
           null,
           null,
@@ -790,7 +796,7 @@
         ],
         "branches": {}
       },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/controllers/users/omniauth_callbacks_controller.rb": {
+      "/home/sui/uni/social-media-rails/app/controllers/users/omniauth_callbacks_controller.rb": {
         "lines": [
           null,
           null,
@@ -825,7 +831,7 @@
         ],
         "branches": {}
       },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/controllers/users/passwords_controller.rb": {
+      "/home/sui/uni/social-media-rails/app/controllers/users/passwords_controller.rb": {
         "lines": [
           null,
           null,
@@ -864,7 +870,7 @@
         ],
         "branches": {}
       },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/controllers/users/registrations_controller.rb": {
+      "/home/sui/uni/social-media-rails/app/controllers/users/registrations_controller.rb": {
         "lines": [
           null,
           null,
@@ -931,7 +937,7 @@
         ],
         "branches": {}
       },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/controllers/users/sessions_controller.rb": {
+      "/home/sui/uni/social-media-rails/app/controllers/users/sessions_controller.rb": {
         "lines": [
           null,
           null,
@@ -963,7 +969,7 @@
         ],
         "branches": {}
       },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/controllers/users/unlocks_controller.rb": {
+      "/home/sui/uni/social-media-rails/app/controllers/users/unlocks_controller.rb": {
         "lines": [
           null,
           null,
@@ -998,7 +1004,7 @@
         ],
         "branches": {}
       },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/jobs/application_job.rb": {
+      "/home/sui/uni/social-media-rails/app/jobs/application_job.rb": {
         "lines": [
           0,
           null,
@@ -1010,7 +1016,7 @@
         ],
         "branches": {}
       },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/mailers/application_mailer.rb": {
+      "/home/sui/uni/social-media-rails/app/mailers/application_mailer.rb": {
         "lines": [
           0,
           0,
@@ -1019,7 +1025,7 @@
         ],
         "branches": {}
       },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/models/business_user.rb": {
+      "/home/sui/uni/social-media-rails/app/models/business_user.rb": {
         "lines": [
           0,
           0,
@@ -1033,11 +1039,11 @@
         "branches": {}
       }
     },
-    "timestamp": 1760235765
+    "timestamp": 1759979466
   },
   "RSpec": {
     "coverage": {
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/models/business_address.rb": {
+      "/home/guilherme/social-media-rails/app/models/business_address.rb": {
         "lines": [
           1,
           1,
@@ -1045,14 +1051,14 @@
           null
         ]
       },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/models/application_record.rb": {
+      "/home/guilherme/social-media-rails/app/models/application_record.rb": {
         "lines": [
           1,
           1,
           null
         ]
       },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/models/business.rb": {
+      "/home/guilherme/social-media-rails/app/models/business.rb": {
         "lines": [
           1,
           1,
@@ -1073,7 +1079,7 @@
           null
         ]
       },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/models/comment.rb": {
+      "/home/guilherme/social-media-rails/app/models/comment.rb": {
         "lines": [
           1,
           1,
@@ -1082,7 +1088,7 @@
           null
         ]
       },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/models/post.rb": {
+      "/home/guilherme/social-media-rails/app/models/post.rb": {
         "lines": [
           1,
           1,
@@ -1093,19 +1099,19 @@
           null,
           1,
           null,
-          10,
-          10,
+          14,
+          14,
           null,
           null,
           1,
-          5,
-          5,
-          5,
+          7,
+          7,
+          7,
           null,
           null
         ]
       },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/models/friendship.rb": {
+      "/home/guilherme/social-media-rails/app/models/friendship.rb": {
         "lines": [
           1,
           1,
@@ -1114,7 +1120,7 @@
           null
         ]
       },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/models/group.rb": {
+      "/home/guilherme/social-media-rails/app/models/group.rb": {
         "lines": [
           1,
           1,
@@ -1133,7 +1139,7 @@
           null
         ]
       },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/models/profile.rb": {
+      "/home/guilherme/social-media-rails/app/models/profile.rb": {
         "lines": [
           1,
           1,
@@ -1143,7 +1149,7 @@
           null
         ]
       },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/models/reaction.rb": {
+      "/home/guilherme/social-media-rails/app/models/reaction.rb": {
         "lines": [
           1,
           1,
@@ -1152,7 +1158,7 @@
           null
         ]
       },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/models/user.rb": {
+      "/home/guilherme/social-media-rails/app/models/user.rb": {
         "lines": [
           1,
           null,
@@ -1189,7 +1195,7 @@
           null,
           null,
           1,
-          1,
+          0,
           null,
           null,
           1,
@@ -1197,12 +1203,12 @@
           null,
           null,
           1,
-          3,
+          0,
           null,
           null,
           1,
           null,
-          5,
+          6,
           null,
           null,
           1,
@@ -1212,100 +1218,22 @@
           null
         ]
       },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/controllers/feed_controller.rb": {
-        "lines": [
-          1,
-          1,
-          null,
-          1,
-          null,
-          5,
-          null,
-          null,
-          1,
-          0,
-          null,
-          null,
-          null,
-          null,
-          null
-        ]
-      },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/controllers/application_controller.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          null
-        ]
-      },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/helpers/application_helper.rb": {
-        "lines": [
-          1,
-          null
-        ]
-      },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/helpers/feed_helper.rb": {
-        "lines": [
-          1,
-          null
-        ]
-      },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/helpers/groups_helper.rb": {
-        "lines": [
-          1,
-          null
-        ]
-      },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/helpers/pages_helper.rb": {
-        "lines": [
-          1,
-          null
-        ]
-      },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/helpers/posts_helper.rb": {
-        "lines": [
-          1,
-          null
-        ]
-      },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/helpers/profile_helper.rb": {
-        "lines": [
-          1,
-          null
-        ]
-      },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/helpers/profiles_helper.rb": {
-        "lines": [
-          1,
-          null
-        ]
-      },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/helpers/users_helper.rb": {
-        "lines": [
-          1,
-          null
-        ]
-      },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/models/relationship.rb": {
-        "lines": [
-          1,
-          1,
-          1,
-          null,
-          1,
-          1,
-          1,
-          null
-        ]
-      },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/controllers/posts_controller.rb": {
+      "/home/guilherme/social-media-rails/app/controllers/posts_controller.rb": {
         "lines": [
           1,
           1,
           null,
           null,
           1,
+          2,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          1,
           1,
           null,
           null,
@@ -1315,21 +1243,12 @@
           null,
           null,
           1,
-          0,
-          null,
-          null,
-          null,
           1,
           null,
-          null,
-          null,
           1,
-          0,
-          null,
-          0,
-          0,
-          0,
-          0,
+          1,
+          2,
+          1,
           null,
           0,
           0,
@@ -1339,10 +1258,10 @@
           null,
           null,
           1,
-          0,
-          0,
-          0,
-          0,
+          1,
+          1,
+          2,
+          1,
           null,
           0,
           0,
@@ -1363,166 +1282,104 @@
           1,
           null,
           1,
-          2,
-          null,
-          null,
-          null,
-          1,
-          0,
-          null,
-          null
-        ]
-      },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/controllers/profiles_controller.rb": {
-        "lines": [
-          1,
-          1,
-          1,
-          null,
-          null,
-          1,
-          0,
+          7,
           null,
           null,
           null,
           1,
           2,
           null,
-          null,
-          null,
-          1,
-          0,
-          null,
-          null,
-          null,
-          1,
-          0,
-          0,
-          0,
-          null,
-          0,
-          null,
-          null,
-          null,
-          null,
-          1,
-          null,
-          null,
-          null,
-          1,
-          0,
-          0,
-          null,
-          0,
-          null,
-          null,
-          null,
-          null,
-          1,
-          0,
-          0,
-          null,
-          null,
-          1,
-          null,
-          1,
-          2,
-          null,
-          null,
-          1,
-          0,
-          null,
           null
         ]
       },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/controllers/relationships_controller.rb": {
+      "/home/guilherme/social-media-rails/app/controllers/application_controller.rb": {
         "lines": [
           1,
-          1,
           null,
           1,
-          null,
-          1,
-          null,
-          null,
-          1,
-          null,
-          0,
-          null,
-          1,
-          0,
-          0,
-          null,
-          null,
-          1,
-          1,
-          2,
-          1,
-          null,
-          null,
-          0,
-          null,
-          null,
-          null,
-          1,
-          null,
-          0,
-          null,
-          null,
-          0,
-          null,
-          null,
-          null,
-          0,
-          0,
-          0,
-          null,
-          null,
-          0,
-          0,
-          0,
-          0,
-          null,
-          null,
-          0,
-          null,
-          null,
           null
         ]
       },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/controllers/users_controller.rb": {
+      "/home/guilherme/social-media-rails/app/helpers/application_helper.rb": {
         "lines": [
           1,
-          1,
-          null,
-          1,
-          1,
-          1,
-          null,
-          null,
-          1,
-          0,
-          0,
-          null,
-          null,
-          1,
-          0,
-          0,
-          null,
           null
         ]
       },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/models/group_participation.rb": {
+      "/home/guilherme/social-media-rails/app/helpers/feed_helper.rb": {
+        "lines": [
+          1,
+          null
+        ]
+      },
+      "/home/guilherme/social-media-rails/app/helpers/groups_helper.rb": {
+        "lines": [
+          1,
+          null
+        ]
+      },
+      "/home/guilherme/social-media-rails/app/helpers/pages_helper.rb": {
+        "lines": [
+          1,
+          null
+        ]
+      },
+      "/home/guilherme/social-media-rails/app/helpers/posts_helper.rb": {
+        "lines": [
+          1,
+          null
+        ]
+      },
+      "/home/guilherme/social-media-rails/app/helpers/profile_helper.rb": {
+        "lines": [
+          1,
+          null
+        ]
+      },
+      "/home/guilherme/social-media-rails/app/helpers/profiles_helper.rb": {
+        "lines": [
+          1,
+          null
+        ]
+      },
+      "/home/guilherme/social-media-rails/app/helpers/users_helper.rb": {
+        "lines": [
+          1,
+          null
+        ]
+      },
+      "/home/guilherme/social-media-rails/app/models/relationship.rb": {
         "lines": [
           1,
           1,
           1,
           null,
           1,
+          1,
+          1,
           null
         ]
       },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/controllers/groups_controller.rb": {
+      "/home/guilherme/social-media-rails/app/controllers/feed_controller.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          null,
+          6,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/home/guilherme/social-media-rails/app/controllers/groups_controller.rb": {
         "lines": [
           1,
           1,
@@ -1613,7 +1470,39 @@
           null
         ]
       },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/controllers/business_registrations_controller.rb": {
+      "/home/guilherme/social-media-rails/app/models/group_participation.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null,
+          1,
+          null
+        ]
+      },
+      "/home/guilherme/social-media-rails/app/controllers/users_controller.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          0,
+          0,
+          null,
+          null,
+          1,
+          0,
+          0,
+          null,
+          null
+        ]
+      },
+      "/home/guilherme/social-media-rails/app/controllers/business_registrations_controller.rb": {
         "lines": [
           0,
           0,
@@ -1666,7 +1555,7 @@
         ],
         "branches": {}
       },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/controllers/friendships_controller.rb": {
+      "/home/guilherme/social-media-rails/app/controllers/friendships_controller.rb": {
         "lines": [
           0,
           0,
@@ -1694,7 +1583,7 @@
         ],
         "branches": {}
       },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/controllers/pages_controller.rb": {
+      "/home/guilherme/social-media-rails/app/controllers/pages_controller.rb": {
         "lines": [
           0,
           0,
@@ -1707,7 +1596,7 @@
         ],
         "branches": {}
       },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/controllers/posts/base_controller.rb": {
+      "/home/guilherme/social-media-rails/app/controllers/posts/base_controller.rb": {
         "lines": [
           0,
           0,
@@ -1723,7 +1612,7 @@
         ],
         "branches": {}
       },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/controllers/posts/comments_controller.rb": {
+      "/home/guilherme/social-media-rails/app/controllers/posts/comments_controller.rb": {
         "lines": [
           0,
           0,
@@ -1767,7 +1656,7 @@
         ],
         "branches": {}
       },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/controllers/posts/reactions_controller.rb": {
+      "/home/guilherme/social-media-rails/app/controllers/posts/reactions_controller.rb": {
         "lines": [
           0,
           0,
@@ -1788,215 +1677,126 @@
         ],
         "branches": {}
       },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/controllers/users/confirmations_controller.rb": {
+      "/home/guilherme/social-media-rails/app/controllers/profiles_controller.rb": {
         "lines": [
-          null,
-          null,
+          0,
+          0,
           0,
           null,
           null,
+          0,
+          0,
+          0,
           null,
           null,
+          0,
+          0,
+          0,
           null,
           null,
+          0,
+          0,
+          0,
           null,
           null,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
           null,
           null,
+          0,
+          0,
           null,
           null,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
           null,
           null,
+          0,
+          0,
+          0,
+          0,
           null,
+          0,
           null,
+          0,
+          0,
+          0,
           null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
+          0,
+          0,
+          0,
           0
         ],
         "branches": {}
       },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/controllers/users/omniauth_callbacks_controller.rb": {
+      "/home/guilherme/social-media-rails/app/controllers/relationships_controller.rb": {
         "lines": [
+          0,
+          0,
           null,
+          0,
           null,
           0,
           null,
           null,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          null,
+          0,
           null,
           null,
+          0,
+          0,
+          0,
           null,
+          0,
+          0,
+          0,
+          0,
           null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
           0
         ],
         "branches": {}
       },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/controllers/users/passwords_controller.rb": {
-        "lines": [
-          null,
-          null,
-          0,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          0
-        ],
-        "branches": {}
-      },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/controllers/users/registrations_controller.rb": {
-        "lines": [
-          null,
-          null,
-          0,
-          0,
-          0,
-          null,
-          null,
-          0,
-          0,
-          0,
-          null,
-          null,
-          0,
-          0,
-          0,
-          null,
-          null,
-          0,
-          0,
-          0,
-          null,
-          null,
-          0,
-          0,
-          0,
-          null,
-          null,
-          0,
-          0,
-          0,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          0,
-          0,
-          0,
-          null,
-          null,
-          null,
-          null,
-          0,
-          0,
-          0,
-          null,
-          null,
-          0,
-          0,
-          0,
-          null,
-          null,
-          0,
-          0,
-          0,
-          null,
-          null,
-          null,
-          null,
-          null,
-          0
-        ],
-        "branches": {}
-      },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/controllers/users/sessions_controller.rb": {
-        "lines": [
-          null,
-          null,
-          0,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          0
-        ],
-        "branches": {}
-      },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/controllers/users/unlocks_controller.rb": {
+      "/home/guilherme/social-media-rails/app/controllers/users/confirmations_controller.rb": {
         "lines": [
           null,
           null,
@@ -2031,7 +1831,215 @@
         ],
         "branches": {}
       },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/jobs/application_job.rb": {
+      "/home/guilherme/social-media-rails/app/controllers/users/omniauth_callbacks_controller.rb": {
+        "lines": [
+          null,
+          null,
+          0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          0
+        ],
+        "branches": {}
+      },
+      "/home/guilherme/social-media-rails/app/controllers/users/passwords_controller.rb": {
+        "lines": [
+          null,
+          null,
+          0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          0
+        ],
+        "branches": {}
+      },
+      "/home/guilherme/social-media-rails/app/controllers/users/registrations_controller.rb": {
+        "lines": [
+          null,
+          null,
+          0,
+          0,
+          0,
+          null,
+          null,
+          0,
+          0,
+          0,
+          null,
+          null,
+          0,
+          0,
+          0,
+          null,
+          null,
+          0,
+          0,
+          0,
+          null,
+          null,
+          0,
+          0,
+          0,
+          null,
+          null,
+          0,
+          0,
+          0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          0,
+          0,
+          0,
+          null,
+          null,
+          null,
+          null,
+          0,
+          0,
+          0,
+          null,
+          null,
+          0,
+          0,
+          0,
+          null,
+          null,
+          0,
+          0,
+          0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          0
+        ],
+        "branches": {}
+      },
+      "/home/guilherme/social-media-rails/app/controllers/users/sessions_controller.rb": {
+        "lines": [
+          null,
+          null,
+          0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          0
+        ],
+        "branches": {}
+      },
+      "/home/guilherme/social-media-rails/app/controllers/users/unlocks_controller.rb": {
+        "lines": [
+          null,
+          null,
+          0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          0
+        ],
+        "branches": {}
+      },
+      "/home/guilherme/social-media-rails/app/jobs/application_job.rb": {
         "lines": [
           0,
           null,
@@ -2043,7 +2051,7 @@
         ],
         "branches": {}
       },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/mailers/application_mailer.rb": {
+      "/home/guilherme/social-media-rails/app/mailers/application_mailer.rb": {
         "lines": [
           0,
           0,
@@ -2052,7 +2060,7 @@
         ],
         "branches": {}
       },
-      "/home/sui/Desktop/Faculdade/eng/social-media-rails/app/models/business_user.rb": {
+      "/home/guilherme/social-media-rails/app/models/business_user.rb": {
         "lines": [
           0,
           0,
@@ -2066,6 +2074,6 @@
         "branches": {}
       }
     },
-    "timestamp": 1760235775
+    "timestamp": 1760013210
   }
 }

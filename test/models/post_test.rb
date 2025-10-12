@@ -20,12 +20,12 @@ class PostTest < ActiveSupport::TestCase
     @post.body = "a" * 200
     assert_equal 144, @post.feed_body.length
   end
-  #
-  #  test "feed_body should return up to 50 chars when there is an image" do
-  #    @post.body = "a" * 200
-  #    attach_image(@post, "test/fixtures/files/sample.jpg", "image/jpeg")
-  #    assert_equal 50, @post.feed_body.length
-  #  end
+  
+  test "feed_body should return up to 50 chars when there is an image" do
+    @post.body = "a" * 200
+    attach_image(@post, "test/fixtures/files/image/image.png", "image/png")
+    assert_equal 50, @post.feed_body.length
+   end
 
   test "feed_body_truncated? returns true when text is longer than truncated version" do
     @post.body = "a" * 200

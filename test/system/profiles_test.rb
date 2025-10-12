@@ -7,40 +7,54 @@ class ProfilesTest < ApplicationSystemTestCase
     @user = users(:one)
     sign_in @user
     @profile = profiles(:one)
-    @profile.user = @user
-    @profile.save
-  end
-  # Profile faz coisas do User [Bookmark] Resolver
-  #  test "visiting the index" do
-  #    visit profiles_url
-  #    assert_selector "h1", text: "Profiles"
-  #  end
-  #
-  #  test "should create profile" do
-  #    visit profiles_url
-  #    click_on "New profile"
-  #
-  #    fill_in "User", with: @profile.user_id
-  #    click_on "Create Profile"
-  #
-  #    assert_text "Profile was successfully created"
-  #    click_on "Back"
-  #  end
 
-  #  test "should update Profile" do
-  #    visit profile_url(@profile)
-  #    click_on "Edit profile", match: :first
-  #
-  #    fill_in "User", with: @profile.user_id
-  #    click_on "Update Profile"
-  #
-  #    assert_text "Profile was successfully updated"
-  #    click_on "Back to profile"
-  #  end
-  # lugar errado
-  #  test "should destroy Profile" do
-  #    visit profile_url(@profile)
-  #    click_on "Destroy this profile", match: :first
-  #    assert_text "Profile was successfully destroyed"
-  #  end
+    @user2 = users(:two)
+    @profile2 = profiles(:two)
+  end
+
+  # TODO: esperar o rich_text...
+  # test "should update Profile" do
+  #   visit profile_url(@profile)
+  #   click_on "Edit profile", match: :first
+
+  #   find('trix-editor#profile_bio.trix-content').set('awesomesauce')
+  #   attach_file('Avatar', "test/fixtures/files/image/image.png")
+  #   attach_file('Header', "test/fixtures/files/image/image.png")
+  #   click_on "Update Profile"
+
+  #   assert_text "Profile was successfully updated"
+  # end
+
+  test "should follow someone" do
+    visit profile_url(@profile2)
+    click_on "Seguir"
+
+    assert_text "Agora você está seguindo #{@user2.username}"
+  end
+
+  # TODO: descobrir como seguir alguém
+  # test "should unfollow someone" do
+  #   post follow_user_path(@user2)
+  #   visit profile_url(@profile2)
+  #   click_on "Deixar de seguir"
+
+  #   assert_text "Você deixou de seguir #{@user2.username}"
+  # end
+
+  # TODO: Não sei se deveria ficar aqui ou no controller
+  # test "should view follower list" do
+  #   visit profile_url(@profile)
+  #   click_on "seguidores"
+
+  #   assert_redirected_to followers_user_url(@profile)
+  #   assert true
+  # end
+
+  # test "should view following list" do
+  #   assert true
+  # end
+
+  # test "should see group list" do
+  #   assert true
+  # end
 end
