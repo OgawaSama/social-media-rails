@@ -3,6 +3,4 @@
 import "trix"
 import "@hotwired/turbo-rails"
 import "@rails/actiontext"
-//import "./business_addresses"
-require("@rails/activestorage").start()
-
+import "@rails/activestorage"
