@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  cardapio: one
+  nome: MyString
+  descricao: MyText
+  preco: 9.99
+  tipo: 1
+
+two:
+  cardapio: two
+  nome: MyString
+  descricao: MyText
+  preco: 9.99
+  tipo: 1
