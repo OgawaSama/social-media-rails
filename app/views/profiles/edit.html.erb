@@ -1,11 +1,13 @@
 <% content_for :title, "Editing profile" %>
 
-<h1>Editing profile</h1>
+<div class="min-h-screen flex flex-col items-center bg-gray-50 py-12">
+  <h1 class="text-3xl font-bold text-blue-600 mb-8">Editing profile</h1>
 
-<%= render "form", profile: @profile %>
+  <div class="bg-white shadow-md rounded-lg p-8 w-full max-w-lg mb-6">
+    <%= render "form", profile: @profile %>
+  </div>
 
-<br>
-
-<div>
-  <%= link_to "Back to profile", @profile %>
+  <div>
+    <%= link_to "Back to profile", @profile, class: "text-gray-600 hover:text-gray-800 font-semibold" %>
+  </div>
 </div>

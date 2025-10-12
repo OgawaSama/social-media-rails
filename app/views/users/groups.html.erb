@@ -1,16 +1,20 @@
-<div class="container mt-4">
+<div class="max-w-4xl mx-auto mt-8 px-4">
+  <div class="flex items-center justify-between mb-6">
+    <h1 class="text-2xl font-bold">Grupos de <%= @user.username %></h1>
+    <%= link_to "Novo grupo", new_group_path, class: "bg-green-500 hover:bg-green-600 text-white font-semibold px-4 py-2 rounded shadow transition duration-200" %>
+  </div>
 
-
-
-<h1>Grupos de <%= @user.username %></h1>
-<%= button_to "Novo grupo", new_group_path, method: :get %> <br>
-    <% if @user.groups.any? %>
-        <% @user.groups.each do |group| %>
-            <p>
-                <%= link_to group.name, group_path(group.id) %>
-            </p>
-        <% end %>
-        <% else %>
-            <p class="text-muted">Não possui grupos ainda.</p>
-        <% end %>
+  <% if @user.groups.any? %>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <% @user.groups.each do |group| %>
+        <div class="bg-white shadow-md rounded-lg p-4 hover:shadow-lg transition-shadow duration-200">
+          <h2 class="text-lg font-semibold text-gray-800">
+            <%= link_to group.name, group_path(group), class: "hover:underline" %>
+          </h2>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="text-gray-500 italic">Não possui grupos ainda.</p>
+  <% end %>
 </div>

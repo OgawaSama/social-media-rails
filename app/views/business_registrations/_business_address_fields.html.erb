@@ -1,20 +1,29 @@
+<div class="business-address-fields bg-gray-50 border border-gray-200 rounded-lg p-4 space-y-3 relative">
 
-<div class="business-address-fields">
   <div>
-    <%= f.label :street, "Rua" %>
-    <%= f.text_field :street %>
+    <%= f.label :street, "Rua", class: "block font-semibold mb-1" %>
+    <%= f.text_field :street, class: "input", placeholder: "Digite a rua" %>
   </div>
+
   <div>
-    <%= f.label :city, "Cidade" %>
-    <%= f.text_field :city %>
+    <%= f.label :city, "Cidade", class: "block font-semibold mb-1" %>
+    <%= f.text_field :city, class: "input", placeholder: "Digite a cidade" %>
   </div>
+
   <div>
-    <%= f.label :state, "Estado" %>
-    <%= f.text_field :state %>
+    <%= f.label :state, "Estado", class: "block font-semibold mb-1" %>
+    <%= f.text_field :state, class: "input", placeholder: "Digite o estado" %>
   </div>
+
   <div>
-    <%= f.label :zip, "CEP" %>
-    <%= f.text_field :zip %>
+    <%= f.label :zip, "CEP", class: "block font-semibold mb-1" %>
+    <%= f.text_field :zip, class: "input", placeholder: "00000-000" %>
   </div>
-  <!-- button type="button" class="remove-address btn btn-outline-danger">Remover endereço</button -->
+
+  <!-- JS quebrado por enquanto-->
+  <!--
+  <button type="button" class="remove-address absolute top-2 right-2 text-red-500 hover:text-red-700 font-bold transition">
+    &times;
+  </button>
+  -->
 </div>

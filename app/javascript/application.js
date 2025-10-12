@@ -2,6 +2,7 @@
 
 import "trix"
 import "@rails/actiontext"
+import "@hotwired/turbo-rails"
 //import "./business_addresses"
 require("@rails/activestorage").start()
 

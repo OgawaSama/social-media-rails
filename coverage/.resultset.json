@@ -1051,6 +1051,7 @@
   },
   "RSpec": {
     "coverage": {
+      "/home/jun/Desktop/social-media-rails/app/models/business_address.rb": {
       "/home/sui/uni/social-media-rails/app/models/business_address.rb": {
         "lines": [
           1,
