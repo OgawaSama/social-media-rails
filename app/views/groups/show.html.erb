@@ -6,7 +6,7 @@
   <%= render @group %>
 </div>
 
-<div class="flex flex-wrap gap-4 mb-6">
+<div class="flex flex-wrap gap-4 mb-6 p-6">
   <%= link_to "Edit this group", edit_group_path(@group), class: "bg-blue-500 hover:bg-blue-600 text-white font-medium px-4 py-2 rounded shadow transition duration-200" %>
   <%= link_to "Back to feed", feed_path, class: "bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium px-4 py-2 rounded shadow transition duration-200" %>
   <%= button_to "Destroy this group", @group, method: :delete, class: "bg-red-500 hover:bg-red-600 text-white font-medium px-4 py-2 rounded shadow transition duration-200" %>

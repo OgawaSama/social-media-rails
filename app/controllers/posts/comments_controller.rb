@@ -11,7 +11,7 @@ module Posts
             @comment.user = current_user
 
             if @comment.save
-                redirect_to feed_path
+                redirect_to post_path(@post)
             else
                 render :new
             end

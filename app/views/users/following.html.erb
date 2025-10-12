@@ -3,16 +3,25 @@
 
   <% if @following.any? %>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-      <% @following.each do |user| %>
+      <% @following.each do |follower| %>
         <div class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
-          <h5 class="text-lg font-semibold mb-2"><%= user.username %></h5>
-
-          <% if user.profile %>
-            <%= link_to "Ver Perfil", profile_path(user.profile), 
-                        class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded shadow transition duration-200 text-sm" %>
-          <% else %>
-            <span class="text-gray-500 text-sm">Perfil não disponível</span>
-          <% end %>
+          <div class="flex flex-lin-3 gap-4">
+            <% if follower.profile.avatar.attached? %>
+              <%= image_tag(follower.profile.avatar, class: "w-10 h-10 rounded-full object-cover") %>
+            <% else %>
+              <div class="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center text-gray-600 font-semibold">
+                <%= follower.username[0].upcase %>
+              </div>
+            <% end %>
+            <h5 class="text-lg font-semibold mb-2"><%= follower.username %></h5>
+            
+            <% if follower.profile %>
+              <%= link_to "Ver Perfil", profile_path(follower.profile), 
+                class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded shadow transition duration-200 text-sm" %>
+            <% else %>
+              <span class="text-gray-500 text-sm">Perfil não disponível</span>
+            <% end %>
+          </div>
         </div>
       <% end %>
     </div>

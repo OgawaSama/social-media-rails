@@ -7,7 +7,7 @@ class Post < ApplicationRecord
 
   def feed_body
     # if there is an image, smaller char limit
-    char_limit = images.any? ? 50 : 144
+    char_limit = images.any? ? 144 : 288
     body&.body&.to_plain_text&.first(char_limit)
   end
 

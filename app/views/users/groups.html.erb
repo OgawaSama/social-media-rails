@@ -7,11 +7,22 @@
   <% if @user.groups.any? %>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
       <% @user.groups.each do |group| %>
-        <div class="bg-white shadow-md rounded-lg p-4 hover:shadow-lg transition-shadow duration-200">
-          <h2 class="text-lg font-semibold text-gray-800">
-            <%= link_to group.name, group_path(group), class: "hover:underline" %>
-          </h2>
-        </div>
+        <%= link_to group_path(group) do %>
+          <div class="flex items-center">
+            <% if group.avatar.attached? %>
+              <%= image_tag(group.avatar, class: "w-10 h-10 rounded-full object-cover") %>
+            <% else %>
+              <div class="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center text-gray-600 font-semibold">
+                <%= group.name[0].upcase %>
+              </div>
+            <% end %>
+            <div class="bg-white shadow-md rounded-lg p-4 hover:shadow-lg transition-shadow duration-200">
+              <h2 class="text-lg font-semibold text-blue-600 hover:underline" ">
+                <%= group.name %>
+              </h2>
+            </div>
+          </div>
+        <% end %>
       <% end %>
     </div>
   <% else %>
