@@ -6,6 +6,10 @@
   <div class="flex items-center gap-6">
     <% if comment.user.profile.avatar.attached? %>
       <%= image_tag(comment.user.profile.avatar, class: "w-8 h-8 rounded-full object-cover") %>
+    <% else %>
+      <div class="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center text-gray-600 font-semibold">
+        <%= comment.user.username[0].upcase %>
+      </div>
     <% end %>
     <span class="text-gray-700 font-medium"><%= comment.user.username %></span>
     <span class="text-gray-500 text-sm"><%= time_ago_in_words(comment.created_at) %> ago</span>
@@ -13,7 +17,7 @@
 
   <% if current_user == comment.user %>
     <div class="self-start">
-      <%= button_to "Delete comment", post_comment_path(id: comment.id), method: :delete, class: "bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded shadow transition duration-200 text-sm" %>
+      <%= button_to "Delete comment", post_comment_path(post_id: @post.id, id: comment.id), method: :delete, class: "bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded shadow transition duration-200 text-sm" %>
     </div>
   <% end %>
 </div>

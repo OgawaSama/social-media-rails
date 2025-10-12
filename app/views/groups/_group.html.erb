@@ -3,7 +3,7 @@
   <!-- Banner do grupo -->
   <% if group.header.attached? %>
     <div class="w-full overflow-hidden" style="height:128px;">
-      <%= image_tag(group.header, class: "w-full h-full object-cover") %>
+      <%= image_tag(group.header, class: "stretch w-full h-full object-cover") %>
     </div>
   <% end %>
 
@@ -11,18 +11,22 @@
 
     <!-- Avatar e Nome do grupo -->
     <div class="flex items-center mb-6">
-      <% if group.avatar.attached? %>
-        <div class="w-32 h-32 rounded-full overflow-hidden border-2 border-gray-300 flex-shrink-0">
-          <%= image_tag(group.avatar, class: "w-full h-full object-cover") %>
-        </div>
-      <% end %>
+      <div class="w-32 h-32 rounded-full overflow-hidden border-2 border-gray-300 flex-shrink-0">
+        <% if group.avatar.attached? %>
+          <%= image_tag(group.avatar, class: "w-full h-full rounded-full object-cover") %>
+        <% else %>
+          <div class="w-full h-full rounded-full bg-gray-300 flex items-center justify-center text-gray-600 font-semibold">
+            <%= group.name[0].upcase %>
+          </div>
+        <% end %>
+      </div>
       <h1 class="text-5xl font-bold ml-16">
         <%= group.name %>
       </h1>
     </div>
 
     <!-- Bio -->
-    <p class="mb-4"><strong>Bio:</strong> <%= group.bio %></p>
+    <p class="mb-4"><strong>Bio:</strong> <%= group.bio %></p> <br>
 
     <!-- Formulário para adicionar membro -->
     <div class="mb-6 flex gap-2">
@@ -37,17 +41,27 @@
       <h2 class="text-xl font-semibold mb-2">Participants</h2>
       <ul class="space-y-2">
         <% @group.participants.each do |participant| %>
-          <li class="flex justify-between items-center border rounded p-2">
-            <% if participant.profile %>
-              <%= link_to participant.username, profile_path(participant.profile), class: "text-blue-600 hover:underline" %>
-            <% else %>
-              <span class="text-gray-500"><%= participant.username %> (No profile set yet)</span>
-            <% end %>
-
-            <%= form_with url: remove_member_path(id: @group.id, participant: participant.username), method: :post, data: { turbo_confirm: "Tem certeza que deseja remover #{participant.username} do grupo?" }, class: "inline-block ml-2" do %>
-              <%= button_tag "Remove", type: "submit", class: "bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded shadow transition duration-200" %>
-            <% end %>
-          </li>
+          <li class="flex justify-between items-center border rounded p-2 gap-3">
+              <div class="flex flex-lin-2 gap-4 items-center">
+                <% if participant.profile.avatar.attached? %>
+                  <%= image_tag(participant.profile.avatar, class: "w-10 h-10 rounded-full object-cover") %>
+                <% else %>
+                  <div class="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center text-gray-600 font-semibold">
+                    <%= participant.username[0].upcase %>
+                  </div>
+                <% end %>
+                <% if participant.profile %>
+                  <%= link_to participant.username, profile_path(participant.profile), class: "text-blue-600 hover:underline" %>
+                <% else %>
+                  <span class="text-gray-500"><%= participant.username %> (No profile set yet)</span>
+                <% end %>
+              </div>
+              <div>
+                <%= form_with url: remove_member_path(id: @group.id, participant: participant.username), method: :post, data: { turbo_confirm: "Tem certeza que deseja remover #{participant.username} do grupo?" }, class: "inline-block ml-2" do %>
+                  <%= button_tag "Remove", type: "submit", class: "bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded shadow transition duration-200" %>
+                <% end %>
+              </div>
+            </li>
         <% end %>
       </ul>
     </div>

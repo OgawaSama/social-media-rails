@@ -10,6 +10,5 @@ class FeedController < ApplicationController
     @users = User.where("username LIKE ? OR email LIKE ?",
                        "%#{params[:query]}%",
                        "%#{params[:query]}%")
-                 .where.not(id: current_user.id)
   end
 end

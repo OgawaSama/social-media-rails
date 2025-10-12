@@ -2,10 +2,21 @@
   <%= render @post %>
 </div>
 
-<div class="flex flex-wrap gap-6">
-  <%= link_to "Edit this post", edit_post_path(@post), class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded shadow transition duration-200" %>
+<div class="flex flex-col gap-2">
+  <% if @post.comments.any? %>
+    <%= render partial: "posts/comments/comment", collection: @post.comments.order(created_at: :desc) %>
+  <% else %>
+    <p class="text-center text-xl"> There are no comments yet </p>
+  <% end %>
+</div>
 
+<!-- Se conseguir deixar o padding um pouco menor que 8 aqui seria legal -->
+<div class="flex flex-wrap gap-6 p-8">
+  <% if current_user == @post.user %>
+    <%= link_to "Edit this post", edit_post_path(@post), class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded shadow transition duration-200" %>
+  <% end %>
   <%= link_to "Back to feed", feed_path, class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded shadow transition duration-200" %>
 
   <%= button_to "Destroy this post", @post, method: :delete, class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded shadow transition duration-200", data: { confirm: "Are you sure?" } %>
+  <%= link_to "Leave a comment", new_post_comment_path(@post), class: "p-2 rounded bg-green-500 font-semibold text-green-50 cursor-pointer hover:scale-105" %>
 </div>

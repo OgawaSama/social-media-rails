@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_10_09_113116) do
+ActiveRecord::Schema[8.0].define(version: 2025_10_12_154813) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -69,6 +69,14 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_09_113116) do
     t.index ["user_id"], name: "index_businesses_on_user_id"
   end
 
+  create_table "cardapios", force: :cascade do |t|
+    t.integer "business_id", null: false
+    t.string "titulo"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["business_id"], name: "index_cardapios_on_business_id"
+  end
+
   create_table "comments", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "post_id", null: false
@@ -103,6 +111,17 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_09_113116) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "item_cardapios", force: :cascade do |t|
+    t.integer "cardapio_id", null: false
+    t.string "nome"
+    t.text "descricao"
+    t.decimal "preco"
+    t.integer "tipo"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cardapio_id"], name: "index_item_cardapios_on_cardapio_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -168,10 +187,12 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_09_113116) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "business_addresses", "businesses"
   add_foreign_key "businesses", "users"
+  add_foreign_key "cardapios", "businesses"
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
   add_foreign_key "friendships", "users"
   add_foreign_key "friendships", "users", column: "other_user_id"
+  add_foreign_key "item_cardapios", "cardapios"
   add_foreign_key "posts", "users"
   add_foreign_key "profiles", "users"
   add_foreign_key "reactions", "posts"
