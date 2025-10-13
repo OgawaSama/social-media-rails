@@ -1,6 +1,5 @@
 # Social Media on Rails
 
-!!LINKS ABAIXO ESTAO ERRADOS!!
 [![CI](https://github.com/OgawaSama/social-media-rails/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/OgawaSama/social-media-rails/actions/workflows/ci.yml)  
 [![Maintainability](https://qlty.sh/gh/OgawaSama/projects/social-media-rails/maintainability.svg)](https://qlty.sh/gh/OgawaSama/projects/social-media-rails)  
 [![Coverage Status](https://coveralls.io/repos/github/OgawaSama/social-media-rails/badge.svg?branch=main)](https://coveralls.io/github/OgawaSama/social-media-rails?branch=main)  
