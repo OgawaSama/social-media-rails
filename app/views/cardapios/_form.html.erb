@@ -1,0 +1,71 @@
+<%= form_with(
+      model: @cardapio,
+      url: @cardapio.persisted? ? business_cardapio_path(@business) : business_cardapio_path(@business),
+      local: true,
+      class: "max-w-2xl mx-auto bg-gray-100 shadow-md rounded-lg p-6 space-y-6 mt-12"
+    ) do |f| %>
+
+  <div>
+    <%= f.label :titulo, "Título do Cardápio", class: "block font-semibold mb-1" %>
+    <%= f.text_field :titulo, class: "input w-full border rounded p-2" %>
+  </div>
+
+  <h3 class="text-lg font-semibold mt-4">Itens do Cardápio</h3>
+
+  <div id="itens-container" class="space-y-4">
+    <%= f.fields_for :itens_cardapio do |item_fields| %>
+      <%= render 'item_cardapio_fields', f: item_fields %>
+    <% end %>
+  </div>
+
+  <!-- Template escondido para clonagem via JS -->
+  <template id="item-template">
+    <div class="item-cardapio flex space-x-2 mt-2">
+      <input type="hidden" name="cardapio[itens_cardapio_attributes][NEW_RECORD][_destroy]" id="cardapio_itens_cardapio_attributes_NEW_RECORD__destroy" />
+      <input type="text" name="cardapio[itens_cardapio_attributes][NEW_RECORD][nome]" placeholder="Nome do item" class="input border rounded p-2 flex-1" />
+      <input type="number" step="0.01" name="cardapio[itens_cardapio_attributes][NEW_RECORD][preco]" placeholder="Preço" class="input border rounded p-2 w-24" />
+      <select name="cardapio[itens_cardapio_attributes][NEW_RECORD][tipo]" class="input border rounded p-2 w-32">
+        <option value="0">Comida</option>
+        <option value="1">Bebida</option>
+      </select>
+      <button type="button" class="remove-item bg-red-500 text-white px-2 rounded">Remover</button>
+    </div>
+  </template>
+
+  <button type="button" id="add-item" class="mt-4 bg-green-500 text-white px-4 py-2 rounded">Adicionar Item</button>
+
+  <div class="flex space-x-2 mt-4">
+    <%= f.submit @cardapio.persisted? ? "Atualizar Cardápio" : "Criar Cardápio", class: "bg-blue-500 text-white px-4 py-2 rounded" %>
+    <%= link_to "Cancelar", business_path(@business), class: "bg-gray-200 text-gray-800 px-4 py-2 rounded" %>
+  </div>
+<% end %>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const addButton = document.getElementById("add-item");
+  const container = document.getElementById("itens-container");
+  const template = document.getElementById("item-template");
+
+  let index = container.children.length;
+
+  addButton.addEventListener("click", () => {
+    let content = template.innerHTML.replace(/NEW_RECORD/g, index);
+    index++;
+    container.insertAdjacentHTML("beforeend", content);
+  });
+
+  container.addEventListener("click", e => {
+    if (e.target.classList.contains("remove-item")) {
+      const itemDiv = e.target.closest(".item-cardapio");
+      const destroyField = itemDiv.querySelector('input[name*="_destroy"]');
+
+      if (destroyField) {
+        destroyField.value = 1;
+        itemDiv.style.display = "none";
+      } else {
+        itemDiv.remove();
+      }
+    }
+  });
+});
+</script>
