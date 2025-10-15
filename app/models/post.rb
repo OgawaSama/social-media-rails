@@ -5,6 +5,8 @@ class Post < ApplicationRecord
   has_many :reactions, dependent: :destroy
   has_many :comments, dependent: :destroy
 
+  validates :images, content_type: { in: [ :png, :jpeg ], spoofing_protection: true }
+
   def feed_body
     # if there is an image, smaller char limit
     char_limit = images.any? ? 144 : 288

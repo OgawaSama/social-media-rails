@@ -4,6 +4,10 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  # Restrict unique attributes
+  validates :username, uniqueness: { case_sensitive: false }
+  validates :email, uniqueness: { case_sensitive: false }
+
   has_many :posts, dependent: :destroy
   has_many :reactions, dependent: :destroy
   has_many :comments, dependent: :destroy

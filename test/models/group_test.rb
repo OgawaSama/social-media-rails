@@ -5,10 +5,11 @@ class GroupTest < ActiveSupport::TestCase
 
   setup do
     @user = users(:one)
-    
+
     @post = posts(:one)
   end
 
+  # TODO: fix whatever is happening here
   test "should be valid with body" do
     assert @post.valid?
   end

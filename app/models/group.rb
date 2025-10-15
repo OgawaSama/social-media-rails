@@ -5,6 +5,9 @@ class Group < ApplicationRecord
   has_one_attached :header
   has_one_attached :avatar
 
+  validates :avatar, content_type: { in: [ :png, :jpeg ], spoofing_protection: true }
+  validates :header, content_type: { in: [ :png, :jpeg ], spoofing_protection: true }
+
   def owner
     group_participations.ownerships.map(&:user).first
   end

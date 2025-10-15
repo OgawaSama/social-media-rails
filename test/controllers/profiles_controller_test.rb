@@ -8,7 +8,7 @@ class ProfilesControllerTest < ActionDispatch::IntegrationTest
     sign_in @user
     @profile = profiles(:one)
   end
-  
+
 
   test "should show profile" do
     get profile_url(@profile), as: :html
