@@ -15,11 +15,11 @@
     </div>
     <% if user_signed_in? && current_user.type != "BusinessUser" %>
       <div class="mt-4 p-6">
-        <%= link_to "É uma empresa? Cadastre-se aqui", new_business_registration_path, class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded shadow transition duration-200" %>
+        <%= link_to "É uma empresa? Cadastre-se aqui", new_business_path, class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded shadow transition duration-200" %>
       </div>
     <% elsif user_signed_in? && current_user.type == "BusinessUser" && current_user.try(:business).present? %>
       <div class="mt-4">
-        <%= link_to "Editar perfil empresarial", edit_business_registration_path, class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded shadow transition duration-200" %>
+        <%= link_to "Editar perfil empresarial", edit_business_path, class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded shadow transition duration-200" %>
       </div>
     <% end %>
   <%# else <%= link_to pagina de exibicao do perfil empresarial %>

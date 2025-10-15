@@ -1,4 +1,4 @@
-class BusinessRegistrationsController < ApplicationController
+class BusinessesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_business, only: [ :edit, :update ]
 
