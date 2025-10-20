@@ -436,9 +436,9 @@ GEM
     term-ansicolor (1.11.2)
       tins (~> 1.0)
     thor (1.4.0)
-    thruster (0.1.15)
-    thruster (0.1.15-aarch64-linux)
-    thruster (0.1.15-x86_64-linux)
+    thruster (0.1.16)
+    thruster (0.1.16-aarch64-linux)
+    thruster (0.1.16-x86_64-linux)
     timeout (0.4.3)
     tins (1.43.0)
       bigdecimal
