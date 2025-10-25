@@ -48,7 +48,7 @@ class User < ApplicationRecord
     # Posts do usuário + posts de quem ele segue
     Post.where(user_id: following_ids + [ id ]).order(created_at: :desc)
   end
-  
+
   validates :username, length: { maximum: 30 }
   validates :first_name, length: { maximum: 50 }
   validates :surnames, length: { maximum: 50 }
