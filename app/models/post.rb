@@ -24,7 +24,7 @@ class Post < ApplicationRecord
     images.each do |image|
       next unless image.variable?
 
-      image.variant(resize_to_limit: [800, 800]).processed
+      image.variant(resize_to_limit: [ 800, 800 ]).processed
     end
-  end # teste 
+  end # teste
 end
