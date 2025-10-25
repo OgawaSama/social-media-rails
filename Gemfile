@@ -77,6 +77,7 @@ group :test do
   gem "rspec-rails"
   gem 'shoulda-matchers', '~> 6.0'
   gem "database_cleaner-active_record"
+  gem 'rails-controller-testing'
 end
 
 # Daniel pediu, ta aqui
