@@ -5,8 +5,9 @@ class Post < ApplicationRecord
   has_many :reactions, dependent: :destroy
   has_many :comments, dependent: :destroy
 
+  before_save :resize_images
+
   def feed_body
-    # if there is an image, smaller char limit
     char_limit = images.any? ? 144 : 288
     body&.body&.to_plain_text&.first(char_limit)
   end
@@ -15,5 +16,15 @@ class Post < ApplicationRecord
     body_chars = body&.body&.to_plain_text&.chars&.count || 0
     feed_body_count = feed_body&.chars&.count || 0
     body_chars > feed_body_count
+  end
+
+  private
+
+  def resize_images
+    images.each do |image|
+      next unless image.variable?
+
+      image.variant(resize_to_limit: [800, 800]).processed
+    end
   end
 end
