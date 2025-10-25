@@ -26,5 +26,5 @@ class Post < ApplicationRecord
 
       image.variant(resize_to_limit: [800, 800]).processed
     end
-  end
+  end # teste 
 end
