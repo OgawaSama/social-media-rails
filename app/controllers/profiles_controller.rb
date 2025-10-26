@@ -77,6 +77,6 @@ class ProfilesController < ApplicationController
   end
 
   def profile_params
-    params.require(:profile).permit(:bio, :header, :avatar).delete_if { |k,v| v.blank? }
+    params.require(:profile).permit(:bio, :header, :avatar).delete_if { |k, v| v.blank? }
   end
 end
