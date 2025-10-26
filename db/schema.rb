@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_10_12_154813) do
+ActiveRecord::Schema[8.0].define(version: 2025_10_25_224100) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -162,11 +162,11 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_12_154813) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "username", default: "", null: false
-    t.string "first_name", default: ""
-    t.string "surnames", default: ""
+    t.string "username", limit: 20
+    t.string "first_name", limit: 30
+    t.string "surnames", limit: 50
     t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
+    t.string "encrypted_password", limit: 128
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
