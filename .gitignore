@@ -42,3 +42,4 @@ node_modules/
 /vendor/*
 /app/assets/builds/*
 !/app/assets/builds/.keep
+/coverage/.resultset.json

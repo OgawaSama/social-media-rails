@@ -8,6 +8,12 @@ class Profile < ApplicationRecord
 
   after_commit :resize_attachments_later, on: [ :create, :update ]
 
+  def bio_limit_char
+    char_limit = 512
+    bio&.to_plain_text&.first(char_limit)
+  end
+
+
   private
 
   def acceptable_files
