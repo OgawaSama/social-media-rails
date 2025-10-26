@@ -24,7 +24,7 @@ class Group < ApplicationRecord
 
   def resize_image(attachment)
     # cria um arquivo temporário com os dados do attachment
-    tempfile = Tempfile.new(["original", File.extname(attachment.filename.to_s)])
+    tempfile = Tempfile.new([ "original", File.extname(attachment.filename.to_s) ])
     tempfile.binmode
     tempfile.write(attachment.download)
     tempfile.rewind
@@ -46,13 +46,5 @@ class Group < ApplicationRecord
     tempfile.close
     tempfile.unlink
     resized.close!
-  end
-
-
-    attachment.attach(
-      io: File.open(resized.path),
-      filename: attachment.filename.to_s,
-      content_type: attachment.content_type
-    )
   end
 end
