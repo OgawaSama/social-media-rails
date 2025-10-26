@@ -1,35 +1,45 @@
-class Post < ApplicationRecord
+class Profile < ApplicationRecord
   belongs_to :user
-  has_rich_text :body
-  has_many_attached :images
-  has_many :comments, dependent: :destroy
-  has_many :reactions, dependent: :destroy
+  has_rich_text :bio
+  has_one_attached :header
+  has_one_attached :avatar
 
-# Redimensiona imagens após criar ou atualizar o post
-after_commit :resize_images_later, on: [ :create, :update ], unless: :resizing_images?
+  validate :acceptable_files
 
-def resizing_images?
-  @resizing_images == true
-end
-
-  # --- FUNÇÕES QUE A VIEW USA ---
-  def feed_body
-    char_limit = images.any? ? 144 : 288
-    body&.body&.to_plain_text&.first(char_limit)
-  end
-
-  def feed_body_truncated?
-    body_chars = body&.body&.to_plain_text&.chars&.count || 0
-    feed_body_count = feed_body&.chars&.count || 0
-    body_chars > feed_body_count
-  end
+  after_commit :resize_attachments_later, on: [:create, :update]
 
   private
 
-  def resize_images_later
-    images.each do |image|
-      next unless image.variable?
-      ResizeImageJob.perform_later(image)
+  def acceptable_files
+    [avatar, header].each do |attachment|
+      next unless attachment.attached?
+
+      unless attachment.content_type.in?(%w[image/jpeg image/png image/gif video/mp4 video/mpeg video/quicktime])
+        errors.add(:base, "Os arquivos do perfil devem ser JPEG, PNG, GIF ou vídeo (MP4, MPEG, MOV)")
+
+        attachment.instance_variable_set(:@should_purge, true)
+      end
     end
   end
+
+  after_validation :purge_invalid_attachments, if: -> { errors.any? }
+
+  def purge_invalid_attachments
+    [avatar, header].each do |attachment|
+      next unless attachment.attached? && attachment.instance_variable_get(:@should_purge)
+
+      attachment.purge
+    end
+  end
+
+  def resize_attachments_later
+    [avatar, header].each do |attachment|
+      next unless attachment.attached?
+      next unless attachment.variable?
+      next unless attachment.blob.present? && attachment.blob.service.exist?(attachment.key)
+
+      ResizeProfileImageJob.perform_later(attachment.blob.id)
+    end
+  end
+
 end
