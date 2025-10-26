@@ -4,20 +4,15 @@ Rails.application.routes.draw do
   end
   resources :profiles
   resources :posts do
-  scope module: :posts do
-    resources :reactions, only: [ :create, :destroy ]
-    resources :comments, only: [ :new, :create, :index, :destroy ]
+    scope module: :posts do
+      resources :reactions, only: [ :create, :destroy ]
+      resources :comments, only: [ :new, :create, :index, :destroy ]
+    end
   end
-
-  # Rota para remover imagem de um post
-  delete "remove_image/:signed_id", to: "posts#remove_image", as: :remove_image
-end
 
   resources :groups
   resources :friendships
   resources :relationships, only: [ :create, :destroy ]
-
-
 
   devise_for :users, controllers: {
     sessions: "users/sessions",
