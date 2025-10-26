@@ -6,12 +6,12 @@ class Profile < ApplicationRecord
 
   validate :acceptable_files
 
-  after_commit :resize_attachments_later, on: [:create, :update]
+  after_commit :resize_attachments_later, on: [ :create, :update ]
 
   private
 
   def acceptable_files
-    [avatar, header].each do |attachment|
+    [ avatar, header ].each do |attachment|
       next unless attachment.attached?
 
       unless attachment.content_type.in?(%w[image/jpeg image/png image/gif video/mp4 video/mpeg video/quicktime])
@@ -25,7 +25,7 @@ class Profile < ApplicationRecord
   after_validation :purge_invalid_attachments, if: -> { errors.any? }
 
   def purge_invalid_attachments
-    [avatar, header].each do |attachment|
+    [ avatar, header ].each do |attachment|
       next unless attachment.attached? && attachment.instance_variable_get(:@should_purge)
 
       attachment.purge
@@ -33,7 +33,7 @@ class Profile < ApplicationRecord
   end
 
   def resize_attachments_later
-    [avatar, header].each do |attachment|
+    [ avatar, header ].each do |attachment|
       next unless attachment.attached?
       next unless attachment.variable?
       next unless attachment.blob.present? && attachment.blob.service.exist?(attachment.key)
@@ -41,5 +41,4 @@ class Profile < ApplicationRecord
       ResizeProfileImageJob.perform_later(attachment.blob.id)
     end
   end
-
 end
