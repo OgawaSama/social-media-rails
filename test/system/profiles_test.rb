@@ -6,10 +6,10 @@ class ProfilesTest < ApplicationSystemTestCase
   setup do
     @user = users(:one)
     sign_in @user
-    @profile = profiles(:one)
+    @profile = @user.profile
 
     @user2 = users(:two)
-    @profile2 = profiles(:two)
+    @profile2 = @user2.profile
   end
 
   # TODO: esperar o rich_text...
@@ -27,7 +27,7 @@ class ProfilesTest < ApplicationSystemTestCase
 
   test "should follow someone" do
     visit profile_url(@profile2)
-    click_on "Seguir"
+    click_on "Follow"
 
     assert_text "Agora você está seguindo #{@user2.username}"
   end

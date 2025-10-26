@@ -6,6 +6,7 @@ class GroupsTest < ApplicationSystemTestCase
   sign_in @user
 
   @group = groups(:one)
+  GroupParticipation.create!(group: @group, user: @user)
   end
 
   test "should create group" do
@@ -23,8 +24,8 @@ class GroupsTest < ApplicationSystemTestCase
   end
 
   test "should update Group" do
-    visit group_url(@group)
-    click_on "Edit this group", match: :first
+    visit group_path(@group)
+    click_on "Edit this group"
 
     fill_in "Name", with: @group.name
     # find('bio').set('awesomesauce')
@@ -37,7 +38,7 @@ class GroupsTest < ApplicationSystemTestCase
   end
 
   test "should destroy Group" do
-    visit group_url(@group)
+    visit group_path(@group)
     click_on "Destroy this group", match: :first
 
     assert_text "Group was successfully destroyed"
