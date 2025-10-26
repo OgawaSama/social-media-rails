@@ -4,32 +4,15 @@ class Profile < ApplicationRecord
   has_one_attached :header
   has_one_attached :avatar
 
-  # Limite de caracteres da bio
-  def bio_limit_char
-    char_limit = 512
-    bio&.to_plain_text&.first(char_limit)
-  end
-
-  # Callback para redimensionar imagens antes de salvar
-  before_save :resize_attachments
+  after_commit :resize_attachments_later, on: [:create, :update]
 
   private
 
-  def resize_attachments
-    resize_image(avatar) if avatar.attached?
-    resize_image(header) if header.attached?
-  end
+  def resize_attachments_later
+    [avatar, header].each do |attachment|
+      next unless attachment.attached? && attachment.variable?
 
-  def resize_image(attachment)
-    resized = ImageProcessing::MiniMagick
-      .source(attachment.download)
-      .resize_to_limit(800, 800) # largura/altura máxima
-      .call
-
-    attachment.attach(
-      io: File.open(resized.path),
-      filename: attachment.filename.to_s,
-      content_type: attachment.content_type
-    )
+      ResizeProfileImageJob.perform_later(attachment.blob.id)
+    end
   end
 end
