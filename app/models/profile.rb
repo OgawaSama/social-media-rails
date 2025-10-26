@@ -10,5 +10,15 @@ class Profile < ApplicationRecord
   def bio_limit_char
     char_limit = 512
     bio&.to_plain_text&.first(char_limit)
+  after_commit :resize_attachments_later, on: [ :create, :update ]
+
+  private
+
+  def resize_attachments_later
+    [ avatar, header ].each do |attachment|
+      next unless attachment.attached? && attachment.variable?
+
+      ResizeProfileImageJob.perform_later(attachment.blob.id)
+    end
   end
 end

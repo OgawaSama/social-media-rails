@@ -33,6 +33,8 @@
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 
+# Por favor aprendam a usar Git
+node_modules/
 
 #TEMP
 # se precisar, tira do .gitignore dps

@@ -53,6 +53,11 @@ class User < ApplicationRecord
     Post.where(user_id: following_ids + [ id ]).order(created_at: :desc)
   end
 
+  validates :username, length: { maximum: 30 }
+  validates :first_name, length: { maximum: 50 }
+  validates :surnames, length: { maximum: 50 }
+  validates :password, length: { minimum: 6, maximum: 128 }, if: :password_required?
+
   private
     def create_user_profile
       self.create_profile
