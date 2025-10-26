@@ -12,6 +12,7 @@
     </div>
   <% end %>
 
+  <!-- Caption e Body já existentes -->
   <div class="space-y-1">
     <%= form.label :caption, class: "block text-gray-700 font-medium" %>
     <%= form.text_field :caption, class: "w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" %>
@@ -22,6 +23,7 @@
     <%= form.rich_text_area :body, direct_upload: true, class: "w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" %>
   </div>
 
+  <!-- Upload de novas imagens -->
   <div class="space-y-1 mb-2">
     <%= form.label :images, class: "block text-gray-700 font-medium mb-2" %>
     <label class="inline-block bg-gray-100 border border-gray-300 rounded px-3 py-2 cursor-pointer hover:bg-gray-200">
@@ -29,7 +31,14 @@
       <%= form.file_field :images, multiple: true, direct_upload: true, class: "hidden", id: "post_images_input" %>
     </label>
 
-    <div id="preview_images" class="grid grid-cols-3 gap-2 mt-2"></div>
+    <div id="preview_images" class="grid grid-cols-3 gap-2 mt-2">
+      <% post.images.each do |image| %>
+        <div class="relative">
+          <%= image_tag image.variant(resize_to_limit: [150,150]), class: "w-full h-24 object-cover rounded" %>
+          <%= button_to "×", remove_post_image_path(post, image.signed_id), method: :delete, data: { confirm: "Tem certeza?" }, class: "absolute top-1 right-1 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm" %>
+        </div>
+      <% end %>
+    </div>
   </div>
 
   <div>

@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: %i[ show edit update destroy ]
+  before_action :set_post, only: %i[ show edit update destroy remove_image]
 
   def index
     @posts = Post.all.order(created_at: :desc) # garante que @posts não seja nil
@@ -55,6 +55,13 @@ class PostsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def remove_image
+    image = @post.images.find_signed(params[:signed_id])
+    image.purge
+    redirect_back fallback_location: edit_post_path(@post), notice: "Imagem removida com sucesso."
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
