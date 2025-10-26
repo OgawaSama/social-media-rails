@@ -6,7 +6,7 @@ RSpec.describe "Users", type: :request do
     # login_as @user
   end
 
-  
+
   describe 'GET /users/edit' do
     context 'user is logged in' do
       it "gets edit page" do
@@ -58,7 +58,6 @@ RSpec.describe "Users", type: :request do
         get new_user_session_url
         # expect(response).to redirect_to(new_user_session_path)
         expect(response).to have_http_status(:success)
-
       end
     end
   end

@@ -42,7 +42,7 @@ RSpec.describe Group, type: :request do
         @user2 = create(:user)
         @group2 = create(:group)
       end
-    
+
       it "should not access a group you're not member of" do
         get group_url(@group2)
         expect(response).to redirect_to(root_path)

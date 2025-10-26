@@ -13,14 +13,14 @@ RSpec.describe Comment, type: :model do
     @comment.user = nil
     expect(@comment).not_to be_valid
   end
-  
+
   it "checks for post ownership" do
     expect(@comment.post).to eq(@post)
 
     @comment.post = nil
     expect(@comment).not_to be_valid
   end
-  
+
   it "checks for valid body" do
     # [Bookmark]
     # Add when having some restrictions

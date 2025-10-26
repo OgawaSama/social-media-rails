@@ -25,5 +25,4 @@ RSpec.describe Relationship, type: :model do
     subject { Relationship.create(follower: @follower, followed: @followed) }
     it { should validate_uniqueness_of(:follower_id).scoped_to(:followed_id).case_insensitive }
   end
-
 end

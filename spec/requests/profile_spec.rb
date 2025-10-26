@@ -6,7 +6,7 @@ RSpec.describe Profile, type: :request do
     @user2 = create(:user)
     @profile2 = @user2.profile
   end
-  
+
   describe 'user is logged in' do
     before(:each) do
       login_as @user
@@ -53,5 +53,4 @@ RSpec.describe Profile, type: :request do
       end
     end
   end
-
 end

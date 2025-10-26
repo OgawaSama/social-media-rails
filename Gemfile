@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 8.0.3"
+gem "rails", "~> 8.1.0"
 # The modern asset pipeline for Rails [https://github.com/rails/propshaft]
 gem "propshaft"
 
@@ -75,9 +75,9 @@ group :test do
 
   # Unit testing
   gem "rspec-rails"
-  gem 'shoulda-matchers', '~> 6.0'
+  gem "shoulda-matchers", "~> 6.0"
   gem "database_cleaner-active_record"
-  gem 'rails-controller-testing'
+  gem "rails-controller-testing"
 end
 
 # Daniel pediu, ta aqui

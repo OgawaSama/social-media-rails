@@ -53,7 +53,7 @@ RSpec.configure do |config|
   # FactoryBot setup
   config.include FactoryBot::Syntax::Methods
 
-  # Shoulda Matchers setup
+    # Shoulda Matchers setup
     Shoulda::Matchers.configure do |config|
     config.integrate do |with|
       with.test_framework :rspec
