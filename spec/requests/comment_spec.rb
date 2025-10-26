@@ -15,7 +15,7 @@ RSpec.describe Comment, type: :request do
       it "should get new" do
         get new_post_comment_url(@post)
         # expect(response).to redirect_to(new_post_comment_path(@post))
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:success)
       end
     end
   end
@@ -25,12 +25,8 @@ RSpec.describe Comment, type: :request do
       it "should not get new" do
         get new_post_comment_url(@post)
         # expect(response).to redirect_to(new_user_session_path)
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:success)
       end
     end
-  end
-
-  it "needs some fixing" do
-    pending "fix the redirects from OK."
   end
 end

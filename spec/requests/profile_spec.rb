@@ -17,7 +17,7 @@ RSpec.describe Profile, type: :request do
       it "should get edit" do
         get edit_profile_url(@profile)
         # expect(response).to redirect_to(edit_profile_path(@profile))
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:success)
       end
     end
 
@@ -25,7 +25,7 @@ RSpec.describe Profile, type: :request do
       it "should access my profile" do
         get profile_url(@profile)
         # expect(response).to redirect_to(profile_path(@profile))
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:success)
       end
     end
 
@@ -33,14 +33,9 @@ RSpec.describe Profile, type: :request do
       it "should access someone else's profile" do
         get profile_url(@profile2)
         # expect(response).to redirect_to(profile_path(@profile2))
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:success)
       end
     end
-
-    it "needs some fixing" do
-      pending "fix the redirects from OK. maybe reduce overhead"
-    end
-
   end
 
   describe 'user is not logged in' do

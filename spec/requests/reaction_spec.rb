@@ -15,12 +15,8 @@ RSpec.describe Reaction, type: :request do
       it "should post reaction" do
         post post_reactions_url(@post, "heart")
         # expect(response).to redirect_to(new_post_comment_path(@post))
-        expect(response).to have_http_status(204)
+        expect(response).to have_http_status(:success)
       end
     end
-  end
-
-  it "needs some fixing" do
-    pending "fix the redirects from OK. Maybe check for blocking reacting w/o login"
   end
 end

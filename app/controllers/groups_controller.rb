@@ -1,7 +1,8 @@
 class GroupsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_group, only: %i[ show edit update destroy add_member remove_member ]
+  before_action :set_group, only: %i[ check_membership show edit update destroy add_member remove_member ]
   before_action :set_participant, only: %i[ add_member remove_member ]
+  before_action :check_membership, only: %i[ show edit update destroy add_member remove_member ]
   after_action :add_member, only: %i[ create ]
 
   def make_owner!(user)
@@ -16,6 +17,11 @@ class GroupsController < ApplicationController
 
   def remove_member
     GroupParticipation.destroy_by(group: @group, user: @participant)
+  end
+
+  def check_membership
+    @user = current_user
+    redirect_to root_path, warning: "No authorization to enter this page." unless GroupParticipation.exists?(group: @group, user: @user)
   end
 
   # GET /groups/1 or /groups/1.json

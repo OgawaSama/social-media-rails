@@ -12,10 +12,10 @@ class PostsTest < ApplicationSystemTestCase
     @post.save
   end
 
-  test "visiting the index" do
-    visit posts_url
-    assert_selector "h1", text: "Posts"
-  end
+  # test "visiting the index" do
+  #   visit posts_url
+  #   assert_selector "h1", text: "Posts"
+  # end
 
   # TODO: re-enable after rich-text is fixed
   # test "should create post" do

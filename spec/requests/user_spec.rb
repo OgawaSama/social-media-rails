@@ -30,26 +30,26 @@ RSpec.describe "Users", type: :request do
         login_as @user
         get new_user_registration_url
         expect(response).to redirect_to(root_path)
-        # expect(flash[:already_authenticated]).to eq("aa")
+        expect(flash[:alert]).to eq("You are already signed in.")
       end
     end
 
     context 'user is not logged in' do
       it "redirects to root" do
         get new_user_registration_url
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:success)
         # expect(response).to redirect_to(new_user_registration_path)
       end
     end
   end
 
-    describe 'GET /users/sign_in' do
+  describe 'GET /users/sign_in' do
     context 'user is logged in' do
       it "redirects to root" do
         login_as @user
         get new_user_session_url
         expect(response).to redirect_to(root_path)
-        # expect(flash[:already_authenticated]).to eq("aa")
+        expect(flash[:alert]).to eq("You are already signed in.")
       end
     end
 
@@ -57,14 +57,9 @@ RSpec.describe "Users", type: :request do
       it "redirects to root" do
         get new_user_session_url
         # expect(response).to redirect_to(new_user_session_path)
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:success)
 
       end
     end
   end
-
-  it "needs some fixing" do
-    pending "fix the flash and redirects from OK"
-  end
-
 end

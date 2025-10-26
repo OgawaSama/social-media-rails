@@ -5,6 +5,7 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
     @user = users(:one)       # Usuário de fixture
     sign_in @user             # Loga o usuário
     @group = groups(:one)
+    GroupParticipation.create!(group: @group, user: @user)
   end
 
   test "should get new" do

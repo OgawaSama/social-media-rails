@@ -12,11 +12,6 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     @post.save
   end
 
-  test "should get index" do
-    get posts_url, as: :html
-    assert_response :success
-  end
-
   test "should get new" do
     get new_post_url, as: :html
     assert_response :success

@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resource :business_registration, only: [ :new, :create, :edit, :update ]
   resources :profiles
-  resources :posts do
+  resources :posts, only: [ :show, :new, :edit, :create, :update, :destroy ] do
     scope module: :posts do
       resources :reactions, only: [ :create, :destroy ]
       resources :comments, only: [ :new, :create, :index, :destroy ]
