@@ -10,14 +10,14 @@ Rails.application.routes.draw do
   end
 
   # Rota para remover imagem de um post
-  delete 'remove_image/:signed_id', to: 'posts#remove_image', as: :remove_image
+  delete "remove_image/:signed_id", to: "posts#remove_image", as: :remove_image
 end
 
   resources :groups
   resources :friendships
   resources :relationships, only: [ :create, :destroy ]
 
-  
+
 
   devise_for :users, controllers: {
     sessions: "users/sessions",

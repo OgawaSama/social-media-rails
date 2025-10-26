@@ -5,7 +5,7 @@ class ResizeImageJob < ApplicationJob
   def perform(image_attachment)
     return unless image_attachment.variable?
 
-    tempfile = Tempfile.new(["original", File.extname(image_attachment.filename.to_s)])
+    tempfile = Tempfile.new([ "original", File.extname(image_attachment.filename.to_s) ])
     tempfile.binmode
     tempfile.write(image_attachment.download)
     tempfile.rewind
