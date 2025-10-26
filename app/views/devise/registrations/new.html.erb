@@ -7,17 +7,17 @@
 
       <div class="space-y-1">
         <%= f.label :username, class: "block text-gray-700 font-medium" %>
-        <%= f.text_field :username, autofocus: true, class: "w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+        <%= f.text_field :username, autofocus: true, maxlength: 20, class: "w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" %>
       </div>
 
       <div class="space-y-1">
         <%= f.label :first_name, class: "block text-gray-700 font-medium" %>
-        <%= f.text_field :first_name, class: "w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+        <%= f.text_field :first_name, maxlength: 30, class: "w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" %>
       </div>
 
       <div class="space-y-1">
         <%= f.label :surnames, class: "block text-gray-700 font-medium" %>
-        <%= f.text_field :surnames, class: "w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+        <%= f.text_field :surnames, maxlength: 50, class: "w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" %>
       </div>
 
       <div class="space-y-1">
@@ -30,12 +30,12 @@
         <% if @minimum_password_length %>
           <em class="text-gray-500 text-sm">(<%= @minimum_password_length %> characters minimum)</em>
         <% end %>
-        <%= f.password_field :password, autocomplete: "new-password", class: "w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 mt-1" %>
+        <%= f.password_field :password, autocomplete: "new-password", maxlength: 128, class: "w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 mt-1" %>
       </div>
 
       <div class="space-y-1">
         <%= f.label :password_confirmation, class: "block text-gray-700 font-medium" %>
-        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 mt-1" %>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", maxlength: 128, class: "w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 mt-1" %>
       </div>
 
       <div>
