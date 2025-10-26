@@ -2,11 +2,17 @@ class Post < ApplicationRecord
   belongs_to :user
   has_rich_text :body
   has_many_attached :images
-  has_many :reactions, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :reactions, dependent: :destroy
 
-  before_save :resize_images
+  # Redimensiona imagens após criar ou atualizar o post
+after_commit :resize_images_later, on: [:create, :update], unless: :resizing_images?
 
+def resizing_images?
+  @resizing_images == true
+end
+
+# --- FUNÇÕES QUE A VIEW USA ---
   def feed_body
     char_limit = images.any? ? 144 : 288
     body&.body&.to_plain_text&.first(char_limit)
@@ -20,11 +26,10 @@ class Post < ApplicationRecord
 
   private
 
-  def resize_images
+  def resize_images_later
     images.each do |image|
       next unless image.variable?
-
-      image.variant(resize_to_limit: [ 800, 800 ]).processed
+      ResizeImageJob.perform_later(image)
     end
-  end # teste
+  end
 end
