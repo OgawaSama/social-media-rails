@@ -3,15 +3,15 @@ Rails.application.routes.draw do
     resource :cardapio, only: [ :new, :create, :edit, :update ]
   end
   resources :profiles
-  resources :posts do
-  scope module: :posts do
-    resources :reactions, only: [ :create, :destroy ]
-    resources :comments, only: [ :new, :create, :index, :destroy ]
+  resources :posts, only: [ :show, :new, :edit, :create, :update, :destroy ] do
+    scope module: :posts do
+      resources :reactions, only: [ :create, :destroy ]
+      resources :comments, only: [ :new, :create, :index, :destroy ]
+    end
   end
 
   # Rota para remover imagem de um post
   delete "remove_image/:signed_id", to: "posts#remove_image", as: :remove_image
-end
 
   resources :groups
   resources :friendships

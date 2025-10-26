@@ -12,7 +12,7 @@ class ResizeImageJob < ApplicationJob
 
     resized = ImageProcessing::MiniMagick
                 .source(tempfile)
-                .resize_to_limit(800, 800)
+                .resize_to_limit(1000, 1000)
                 .call
 
     # reanexa a imagem sem disparar callbacks

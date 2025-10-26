@@ -5,6 +5,7 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
     @user = users(:one)       # Usuário de fixture
     sign_in @user             # Loga o usuário
     @group = groups(:one)
+    GroupParticipation.create!(group: @group, user: @user)
   end
 
   test "should get new" do
@@ -12,13 +13,13 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  # test "should create group" do
-  #   assert_difference("Group.count") do
-  #     post groups_url, params: { group: { name: @group.name } }
-  #   end
+  test "should create group" do
+    assert_difference("Group.count") do
+      post groups_url, params: { group: { name: @group.name } }
+    end
 
-  #   assert_redirected_to group_url(Group.last)
-  # end
+    assert_redirected_to group_url(Group.last)
+  end
 
   test "should show group" do
     get group_url(@group)
@@ -31,7 +32,7 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update group" do
-    patch group_url(@group), params: { group: { name: @group.name } }
+    patch group_url(@group), params: { group: { name: @group.name, bio: "abababa" } }
     assert_redirected_to group_url(@group)
   end
 
