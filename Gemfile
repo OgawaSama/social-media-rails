@@ -26,7 +26,7 @@ gem "stimulus-rails"
 gem "jbuilder"
 
 # Authentication and secure passwords
-gem "devise"
+gem "devise", github: "heartcombo/devise", branch: "main"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[ windows jruby ]

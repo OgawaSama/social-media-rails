@@ -6,11 +6,13 @@ class Profile < ApplicationRecord
 
   validates :avatar, content_type: { in: [ :png, :jpeg ], spoofing_protection: true }
   validates :header, content_type: { in: [ :png, :jpeg ], spoofing_protection: true }
+  after_commit :resize_attachments_later, on: [ :create, :update ]
 
   def bio_limit_char
     char_limit = 512
     bio&.to_plain_text&.first(char_limit)
-  after_commit :resize_attachments_later, on: [ :create, :update ]
+  end
+
 
   private
 

@@ -12,7 +12,6 @@ Rails.application.routes.draw do
 
   # Rota para remover imagem de um post
   delete "remove_image/:signed_id", to: "posts#remove_image", as: :remove_image
-end
 
   resources :groups
   resources :friendships
