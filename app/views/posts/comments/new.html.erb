@@ -1,7 +1,7 @@
 <div class="w-full flex flex-col items-center pt-24">
   <div class="max-w-2xl w-full mx-auto bg-white shadow-md rounded-lg p-6">
     <%= turbo_frame_tag :comments do %>
-      <%= form_with model: [@post, @post.comments.new], local: true, html: { class: "space-y-4" } do |f| %>
+      <%= form_with model: [@post, @post.comments.new], data: { turbo: false }, html: { class: "space-y-4" } do |f| %>
         
         <div class="space-y-1">
           <%= f.label :body, "Add a comment", class: "block text-gray-700 font-medium" %>

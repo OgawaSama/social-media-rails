@@ -1,6 +1,11 @@
-class BusinessRegistrationsController < ApplicationController
+class BusinessesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_business, only: [ :edit, :update ]
+  before_action :set_business, only: [ :edit, :update, :show ]
+
+  def show
+    @cardapio = @business.cardapio
+    @itens = @cardapio&.itens_cardapio
+  end
 
   def new
     @business = Business.new
@@ -35,7 +40,7 @@ class BusinessRegistrationsController < ApplicationController
   private
 
   def set_business
-    @business = current_user.business
+    @business = Business.find(params[:id])
     redirect_to root_path, alert: "Perfil empresarial não encontrado." unless @business
   end
 

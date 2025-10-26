@@ -47,17 +47,7 @@
     <% end %>
 
     <!-- Follow / Unfollow -->
-    <% if user_signed_in? && current_user != profile.user %>
-      <% if current_user.following?(profile.user) %>
-        <%= button_to "Deixar de seguir", unfollow_user_path(profile.user), 
-                      method: :delete, 
-                      class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-2 rounded-lg shadow transition duration-200" %>
-      <% else %>
-        <%= button_to "Seguir", follow_user_path(profile.user), 
-                      method: :post, 
-                      class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-2 rounded-lg shadow transition duration-200" %>
-      <% end %>
-    <% end %>
+    <%= render 'relationships/follow_button', user: profile.user %>
 
   </div>
 </div>

@@ -26,10 +26,34 @@
     <%= form.label :images, class: "block text-gray-700 font-medium mb-2" %>
     <label class="inline-block bg-gray-100 border border-gray-300 rounded px-3 py-2 cursor-pointer hover:bg-gray-200">
       Escolher arquivo
-      <%= form.file_field :images, direct_upload: true, class: "hidden" %>
+      <%= form.file_field :images, multiple: true, direct_upload: true, class: "hidden", id: "post_images_input" %>
+    </label>
+
+    <div id="preview_images" class="grid grid-cols-3 gap-2 mt-2"></div>
   </div>
 
   <div>
     <%= form.submit "Save Post", class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-3 rounded-lg shadow-lg transition duration-200" %>
   </div>
 <% end %>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const input = document.getElementById('post_images_input');
+    const preview = document.getElementById('preview_images');
+
+    input.addEventListener('change', () => {
+      preview.innerHTML = ''; // Limpa previews antigos
+      Array.from(input.files).forEach(file => {
+        const reader = new FileReader();
+        reader.onload = e => {
+          const img = document.createElement('img');
+          img.src = e.target.result;
+          img.className = 'w-full h-24 object-cover rounded';
+          preview.appendChild(img);
+        };
+        reader.readAsDataURL(file);
+      });
+    });
+  });
+</script>

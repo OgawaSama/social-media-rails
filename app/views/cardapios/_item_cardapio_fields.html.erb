@@ -1,0 +1,7 @@
+<div class="item-cardapio flex space-x-2 mt-2">
+  <%= f.hidden_field :_destroy %>
+  <%= f.text_field :nome, placeholder: "Nome do item", class: "input border rounded p-2 flex-1" %>
+  <%= f.number_field :preco, placeholder: "Preço", class: "input border rounded p-2 w-24", step: 0.01 %>
+  <%= f.select :tipo, [["Comida", 0], ["Bebida", 1]], {}, class: "input border rounded p-2 w-32" %>
+  <button type="button" class="remove-item bg-red-500 text-white px-2 rounded">Remover</button>
+</div>

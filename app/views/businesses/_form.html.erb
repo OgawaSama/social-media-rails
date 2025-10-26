@@ -1,5 +1,5 @@
 <%= form_with model: @business,
-              url: @business.persisted? ? business_registration_path : business_registration_path,
+              url: @business.persisted? ? business_path(@business) : businesses_path,
               local: true,
               method: @business.persisted? ? :patch : :post,
               class: "max-w-2xl mx-auto bg-gray-100 shadow-md rounded-lg p-6 space-y-6 mt-16" do |f| %>

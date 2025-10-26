@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resource :business_registration, only: [ :new, :create, :edit, :update ]
+  resources :businesses, only: [ :new, :create, :edit, :update, :show ] do
+    resource :cardapio, only: [ :new, :create, :edit, :update ]
+  end
   resources :profiles
   resources :posts, only: [ :show, :new, :edit, :create, :update, :destroy ] do
     scope module: :posts do
