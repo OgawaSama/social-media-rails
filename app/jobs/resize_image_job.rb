@@ -2,12 +2,12 @@
 class ResizeImageJob < ApplicationJob
   queue_as :default
 
-  def perform(image_attachment)
-    return unless image_attachment.variable?
+  def perform(blob)
+    return unless blob.variable?
 
-    tempfile = Tempfile.new([ "original", File.extname(image_attachment.filename.to_s) ])
+    tempfile = Tempfile.new([ "original", File.extname(blob.filename.to_s) ])
     tempfile.binmode
-    tempfile.write(image_attachment.download)
+    tempfile.write(blob.download)
     tempfile.rewind
 
     resized = ImageProcessing::MiniMagick
@@ -16,11 +16,13 @@ class ResizeImageJob < ApplicationJob
                 .call
 
     # reanexa a imagem sem disparar callbacks
-    image_attachment.record.images.detach(image_attachment)
-    image_attachment.record.images.attach(
+    record = blob.attachments.first.record
+    name   = blob.attachments.first.name
+    record.public_send(name).detach
+    record.public_send(name).attach(
       io: File.open(resized.path),
-      filename: image_attachment.filename.to_s,
-      content_type: image_attachment.content_type
+      filename: blob.filename.to_s,
+      content_type: blob.content_type
     )
 
     tempfile.close

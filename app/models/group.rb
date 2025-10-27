@@ -5,9 +5,11 @@ class Group < ApplicationRecord
   has_one_attached :header
   has_one_attached :avatar
 
-  validates :avatar, content_type: { in: [ :png, :jpeg ], spoofing_protection: true }
-  validates :header, content_type: { in: [ :png, :jpeg ], spoofing_protection: true }
-  before_save :resize_attachments
+  validates :avatar, content_type: { in: [ :png, :jpeg, :gif ], spoofing_protection: true }
+  validates :header, content_type: { in: [ :png, :jpeg, :gif ], spoofing_protection: true }
+  validates :name, presence: true
+
+  after_commit :resize_attachments_later, on: [ :create, :update ]
 
   def owner
     group_participations.ownerships.map(&:user).first
@@ -19,34 +21,10 @@ class Group < ApplicationRecord
 
   private
 
-  def resize_attachments
-    resize_image(avatar) if avatar.attached?
-    resize_image(header) if header.attached?
-  end
-
-  def resize_image(attachment)
-    # cria um arquivo temporário com os dados do attachment
-    tempfile = Tempfile.new([ "original", File.extname(attachment.filename.to_s) ])
-    tempfile.binmode
-    tempfile.write(attachment.download)
-    tempfile.rewind
-
-    # redimensiona
-    resized = ImageProcessing::MiniMagick
-      .source(tempfile)
-      .resize_to_limit(800, 800)
-      .call
-
-    # reanexa a imagem
-    attachment.attach(
-      io: File.open(resized.path),
-      filename: attachment.filename.to_s,
-      content_type: attachment.content_type
-    )
-
-    # limpa tempfiles
-    tempfile.close
-    tempfile.unlink
-    resized.close!
+  def resize_attachments_later
+    [ avatar, header ].each do |attachment|
+      next unless attachment.attached? && attachment.variable?
+      ResizeImageJob.perform_later(attachment.blob)
+    end
   end
 end
