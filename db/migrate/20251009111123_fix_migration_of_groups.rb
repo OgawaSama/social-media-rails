@@ -1,8 +1,5 @@
 class FixMigrationOfGroups < ActiveRecord::Migration[8.0]
   def change
-    drop_table :groups
-    drop_table :group_participations
-
     create_table :groups do |t|
       t.string :name
       t.timestamps
