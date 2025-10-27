@@ -7,8 +7,9 @@ class Group < ApplicationRecord
 
   validates :avatar, content_type: { in: [ :png, :jpeg, :gif ], spoofing_protection: true }
   validates :header, content_type: { in: [ :png, :jpeg, :gif ], spoofing_protection: true }
+  validates :name, presence: true
 
-  after_commit :resize_attachments_later, on: [:create, :update]
+  after_commit :resize_attachments_later, on: [ :create, :update ]
 
   def owner
     group_participations.ownerships.map(&:user).first
@@ -21,9 +22,9 @@ class Group < ApplicationRecord
   private
 
   def resize_attachments_later
-    [avatar, header].each do |attachment|
+    [ avatar, header ].each do |attachment|
       next unless attachment.attached? && attachment.variable?
-      ResizeImageJob.perform_later(attachment)
+      ResizeImageJob.perform_later(attachment.blob)
     end
   end
 end
