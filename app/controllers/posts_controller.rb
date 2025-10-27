@@ -24,6 +24,7 @@ class PostsController < ApplicationController
         format.html { redirect_to @post, notice: "Post was successfully created." }
         format.json { render :show, status: :created, location: @post }
       else
+        flash.now[:alert] = "Não foi possível criar o post."
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
