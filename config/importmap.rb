@@ -1,6 +1,10 @@
-pin "trix"
-pin "@rails/actiontext", to: "actiontext.esm.js"
-pin "@hotwired/turbo-rails", to: "turbo.min.js", preload: true
-pin "@hotwired/turbo", to: "turbo.esm.js"
-pin "@rails/actioncable/src", to: "@rails--actioncable--src.js" # @8.0.300
-pin "@rails/activestorage", to: "activestorage.js"
+pin "application", preload: true
+pin "business_adress"
+pin "cardapio"
+
+pin "trix" # @2.1.15
+pin "@rails/actiontext", to: "@rails--actiontext.js" # @8.1.0
+pin "@hotwired/turbo-rails", to: "@hotwired--turbo-rails.js" # @8.0.18
+pin "@hotwired/turbo", to: "@hotwired--turbo.js" # @8.0.18
+pin "@rails/actioncable/src", to: "@rails--actioncable--src.js" # @8.1.0
+pin "@rails/activestorage", to: "@rails--activestorage.js" # @8.1.0
