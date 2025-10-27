@@ -29,7 +29,7 @@ class ProfilesTest < ApplicationSystemTestCase
     visit profile_url(@profile2)
     click_on "Follow"
 
-    assert_text "Agora você está seguindo #{@user2.username}"
+    assert_text "Unfollow"
   end
 
   # TODO: descobrir como seguir alguém

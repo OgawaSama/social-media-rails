@@ -10,36 +10,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_10_25_224100) do
+ActiveRecord::Schema[8.1].define(version: 2025_10_27_201714) do
   create_table "action_text_rich_texts", force: :cascade do |t|
-    t.string "name", null: false
     t.text "body"
-    t.string "record_type", null: false
-    t.bigint "record_id", null: false
     t.datetime "created_at", null: false
+    t.string "name", null: false
+    t.bigint "record_id", null: false
+    t.string "record_type", null: false
     t.datetime "updated_at", null: false
     t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_uniqueness", unique: true
   end
 
   create_table "active_storage_attachments", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "record_type", null: false
-    t.bigint "record_id", null: false
     t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
+    t.string "name", null: false
+    t.bigint "record_id", null: false
+    t.string "record_type", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
 
   create_table "active_storage_blobs", force: :cascade do |t|
-    t.string "key", null: false
-    t.string "filename", null: false
-    t.string "content_type"
-    t.text "metadata"
-    t.string "service_name", null: false
     t.bigint "byte_size", null: false
     t.string "checksum"
+    t.string "content_type"
     t.datetime "created_at", null: false
+    t.string "filename", null: false
+    t.string "key", null: false
+    t.text "metadata"
+    t.string "service_name", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
@@ -51,133 +51,133 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_25_224100) do
 
   create_table "business_addresses", force: :cascade do |t|
     t.integer "business_id", null: false
-    t.string "street"
     t.string "city"
-    t.string "state"
-    t.string "zip"
     t.datetime "created_at", null: false
+    t.string "state"
+    t.string "street"
     t.datetime "updated_at", null: false
+    t.string "zip"
     t.index ["business_id"], name: "index_business_addresses_on_business_id"
   end
 
   create_table "businesses", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.string "company_name"
     t.string "cnpj"
+    t.string "company_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
     t.index ["user_id"], name: "index_businesses_on_user_id"
   end
 
   create_table "cardapios", force: :cascade do |t|
     t.integer "business_id", null: false
-    t.string "titulo"
     t.datetime "created_at", null: false
+    t.string "titulo"
     t.datetime "updated_at", null: false
     t.index ["business_id"], name: "index_cardapios_on_business_id"
   end
 
   create_table "comments", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "post_id", null: false
     t.datetime "created_at", null: false
+    t.integer "post_id", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
     t.index ["post_id"], name: "index_comments_on_post_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "friendships", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "other_user_id", null: false
     t.datetime "created_at", null: false
+    t.integer "other_user_id", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
     t.index ["other_user_id"], name: "index_friendships_on_other_user_id"
     t.index ["user_id", "other_user_id"], name: "index_friendships_on_user_id_and_other_user_id", unique: true
     t.index ["user_id"], name: "index_friendships_on_user_id"
   end
 
   create_table "group_participations", force: :cascade do |t|
-    t.integer "group_id"
-    t.integer "user_id"
-    t.datetime "join_date"
     t.datetime "created_at", null: false
+    t.integer "group_id"
+    t.datetime "join_date"
     t.datetime "updated_at", null: false
+    t.integer "user_id"
     t.index ["group_id"], name: "index_group_participations_on_group_id"
     t.index ["user_id", "group_id"], name: "index_group_participations_on_user_id_and_group_id", unique: true
     t.index ["user_id"], name: "index_group_participations_on_user_id"
   end
 
   create_table "groups", force: :cascade do |t|
-    t.string "name"
     t.datetime "created_at", null: false
+    t.string "name"
     t.datetime "updated_at", null: false
   end
 
   create_table "item_cardapios", force: :cascade do |t|
     t.integer "cardapio_id", null: false
-    t.string "nome"
+    t.datetime "created_at", null: false
     t.text "descricao"
+    t.string "nome"
     t.decimal "preco"
     t.integer "tipo"
-    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["cardapio_id"], name: "index_item_cardapios_on_cardapio_id"
   end
 
   create_table "posts", force: :cascade do |t|
     t.string "caption"
+    t.integer "comments_count", default: 0, null: false
     t.datetime "created_at", null: false
+    t.integer "reactions_count", default: 0, null: false
     t.datetime "updated_at", null: false
     t.integer "user_id", null: false
-    t.integer "reactions_count", default: 0, null: false
-    t.integer "comments_count", default: 0, null: false
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
   create_table "profiles", force: :cascade do |t|
-    t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
   create_table "reactions", force: :cascade do |t|
-    t.string "name"
-    t.integer "user_id", null: false
-    t.integer "post_id", null: false
     t.datetime "created_at", null: false
+    t.string "name"
+    t.integer "post_id", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
     t.index ["post_id"], name: "index_reactions_on_post_id"
     t.index ["user_id", "post_id"], name: "index_reactions_on_user_id_and_post_id", unique: true
     t.index ["user_id"], name: "index_reactions_on_user_id"
   end
 
   create_table "relationships", force: :cascade do |t|
-    t.integer "follower_id", null: false
-    t.integer "followed_id", null: false
     t.datetime "created_at", null: false
+    t.integer "followed_id", null: false
+    t.integer "follower_id", null: false
     t.datetime "updated_at", null: false
     t.index ["followed_id"], name: "index_relationships_on_followed_id"
     t.index ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "username", limit: 20
-    t.string "first_name", limit: 30
-    t.string "surnames", limit: 50
+    t.datetime "created_at", null: false
+    t.datetime "current_sign_in_at"
+    t.string "current_sign_in_ip"
     t.string "email", default: "", null: false
     t.string "encrypted_password", limit: 128
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer "sign_in_count", default: 0, null: false
-    t.datetime "current_sign_in_at"
+    t.string "first_name", limit: 30
     t.datetime "last_sign_in_at"
-    t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "remember_created_at"
+    t.datetime "reset_password_sent_at"
+    t.string "reset_password_token"
+    t.integer "sign_in_count", default: 0, null: false
+    t.string "surnames", limit: 50
     t.string "type"
+    t.datetime "updated_at", null: false
+    t.string "username", limit: 20
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
