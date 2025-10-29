@@ -27,9 +27,4 @@ RSpec.describe Business, type: :model do
       expect(@business).not_to be_valid
     end
   end
-
-  it "checks for cardapio presence" do
-    # [Bookmark]
-    # For you Jun
-  end
 end
