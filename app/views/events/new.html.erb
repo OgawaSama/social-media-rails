@@ -1,0 +1,65 @@
+<%# app/views/events/new.html.erb %>
+
+<div class="max-w-2xl mx-auto mt-12 bg-white shadow-md rounded-lg p-8">
+  <h1 class="text-3xl font-bold text-center text-blue-600 mb-8">Criar Novo Rolê</h1>
+
+  <%= form_with(model: @event, url: events_path, method: :post, local: true, class: "space-y-6") do |form| %>
+    <%# Exibe erros de validação, se houver %>
+    <% if @event.errors.any? %>
+      <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+        <strong class="font-bold">Oops!</strong>
+        <span class="block sm:inline"><%= pluralize(@event.errors.count, "erro") %> impediu este evento de ser salvo:</span>
+        <ul class="list-disc list-inside mt-2">
+          <% @event.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <%# Campo Título %>
+    <div class="space-y-1">
+      <%= form.label :title, "Nome do Rolê", class: "block text-gray-700 font-medium" %>
+      <%= form.text_field :title, required: true, class: "w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+    </div>
+
+    <%# Campo Descrição %>
+    <div class="space-y-1">
+      <%= form.label :description, "Descrição (Opcional)", class: "block text-gray-700 font-medium" %>
+      <%= form.text_area :description, rows: 4, class: "w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+      <%# Se quiser usar ActionText como nos Posts/Profiles: %>
+      <%#= form.rich_text_area :description, class: "w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+    </div>
+
+    <%# Campos Data Início e Fim %>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="space-y-1">
+        <%= form.label :start_date, "Data de Início", class: "block text-gray-700 font-medium" %>
+        <%= form.date_field :start_date, required: true, class: "w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+      </div>
+      <div class="space-y-1">
+        <%= form.label :end_date, "Data de Fim", class: "block text-gray-700 font-medium" %>
+        <%= form.date_field :end_date, required: true, class: "w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+      </div>
+    </div>
+
+    <%# TODO: Adicionar campos para definir os horários dos slots, se a lógica no controller for alterada %>
+    <%# Exemplo: Campos para hora inicial e final padrão, ou um selecionador mais complexo %>
+
+    <%# TODO: Adicionar campo para convidar usuários/grupos (se implementar EventInvitation) %>
+    <%# Exemplo: Um campo de texto para usernames separados por vírgula %>
+    <%# <div class="space-y-1"> %>
+    <%#   <%= label_tag :invites, "Convidar (usernames separados por vírgula)", class: "block text-gray-700 font-medium" %>
+    <%#   <%= text_field_tag :invites, nil, class: "w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+    <%# </div> %>
+
+    <%# Botão de Envio %>
+    <div class="flex justify-center pt-4">
+      <%= form.submit "Criar Rolê e Gerar Horários", class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-3 rounded-lg shadow-lg transition duration-200 cursor-pointer" %>
+    </div>
+  <% end %>
+
+  <div class="text-center mt-6">
+    <%= link_to "Cancelar", root_path, class: "text-gray-600 hover:text-gray-800" %>
+  </div>
+</div>

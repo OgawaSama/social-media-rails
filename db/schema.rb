@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_10_27_201714) do
+ActiveRecord::Schema[8.1].define(version: 2025_10_30_053355) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -49,6 +49,15 @@ ActiveRecord::Schema[8.1].define(version: 2025_10_27_201714) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "availabilities", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "status"
+    t.integer "time_slot_id", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["user_id", "time_slot_id"], name: "index_availabilities_on_user_id_and_time_slot_id", unique: true
+  end
+
   create_table "business_addresses", force: :cascade do |t|
     t.integer "business_id", null: false
     t.string "city"
@@ -84,6 +93,29 @@ ActiveRecord::Schema[8.1].define(version: 2025_10_27_201714) do
     t.integer "user_id", null: false
     t.index ["post_id"], name: "index_comments_on_post_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "event_invitations", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "event_id", null: false
+    t.integer "invitee_id", null: false
+    t.string "invitee_type", null: false
+    t.integer "status"
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_event_invitations_on_event_id"
+    t.index ["invitee_type", "invitee_id"], name: "index_event_invitations_on_invitee"
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "creator_id", null: false
+    t.string "creator_type", null: false
+    t.text "description"
+    t.date "end_date"
+    t.date "start_date"
+    t.string "title"
+    t.datetime "updated_at", null: false
+    t.index ["creator_type", "creator_id"], name: "index_events_on_creator"
   end
 
   create_table "friendships", force: :cascade do |t|
@@ -161,6 +193,15 @@ ActiveRecord::Schema[8.1].define(version: 2025_10_27_201714) do
     t.index ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
   end
 
+  create_table "time_slots", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "end_time"
+    t.integer "event_id", null: false
+    t.datetime "start_time"
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_time_slots_on_event_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "current_sign_in_at"
@@ -185,11 +226,14 @@ ActiveRecord::Schema[8.1].define(version: 2025_10_27_201714) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "availabilities", "time_slots"
+  add_foreign_key "availabilities", "users"
   add_foreign_key "business_addresses", "businesses"
   add_foreign_key "businesses", "users"
   add_foreign_key "cardapios", "businesses"
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
+  add_foreign_key "event_invitations", "events"
   add_foreign_key "friendships", "users"
   add_foreign_key "friendships", "users", column: "other_user_id"
   add_foreign_key "item_cardapios", "cardapios"
@@ -199,4 +243,5 @@ ActiveRecord::Schema[8.1].define(version: 2025_10_27_201714) do
   add_foreign_key "reactions", "users"
   add_foreign_key "relationships", "users", column: "followed_id"
   add_foreign_key "relationships", "users", column: "follower_id"
+  add_foreign_key "time_slots", "events"
 end

@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  get "event_availabilities/show"
+  get "event_availabilities/create"
+  get "event_availabilities/update"
+  get "events/new"
+  get "events/create"
+  get "events/show"
   resources :businesses, only: [ :new, :create, :edit, :update, :show ] do
     resource :cardapio, only: [ :new, :create, :edit, :update ]
   end
@@ -23,6 +29,12 @@ Rails.application.routes.draw do
     sessions: "users/sessions",
     registrations: "users/registrations"
   }
+
+  # Rota para rolês
+  resources :events, only: [:new, :create, :show] do
+    # Rota para a página de "Marcar Disponibilidade"
+    resource :my_availability, only: [:show, :create, :update], controller: 'event_availabilities'
+  end
 
   # Rotas para followers/following
   resources :users, only: [] do

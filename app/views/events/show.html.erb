@@ -1,0 +1,111 @@
+<%# app/views/events/show.html.erb %>
+
+<div class="container mx-auto px-4 py-8">
+  <h1 class="text-4xl font-bold text-center text-blue-600 mb-4"><%= @event.title %></h1>
+  <p class="text-center text-gray-600 mb-2">Criado por: <%= @event.creator.try(:username) || 'Grupo/Desconhecido' %></p>
+  <% if @event.description.present? %>
+    <div class="text-center text-gray-700 mb-8"><%= @event.description %></div>
+  <% end %>
+
+  <%# Botão para o usuário editar sua disponibilidade %>
+  <div class="text-center mb-8">
+    <%= link_to "Marcar/Editar Minha Disponibilidade", event_my_availability_path(@event), class: "bg-green-500 hover:bg-green-600 text-white font-semibold px-6 py-2 rounded-lg shadow transition duration-200" %>
+  </div>
+
+  <%# Tabela de Disponibilidade %>
+  <div class="overflow-x-auto bg-white shadow-md rounded-lg p-6">
+    <table class="min-w-full divide-y divide-gray-200">
+      <thead class="bg-gray-50">
+        <tr>
+          <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider sticky left-0 bg-gray-50 z-10">
+            Participante
+          </th>
+          <%# Cabeçalho dos Dias e Horários %>
+          <% @time_slots_by_day.each do |date, slots| %>
+            <th scope="col" colspan="<%= slots.size %>" class="px-3 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider border-l">
+              <%= l(date, format: :short) %> <%# Formata a data %>
+            </th>
+          <% end %>
+        </tr>
+        <tr>
+          <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider sticky left-0 bg-gray-50 z-10">
+            <%# Espaço Vazio %>
+          </th>
+          <%# Cabeçalho dos Horários %>
+          <% @time_slots_by_day.values.flatten.each_with_index do |slot, index| %>
+            <th scope="col" class="px-1 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider <%= 'border-l' if index == 0 || slot.start_time.hour == 9 %>">
+              <%= slot.start_time.strftime("%H:%M") %> <%# Formata a hora %>
+              <%#= slot.start_time.strftime("%H:%M") %> - <%#= slot.end_time.strftime("%H:%M") %>
+            </th>
+          <% end %>
+        </tr>
+      </thead>
+
+      <tbody class="bg-white divide-y divide-gray-200">
+        <%# Linha para cada Participante %>
+        <% @participants.each do |participant| %>
+          <tr>
+            <td class="px-3 py-2 whitespace-nowrap text-sm font-medium text-gray-900 sticky left-0 bg-white z-10">
+              <%= participant.username %>
+            </td>
+            <%# Célula para cada Slot %>
+            <% @time_slots_by_day.values.flatten.each_with_index do |slot, index| %>
+              <% availability = @availabilities[[participant.id, slot.id]] %>
+            <%
+            bg_color = case availability&.status 
+            when Availability::STATUS[:available] then 'bg-green-300 hover:bg-green-400'
+            when Availability::STATUS[:maybe] then 'bg-yellow-300 hover:bg-yellow-400'
+            when Availability::STATUS[:unavailable] then 'bg-red-300 hover:bg-red-400'
+            else 'bg-gray-100 hover:bg-gray-200'
+            end
+            %>
+              <td class="px-1 py-2 whitespace-nowrap text-center text-sm <%= bg_color %> <%= 'border-l' if index == 0 || slot.start_time.hour == 9 %> transition-colors duration-150">
+                <%# Opcional: Mostrar ícone ou texto pequeno %>
+                <%#= status.chars.first.upcase if status != 'not_answered' %>
+              </td>
+            <% end %>
+          </tr>
+        <% end %>
+
+        <%# --- Linha de Totais (Sugestão) --- %>
+        <tr class="bg-gray-100 font-semibold">
+          <td class="px-3 py-2 whitespace-nowrap text-sm text-gray-700 sticky left-0 bg-gray-100 z-10">
+            Disponíveis
+          </td>
+          <% @time_slots_by_day.values.flatten.each_with_index do |slot, index| %>
+            <% available_count = @participants.count { |p| @availabilities[[p.id, slot.id]]&.status == Availability::STATUS[:available] } %>
+             <%
+                total_participants = @participants.size
+                bg_intensity = if total_participants > 0 && available_count == total_participants
+                                 'bg-green-500 text-white' # Todos disponíveis
+                               elsif available_count > total_participants / 2
+                                 'bg-green-200' # Maioria disponível
+                               elsif available_count > 0
+                                 'bg-green-100' # Alguém disponível
+                               else
+                                 'bg-gray-200'  # Ninguém disponível
+                               end
+            %>
+            <td class="px-1 py-2 whitespace-nowrap text-center text-sm <%= bg_intensity %> <%= 'border-l' if index == 0 || slot.start_time.hour == 9 %>">
+              <%= available_count %>
+            </td>
+          <% end %>
+        </tr>
+        <%# --- Fim da Linha de Totais --- %>
+
+      </tbody>
+    </table>
+  </div>
+
+  <div class="mt-8 text-center">
+    <%= link_to "Voltar", root_path, class: "text-gray-600 hover:text-gray-800" %>
+  </div>
+</div>
+
+<%# Adiciona um pouco de CSS para a coluna sticky (opcional, pode ir pro CSS global) %>
+<style>
+  .sticky {
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+  }
+</style>

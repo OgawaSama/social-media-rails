@@ -30,6 +30,12 @@ class User < ApplicationRecord
 
   after_create :create_user_profile
 
+  # Sistema de marcar rolês
+  has_many :created_events, class_name: 'Event', as: :creator
+  has_many :availabilities
+  has_many :event_invitations, as: :invitee
+  has_many :invited_events, through: :event_invitations, source: :event
+
   # Método para decidir dono do grupo
   def owned_events
     group_participations.ownerships.map(&:group)

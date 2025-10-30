@@ -5,6 +5,10 @@ class Group < ApplicationRecord
   has_one_attached :header
   has_one_attached :avatar
 
+  has_many :created_events, class_name: 'Event', as: :creator
+  has_many :event_invitations, as: :invitee
+  has_many :invited_events, through: :event_invitations, source: :event
+
   validates :avatar, content_type: { in: [ :png, :jpeg, :gif ], spoofing_protection: true }
   validates :header, content_type: { in: [ :png, :jpeg, :gif ], spoofing_protection: true }
   validates :name, presence: true
