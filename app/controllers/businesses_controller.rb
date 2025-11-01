@@ -3,8 +3,7 @@ class BusinessesController < ApplicationController
   before_action :set_business, only: [ :edit, :update, :show ]
 
   def show
-    @cardapio = @business.cardapio
-    @itens = @cardapio&.itens_cardapio
+    @addresses = @business.business_addresses.includes(:cardapio)
   end
 
   def new
