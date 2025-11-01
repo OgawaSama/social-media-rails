@@ -1,0 +1,22 @@
+<div class="max-w-4xl mx-auto mt-12 bg-gray-100 shadow-md rounded-lg p-6 space-y-6 text-center">
+
+  <h1 class="text-3xl font-bold mb-4">Cardápio: <%= @cardapio.titulo %></h1>
+
+  <ul class="list-disc ml-6 space-y-4 text-left">
+    <% @itens.each do |item| %>
+      <li class="p-4 bg-white rounded shadow">
+        <div class="flex justify-between items-center">
+          <span>
+            <%= item.nome %> - R$ <%= number_with_precision(item.preco, precision: 2, separator: ",") %> (<%= item.tipo == 0 ? "Comida" : "Bebida" %>)
+          </span>
+        </div>
+      </li>
+    <% end %> <!-- fecha o each -->
+  </ul>
+
+  <% if current_user == @cardapio.business_address.business.user %>
+    <div class="mt-6">
+      <%= link_to "Editar Cardápio", edit_business_business_address_cardapio_path(@cardapio.business_address.business, @cardapio), class: "bg-yellow-500 text-white px-4 py-2 rounded shadow" %>
+    </div>
+  <% end %>
+</div>
