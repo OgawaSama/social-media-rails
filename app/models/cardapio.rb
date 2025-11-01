@@ -4,7 +4,7 @@ class Cardapio < ApplicationRecord
 
   accepts_nested_attributes_for :itens_cardapio, allow_destroy: true
 
-  has_many :promocoes, dependent: :destroy
+  has_many :promocoes, class_name: "Promocao", dependent: :destroy
 
   validates :titulo, presence: true
 end
