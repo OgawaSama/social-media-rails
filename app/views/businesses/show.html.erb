@@ -1,11 +1,24 @@
 <div class="max-w-4xl mx-auto mt-12 bg-gray-100 shadow-md rounded-lg p-6 space-y-6">
 
   <h1 class="text-2xl font-bold mb-2"><%= @business.company_name %></h1>
-  <p class="text-gray-700 mb-4">CNPJ: <%= @business.cnpj %></p>
+  <p class="text-l font-bold mb-4">Rating: <%= @business.rating %>/5</p>
+  <p class="text-gray-700 mb-2">CNPJ: <%= @business.cnpj %></p>
 
   <h2 class="text-xl font-semibold mb-2 flex justify-between items-center">
     Endereços
   </h2>
+
+  <% if current_user != @business.user %>
+    <div class="flex flex-wrap items-center gap-2">
+      <p class="text font-bold mb-2">Rate this place: </p>
+      <%= button_to "1", add_rating_path(id: @business.id, rating: 1), method: :post, id: "rating-1", class: "bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded" %>
+      <%= button_to "2", add_rating_path(id: @business.id, rating: 2), method: :post, id: "rating-2", class: "bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded" %>
+      <%= button_to "3", add_rating_path(id: @business.id, rating: 3), method: :post, id: "rating-3", class: "bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded" %>
+      <%= button_to "4", add_rating_path(id: @business.id, rating: 4), method: :post, id: "rating-4", class: "bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded" %>
+      <%= button_to "5", add_rating_path(id: @business.id, rating: 5), method: :post, id: "rating-5", class: "bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded" %>
+    </div>
+    <%# <p class="text-l-gray-700 mb-2">Your rating here: <%= %>
+  <% end %>
 
   <% if @addresses.any? %>
     <ul class="space-y-4">

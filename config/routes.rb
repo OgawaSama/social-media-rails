@@ -40,6 +40,7 @@ Rails.application.routes.draw do
 
   post :add_member, to: "groups#add_member"
   post :remove_member, to: "groups#remove_member"
+  post :add_rating, to: "businesses#add_rating"
   get "pages/userindex", as: "userindex"
   get "pages/barindex", as: "barindex"
 

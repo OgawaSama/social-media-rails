@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_11_01_135815) do
+ActiveRecord::Schema[8.1].define(version: 2025_11_01_231223) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -64,6 +64,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_01_135815) do
     t.string "cnpj"
     t.string "company_name"
     t.datetime "created_at", null: false
+    t.float "rating"
     t.datetime "updated_at", null: false
     t.integer "user_id", null: false
     t.index ["user_id"], name: "index_businesses_on_user_id"
@@ -151,6 +152,17 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_01_135815) do
     t.datetime "updated_at", null: false
     t.index ["cardapio_id"], name: "index_promocaos_on_cardapio_id"
     t.index ["item_cardapio_id"], name: "index_promocaos_on_item_cardapio_id"
+  end
+
+  create_table "rates", force: :cascade do |t|
+    t.integer "business_id"
+    t.datetime "created_at", null: false
+    t.integer "rating"
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.index ["business_id"], name: "index_rates_on_business_id"
+    t.index ["user_id", "business_id"], name: "index_rates_on_user_id_and_business_id", unique: true
+    t.index ["user_id"], name: "index_rates_on_user_id"
   end
 
   create_table "reactions", force: :cascade do |t|

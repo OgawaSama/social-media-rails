@@ -69,7 +69,7 @@ end
 
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
-  gem "cucumber"
+  gem "cucumber-rails"
   gem "capybara"
   gem "selenium-webdriver"
 
