@@ -31,4 +31,4 @@ Planejamos implementar:
 * E muito mais!
 
 ## Heroku
-[Aplicação no Heroku](https://tabi-planner-8fed89242f80.herokuapp.com/)
+[Aplicação no Heroku](https://social-media-rails-8aa272f4120e.herokuapp.com/)
