@@ -49,6 +49,7 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   get "feed/search", to: "feed#search", as: "search_users"
+  get "feed/search_shops", to: "feed#search_shops", as: "search_shops"
 
   authenticated :user do
     root to: "feed#show", as: :authenticated_user_root

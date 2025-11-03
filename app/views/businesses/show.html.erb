@@ -31,7 +31,11 @@
             <% if address.cardapio.present? %>
               <%= link_to "Ver Cardápio", business_business_address_cardapio_path(@business, address), class: "bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded" %>
             <% else %>
-              <%= link_to "Criar Cardápio", new_business_business_address_cardapio_path(@business, address), class: "bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded" %>
+              <% if current_user == @business.user %> 
+                <%= link_to "Criar Cardápio", new_business_business_address_cardapio_path(@business, address), class: "bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded" %>
+              <% else %> 
+                <p class="text font-bold"> No menus yet. </p>
+              <% end %>
             <% end %>
           </div>
         </li>

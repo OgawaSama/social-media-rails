@@ -42,7 +42,8 @@ class BusinessesController < ApplicationController
     if !Rate.where(business: @business, user: @user).present?
       Rate.create!(business: @business, user: @user, rating: params[:rating])
     else
-      Rate.update!(business: @business, user: @user, rating: params[:rating])
+      @rate = Rate.where(business: @business, user: @user)
+      @rate.update(rating: params[:rating])
     end
   end
 
