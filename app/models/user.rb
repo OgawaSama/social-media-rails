@@ -18,6 +18,9 @@ class User < ApplicationRecord
   has_many :group_participations
   has_many :groups, through: :group_participations
 
+  # Sistema de avaliação de empresa    sim o nome ficou ruim...  :/
+  has_many :rates
+
   # Sistema de Followers/Following
   has_many :active_relationships, class_name: "Relationship",
                                   foreign_key: "follower_id",

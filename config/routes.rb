@@ -40,6 +40,7 @@ Rails.application.routes.draw do
 
   post :add_member, to: "groups#add_member"
   post :remove_member, to: "groups#remove_member"
+  post :add_rating, to: "businesses#add_rating"
   get "pages/userindex", as: "userindex"
   get "pages/barindex", as: "barindex"
 
@@ -48,6 +49,7 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   get "feed/search", to: "feed#search", as: "search_users"
+  get "feed/search_shops", to: "feed#search_shops", as: "search_shops"
 
   authenticated :user do
     root to: "feed#show", as: :authenticated_user_root

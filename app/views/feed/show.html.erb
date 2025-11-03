@@ -12,6 +12,19 @@
   </div>
 <% end %>
 
+<!-- Please change where this is, this location is TEMPORARY -->
+<%= form_with url: search_shops_url, method: :get, local: true do |f| %>
+  <div class="flex items-center mt-4 space-x-2 max-w-5xl mx-auto px-4">
+    <%= f.text_field :query,
+          id: "search_shops_query",
+          placeholder: "Search shop items...",
+          class: "flex-1 border rounded p-2 focus:outline-none focus:ring-2 focus:ring-blue-400" %>
+    <%= f.submit "Search shops",
+          class: "px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600" %>
+  </div>
+<% end %>
+
+
 <div class="bg-gray-100 min-h-screen pt-24">
   <div class="px-4 max-w-5xl mx-auto">
     
