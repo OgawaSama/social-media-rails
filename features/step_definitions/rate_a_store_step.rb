@@ -41,4 +41,3 @@ Then("I should see a rating of {string}") do |string|
   # rating = page.text.match(/Rating:\s*[\d]+.[\d]+/)
   # expect(rating.to_s).to match(/Rating: #{string}/)
 end
-
