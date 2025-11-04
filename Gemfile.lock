@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/heartcombo/devise.git
-  revision: ef2d4831ef4641571aabde28ccf54f73329dfbc5
+  revision: c6b08ae7e12d068e7fde62dda951316147300daf
   branch: main
   specs:
     devise (5.0.0.beta)
@@ -314,7 +314,7 @@ GEM
       nio4r (~> 2.0)
     raabro (1.4.0)
     racc (1.8.1)
-    rack (3.2.3)
+    rack (3.2.4)
     rack-session (2.1.1)
       base64 (>= 0.1.0)
       rack (>= 3.0.0)
@@ -502,7 +502,7 @@ GEM
     unicode-display_width (3.2.0)
       unicode-emoji (~> 4.1)
     unicode-emoji (4.1.0)
-    uri (1.1.0)
+    uri (1.1.1)
     useragent (0.16.11)
     warden (1.2.9)
       rack (>= 2.0.9)
