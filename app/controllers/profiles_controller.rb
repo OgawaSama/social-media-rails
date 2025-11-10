@@ -31,8 +31,8 @@ class ProfilesController < ApplicationController
   def edit
   end
 
-  # PATCH/PUT /profiles/1
-  # app/controllers/profiles_controller.rb
+# PATCH/PUT /profiles/1
+# app/controllers/profiles_controller.rb
 def update
   if @profile.update(profile_params)
     redirect_to @profile, notice: "Profile was successfully updated!"
