@@ -11,4 +11,13 @@ class FeedController < ApplicationController
                        "%#{params[:query]}%",
                        "%#{params[:query]}%")
   end
+
+  def search_shops
+    @query = params[:query]
+    @shops = Business.where(id: BusinessAddress.where(
+                              id: Cardapio.where(
+                                id: ItemCardapio.where("nome LIKE ?", "%#{@query}%").pluck(:cardapio_id)
+                              ).pluck(:business_address_id)
+                            ).pluck(:business_id)).all.reorder("rating DESC")
+  end
 end

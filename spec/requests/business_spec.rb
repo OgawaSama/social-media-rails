@@ -27,13 +27,13 @@ RSpec.describe Business, type: :request do
       end
     end
 
-    # context 'GET business/:business_id' do
-    #   it "should access existing post" do
-    #     get post_url(@post)
-    #     # expect(response).to redirect_to(post_path(@post))
-    #     expect(response).to have_http_status(200)
-    #   end
-    # end
+    context 'GET business/:business_id' do
+      it "should access existing business" do
+        get business_url(@business)
+        # expect(response).to redirect_to(post_path(@post))
+        expect(response).to have_http_status(200)
+      end
+    end
   end
 
   describe 'user is not logged in' do
@@ -57,11 +57,11 @@ RSpec.describe Business, type: :request do
       end
     end
 
-    # context "GET business/:business_id" do
-    #   it "should not access existing post" do
-    #     get post_url(@post2)
-    #     expect(response).to redirect_to(new_user_session_path)
-    #   end
-    # end
+    context "GET business/:business_id" do
+      it "should not access existing business" do
+        get business_url(@business)
+        expect(response).to redirect_to(new_user_session_path)
+      end
+    end
   end
 end

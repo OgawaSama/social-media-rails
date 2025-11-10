@@ -41,4 +41,10 @@ RSpec.describe BusinessAddress, type: :model do
     @business_address.zip = nil
     expect(@business_address).not_to be_valid
   end
+
+   it "checks for cardapio presence" do
+    cardapio = create(:cardapio, business_address: @business_address)
+
+    expect(@business_address.cardapios).to include(cardapio)
+  end
 end

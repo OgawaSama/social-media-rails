@@ -1,6 +1,10 @@
+pin "application", preload: true
+pin "business_adress"
+pin "cardapio"
+
 pin "trix"
 pin "@rails/actiontext", to: "actiontext.esm.js"
 pin "@hotwired/turbo-rails", to: "turbo.min.js", preload: true
-pin "@hotwired/turbo", to: "turbo.esm.js"
-pin "@rails/actioncable/src", to: "@rails--actioncable--src.js" # @8.0.300
-pin "@rails/activestorage", to: "activestorage.js"
+pin "@hotwired/turbo"
+pin "@rails/actioncable/src"
+pin "@rails/activestorage", to: "activestorage.esm.js"

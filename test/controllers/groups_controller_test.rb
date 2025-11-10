@@ -43,4 +43,23 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to feed_url
   end
+
+    test "should create group with header" do
+    assert_difference("Group.count", 1) do
+      post groups_url, params: {
+        group: {
+          name: "Grupo com Header",
+          header: fixture_file_upload("test/fixtures/files/teste.png", "image/jpeg")
+        }
+      }
+    end
+    assert_redirected_to group_url(Group.last)
+  end
+
+  test "should not create group without name" do
+    assert_no_difference("Group.count") do
+      post groups_url, params: { group: { name: "" } }
+    end
+    assert_response :unprocessable_entity
+  end
 end

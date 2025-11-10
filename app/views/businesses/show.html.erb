@@ -1,14 +1,43 @@
 <div class="max-w-4xl mx-auto mt-12 bg-gray-100 shadow-md rounded-lg p-6 space-y-6">
 
   <h1 class="text-2xl font-bold mb-2"><%= @business.company_name %></h1>
-  <p class="text-gray-700 mb-4">CNPJ: <%= @business.cnpj %></p>
+  <p class="text-l font-bold mb-4">Rating: <%= @business.rating %>/5</p>
+  <p class="text-gray-700 mb-2">CNPJ: <%= @business.cnpj %></p>
 
-  <h2 class="text-xl font-semibold mb-2">Endereços</h2>
-  <% if @business.business_addresses.any? %>
-    <ul class="list-disc ml-6 space-y-1">
-      <% @business.business_addresses.each do |address| %>
-        <li>
-          <%= address.street %>, <%= address.city %> - <%= address.state %>
+  <h2 class="text-xl font-semibold mb-2 flex justify-between items-center">
+    Endereços
+  </h2>
+
+  <% if current_user != @business.user %>
+    <div class="flex flex-wrap items-center gap-2">
+      <p class="text font-bold mb-2">Rate this place: </p>
+      <%= button_to "1", add_rating_path(id: @business.id, rating: 1), method: :post, id: "rating-1", class: "bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded" %>
+      <%= button_to "2", add_rating_path(id: @business.id, rating: 2), method: :post, id: "rating-2", class: "bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded" %>
+      <%= button_to "3", add_rating_path(id: @business.id, rating: 3), method: :post, id: "rating-3", class: "bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded" %>
+      <%= button_to "4", add_rating_path(id: @business.id, rating: 4), method: :post, id: "rating-4", class: "bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded" %>
+      <%= button_to "5", add_rating_path(id: @business.id, rating: 5), method: :post, id: "rating-5", class: "bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded" %>
+    </div>
+    <%# <p class="text-l-gray-700 mb-2">Your rating here: <%= %>
+  <% end %>
+
+  <% if @addresses.any? %>
+    <ul class="space-y-4">
+      <% @addresses.each do |address| %>
+        <li class="p-4 bg-white rounded shadow flex justify-between items-center">
+          <div>
+            <%= address.street %>, <%= address.city %> - <%= address.state %> (CEP: <%= address.zip %>)
+          </div>
+          <div class="space-x-2">
+            <% if address.cardapio.present? %>
+              <%= link_to "Ver Cardápio", business_business_address_cardapio_path(@business, address), class: "bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded" %>
+            <% else %>
+              <% if current_user == @business.user %> 
+                <%= link_to "Criar Cardápio", new_business_business_address_cardapio_path(@business, address), class: "bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded" %>
+              <% else %> 
+                <p class="text font-bold"> No menus yet. </p>
+              <% end %>
+            <% end %>
+          </div>
         </li>
       <% end %>
     </ul>
@@ -20,30 +49,6 @@
     <div class="mt-6">
       <%= link_to "Editar Perfil", edit_business_path(@business), class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded shadow" %>
     </div>
-  <% end %>
-
-  <h2 class="text-xl font-semibold mt-6 mb-2">Cardápio</h2>
-  <% if @cardapio.present? && @itens.any? %>
-     <% if current_user == @business.user %>
-      <div class="mt-4">
-        <%= link_to "Editar Cardápio", edit_business_cardapio_path(@business), class: "bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded shadow" %>
-      </div>
-    <% end %>
-    <ul class="list-disc ml-6 space-y-1">
-      <% @itens.each do |item| %>
-        <li>
-          <%= item.nome %> - R$ <%= number_with_precision(item.preco, precision: 2, separator: ",") %> (<%= item.tipo == 0 ? "Comida" : "Bebida" %>)
-        </li>
-      <% end %>
-    </ul>
-  <% else %>
-    <p>Cardápio não cadastrado.</p>
-
-    <% if current_user == @business.user && !@cardapio.present?%>
-      <div class="mt-4">
-        <%= link_to "Criar Cardápio", new_business_cardapio_path(@business), class: "bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded shadow" %>
-      </div>
-    <% end %>
   <% end %>
 
 </div>

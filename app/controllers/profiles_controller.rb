@@ -47,6 +47,7 @@ def update
     redirect_to edit_profile_path(@profile), alert: "Ocorreu um erro ao atualizar o perfil. Tente novamente."
   end
 
+
   # DELETE /profiles/1
   def destroy
     @profile.destroy
@@ -60,6 +61,6 @@ def update
   end
 
   def profile_params
-    params.require(:profile).permit(:bio, :header, :avatar)
+    params.require(:profile).permit(:bio, :header, :avatar).delete_if { |k, v| v.blank? }
   end
 end

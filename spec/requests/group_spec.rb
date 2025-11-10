@@ -7,11 +7,15 @@ RSpec.describe Group, type: :request do
   end
 
   describe 'user is logged in' do
-    before(:each) do
-      login_as @user
-      @group = create(:group)
-      GroupParticipation.create!(group: @group, user: @user)
-    end
+  before(:each) do
+    # evita que o job de resize quebre os requests
+    allow(ResizeImageJob).to receive(:perform_later)
+
+    login_as @user
+    @group = create(:group)
+    GroupParticipation.create!(group: @group, user: @user)
+  end
+
 
     context 'GET users/:user_id/:group_id' do
       it "should get a group I own" do
@@ -52,9 +56,12 @@ RSpec.describe Group, type: :request do
   end
 
   describe 'user is not logged in' do
-    before(:each) do
-      @group = create(:group)
-    end
+  before(:each) do
+    allow(ResizeImageJob).to receive(:perform_later)
+
+    @group = create(:group)
+  end
+
 
     context 'GET users/:user_id/:group_id' do
       it "should not get group" do

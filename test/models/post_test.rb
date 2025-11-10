@@ -1,6 +1,7 @@
 require "test_helper"
 
 class PostTest < ActiveSupport::TestCase
+  include ActiveJob::TestHelper
   def setup
     @user = users(:one)
     @post = Post.new(user: @user)
@@ -14,6 +15,12 @@ class PostTest < ActiveSupport::TestCase
     @post.user = nil
     assert_not @post.valid?
     assert_includes @post.errors[:user], "must exist"
+  end
+
+
+  test "feed_body returns up to 288 chars when no images" do
+    @post.body = "a" * 400
+    assert_equal 288, @post.feed_body.length
   end
 
   test "feed_body should return up to 144 chars when no images" do
@@ -61,7 +68,24 @@ class PostTest < ActiveSupport::TestCase
   #    assert_not invalid_files.empty?, "Non-image attachments should be detected"
   #  end
 
+  test "resize_images_later enqueues ResizeImageJob only" do
+    attach_image(@post, "test/fixtures/files/teste.png", "image/jpeg")
+
+    assert_enqueued_with(job: ResizeImageJob) do
+      @post.save!
+    end
+  end
+
+
+
+  test "resize_images_later is called after commit" do
+    post = Post.new(user: @user)
+    attach_image(post, "test/fixtures/files/teste.png", "image/jpeg")
+    assert_enqueued_with(job: ResizeImageJob) { post.save! }
+  end
+
   private
+
 
   def attach_image(post, path, content_type)
     post.images.attach(io: File.open(path), filename: File.basename(path), content_type: content_type)

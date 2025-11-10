@@ -1,6 +1,6 @@
 <%= form_with(
       model: @cardapio,
-      url: @cardapio.persisted? ? business_cardapio_path(@business) : business_cardapio_path(@business),
+      url: @cardapio.persisted? ? business_business_address_cardapio_path(@business, @business_address) : business_business_address_cardapio_path(@business, @business_address),
       local: true,
       class: "max-w-2xl mx-auto bg-gray-100 shadow-md rounded-lg p-6 space-y-6 mt-12"
     ) do |f| %>
