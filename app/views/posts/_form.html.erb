@@ -35,7 +35,8 @@
       <% post.images.each do |image| %>
       <div class="relative">
         <% if image.variable? %>
-          <%= image_tag image.variant(resize_to_limit: [150,150]), class: "w-full h-24 object-cover rounded" %>
+           <%#= image_tag image.variant(resize_to_limit: [150,150]), class: "w-full h-24 object-cover rounded" %>
+          <%= image_tag image, class: "w-full h-24 object-cover rounded"%>
         <% else %>
           <p class="text-red-500 text-sm">Arquivo inválido (tipo: <%= image.content_type %>)</p>
         <% end %>
