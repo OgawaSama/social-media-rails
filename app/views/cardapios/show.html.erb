@@ -10,8 +10,14 @@
             <%= item.nome %> - R$ <%= number_with_precision(item.preco, precision: 2, separator: ",") %> (<%= item.tipo == 0 ? "Comida" : "Bebida" %>)
           </span>
         </div>
+        <div class="mt-3">
+          <%= link_to 'Ver comentários', business_business_address_cardapio_item_cardapio_comments_path(@cardapio.business_address.business, @cardapio.business_address, @cardapio, item_cardapio_id: item.id), data: { turbo_frame: "item_comments_#{item.id}" }, class: 'text-blue-600 underline' %>
+
+          <%= turbo_frame_tag "item_comments_#{item.id}" do %>
+          <% end %>
+        </div>
       </li>
-    <% end %> <!-- fecha o each -->
+    <% end %>
   </ul>
 
   <% if current_user == @cardapio.business_address.business.user %>

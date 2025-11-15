@@ -4,6 +4,8 @@ class Business < ApplicationRecord
   has_many :business_addresses, dependent: :destroy
   accepts_nested_attributes_for :business_addresses, allow_destroy: true
 
+  has_many :business_comments, dependent: :destroy
+
   has_many :rates, dependent: :destroy
 
   validates :company_name, :cnpj, presence: true

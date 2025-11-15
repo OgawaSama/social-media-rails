@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
   resources :businesses, only: [ :new, :create, :edit, :update, :show ] do
+    resources :business_comments, only: [ :create, :index, :destroy ]
     resources :business_addresses do
-      resource :cardapio, only: [ :new, :create, :edit, :update, :show ]
+      resource :cardapio, only: [ :new, :create, :edit, :update, :show ] do
+        resources :item_cardapio_comments, only: [ :create, :index, :destroy ]
+      end
     end
   end
   resources :profiles
