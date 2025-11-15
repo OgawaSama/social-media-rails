@@ -1,0 +1,30 @@
+<h2 class="text-xl font-bold mb-4"><%= @event.name %></h2>
+<p><%= @event.description %></p>
+<p>Início: <%= l(@event.start_time, format: :short) %></p>
+<% if @event.end_time %>
+  <p>Fim: <%= l(@event.end_time, format: :short) %></p>
+<% end %>
+<% if @event.points_rewarded.present? %>
+  <p>Pontos: <%= @event.points_rewarded %></p>
+<% end %>
+
+<% unless @event.participants.include?(current_user) %>
+  <% if user_signed_in? %>
+    <%= form_with url: business_business_address_event_event_participations_path(@event.business_address.business, @event.business_address, @event), method: :post do %>
+      <%= submit_tag "Participar deste evento", class: "bg-green-500 text-white px-4 py-2 rounded" %>
+    <% end %>
+  <% else %>
+    <p class="text-gray-500">Faça login para participar deste evento.</p>
+  <% end %>
+<% else %>
+  <p class="text-green-600 font-bold">Você já está participando deste evento!</p>
+<% end %>
+
+<h3 class="text-lg font-semibold mt-6 mb-2">Participantes</h3>
+<ul>
+  <% @event.participants.each do |user| %>
+    <li><%= user.username || user.email %></li>
+  <% end %>
+</ul>
+
+<%= link_to "Voltar", business_business_address_events_path(@business_address.business, @business_address), class: "text-blue-600 underline" %>

@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   resources :businesses, only: [ :new, :create, :edit, :update, :show ] do
     resources :business_comments, only: [ :create, :index, :destroy ]
     resources :business_addresses do
+      resources :events do
+        resources :event_participations, only: [ :create ]
+      end
       resource :cardapio, only: [ :new, :create, :edit, :update, :show ] do
         resources :item_cardapio_comments, only: [ :create, :index, :destroy ]
       end
