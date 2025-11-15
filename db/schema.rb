@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_11_02_221629) do
+ActiveRecord::Schema[8.1].define(version: 2025_11_15_000300) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -58,6 +58,16 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_02_221629) do
     t.datetime "updated_at", null: false
     t.string "zip"
     t.index ["business_id"], name: "index_business_addresses_on_business_id"
+  end
+
+  create_table "business_comments", force: :cascade do |t|
+    t.integer "business_id", null: false
+    t.datetime "created_at", null: false
+    t.string "role", default: "consumer", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["business_id"], name: "index_business_comments_on_business_id"
+    t.index ["user_id"], name: "index_business_comments_on_user_id"
   end
 
   create_table "businesses", force: :cascade do |t|
@@ -112,6 +122,16 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_02_221629) do
     t.datetime "created_at", null: false
     t.string "name"
     t.datetime "updated_at", null: false
+  end
+
+  create_table "item_cardapio_comments", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "item_cardapio_id", null: false
+    t.string "role", default: "consumer", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["item_cardapio_id"], name: "index_item_cardapio_comments_on_item_cardapio_id"
+    t.index ["user_id"], name: "index_item_cardapio_comments_on_user_id"
   end
 
   create_table "item_cardapios", force: :cascade do |t|
@@ -187,6 +207,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_02_221629) do
 
   create_table "users", force: :cascade do |t|
     t.datetime "created_at", null: false
+    t.boolean "critic", default: false, null: false
     t.datetime "current_sign_in_at"
     t.string "current_sign_in_ip"
     t.string "email", default: "", null: false
@@ -210,12 +231,16 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_02_221629) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "business_addresses", "businesses"
+  add_foreign_key "business_comments", "businesses"
+  add_foreign_key "business_comments", "users"
   add_foreign_key "businesses", "users"
   add_foreign_key "cardapios", "business_addresses"
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
   add_foreign_key "friendships", "users"
   add_foreign_key "friendships", "users", column: "other_user_id"
+  add_foreign_key "item_cardapio_comments", "item_cardapios"
+  add_foreign_key "item_cardapio_comments", "users"
   add_foreign_key "item_cardapios", "cardapios"
   add_foreign_key "posts", "users"
   add_foreign_key "profiles", "users"
