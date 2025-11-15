@@ -4,6 +4,14 @@
   <p class="text-l font-bold mb-4">Rating: <%= @business.rating %>/5</p>
   <p class="text-gray-700 mb-2">CNPJ: <%= @business.cnpj %></p>
 
+  <div class="mt-6">
+    <%= link_to 'Ver comentários', business_business_comments_path(@business), data: { turbo_frame: "business_comments_#{@business.id}" }, class: 'text-blue-600 underline' %>
+
+    <%= turbo_frame_tag "business_comments_#{@business.id}" do %>
+    <% end %>
+  </div>
+
+
   <h2 class="text-xl font-semibold mb-2 flex justify-between items-center">
     Endereços
   </h2>

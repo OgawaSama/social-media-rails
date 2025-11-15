@@ -6,6 +6,7 @@ class BusinessesController < ApplicationController
 
   def show
     @addresses = @business.business_addresses.includes(:cardapio)
+    @business_comments = @business.business_comments.includes(:user).order(created_at: :desc)
   end
 
   def new

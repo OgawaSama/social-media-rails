@@ -67,4 +67,9 @@ class User < ApplicationRecord
     def create_user_profile
       self.create_profile
     end
+
+    public
+    def critic?
+      self.critic == true
+    end
 end
