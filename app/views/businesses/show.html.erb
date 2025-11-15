@@ -46,6 +46,26 @@
               <% end %>
             <% end %>
           </div>
+          <div class="mt-2">
+            <h4 class="text-md font-semibold mb-1">Eventos</h4>
+            <% if address.events.any? %>
+              <ul class="mb-2">
+                <% address.events.each do |event| %>
+                  <li>
+                    <%= link_to event.name, business_business_address_event_path(@business, address, event), class: "text-green-600 underline" %>
+                    <% if event.points_rewarded.present? && event.points_rewarded > 0 %>
+                      <span class="ml-2 text-yellow-600">+<%= event.points_rewarded %> pontos</span>
+                    <% end %>
+                  </li>
+                <% end %>
+              </ul>
+            <% else %>
+              <span class="text-gray-500">Nenhum evento cadastrado.</span>
+            <% end %>
+            <% if current_user == @business.user %>
+              <%= link_to "Gerenciar Eventos", business_business_address_events_path(@business, address), class: "bg-purple-500 text-white px-2 py-1 rounded ml-2" %>
+            <% end %>
+          </div>
         </li>
       <% end %>
     </ul>

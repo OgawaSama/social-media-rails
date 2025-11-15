@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_11_15_000300) do
+ActiveRecord::Schema[8.1].define(version: 2025_11_15_002100) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -95,6 +95,28 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_15_000300) do
     t.integer "user_id", null: false
     t.index ["post_id"], name: "index_comments_on_post_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "event_participations", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "event_id", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["event_id"], name: "index_event_participations_on_event_id"
+    t.index ["user_id", "event_id"], name: "index_event_participations_on_user_id_and_event_id", unique: true
+    t.index ["user_id"], name: "index_event_participations_on_user_id"
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.integer "business_address_id", null: false
+    t.datetime "created_at", null: false
+    t.text "description"
+    t.datetime "end_time"
+    t.string "name", null: false
+    t.integer "points_rewarded"
+    t.datetime "start_time", null: false
+    t.datetime "updated_at", null: false
+    t.index ["business_address_id"], name: "index_events_on_business_address_id"
   end
 
   create_table "friendships", force: :cascade do |t|
@@ -215,6 +237,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_15_000300) do
     t.string "first_name", limit: 30
     t.datetime "last_sign_in_at"
     t.string "last_sign_in_ip"
+    t.integer "points", default: 0, null: false
     t.datetime "remember_created_at"
     t.datetime "reset_password_sent_at"
     t.string "reset_password_token"
@@ -237,6 +260,9 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_15_000300) do
   add_foreign_key "cardapios", "business_addresses"
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
+  add_foreign_key "event_participations", "events"
+  add_foreign_key "event_participations", "users"
+  add_foreign_key "events", "business_addresses"
   add_foreign_key "friendships", "users"
   add_foreign_key "friendships", "users", column: "other_user_id"
   add_foreign_key "item_cardapio_comments", "item_cardapios"
