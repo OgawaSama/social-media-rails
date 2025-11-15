@@ -5,7 +5,7 @@
       <% @business_comments.each do |c| %>
         <li class="border rounded p-3">
           <p class="text-sm text-gray-600">Por: <%= c.user.email %> — <span class="font-semibold"><%= c.role.capitalize %></span> • <%= l(c.created_at, format: :short) %></p>
-          <div class="mt-2"><%= c.body.to_s.html_safe %></div>
+          <div class="mt-2"><%= c.body %></div>
           <% if c.user == current_user || current_user == @business.user %>
             <%= button_to "Remover", business_business_comment_path(@business, c), method: :delete, data: { confirm: "Confirma remoção?" }, class: "text-red-600 mt-2", form: { data: { turbo_frame: "business_comments_#{@business.id}" } } %>
           <% end %>
