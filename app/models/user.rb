@@ -13,6 +13,8 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :friendships, dependent: :destroy
   has_one :profile, dependent: :destroy
+  has_many :event_participations, dependent: :destroy
+  has_many :participated_events, through: :event_participations, source: :event
 
   # Sistema de grupos
   has_many :group_participations

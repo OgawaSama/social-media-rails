@@ -3,4 +3,5 @@ class BusinessAddress < ApplicationRecord
   validates :street, :city, :state, :zip, presence: true
 
   has_one :cardapio, dependent: :destroy
+  has_many :events, dependent: :destroy
 end

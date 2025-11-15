@@ -1,0 +1,27 @@
+<h2 class="text-xl font-bold mb-4">Eventos para este endereço</h2>
+<%= link_to "Novo Evento", new_business_business_address_event_path(@business_address.business, @business_address), class: "bg-blue-500 text-white px-4 py-2 rounded" %>
+
+<ul class="mt-4 space-y-4">
+  <% @events.each do |event| %>
+    <li class="p-4 bg-white rounded shadow">
+      <h3 class="text-lg font-semibold"><%= event.name %></h3>
+      <p><%= event.description %></p>
+      <p>Início: <%= l(event.start_time, format: :short) %></p>
+      <% if event.end_time %>
+        <p>Fim: <%= l(event.end_time, format: :short) %></p>
+      <% end %>
+      <% if event.points_rewarded.present? %>
+        <p>Pontos: <%= event.points_rewarded %></p>
+      <% end %>
+      <div class="mt-2">
+        <% if current_user == @business_address.business.user %>
+            <%= link_to "Editar", edit_business_business_address_event_path(@business_address.business, @business_address, event), class: "text-blue-600 underline" %> |
+            <%= button_to "Remover", business_business_address_event_path(@business_address.business, @business_address, event), method: :delete, data: { confirm: "Confirma remoção?" }, class: "text-red-600 underline" %> |
+        <% end %>
+        
+        <%= link_to "Detalhes", business_business_address_event_path(@business_address.business, @business_address, event), class: "text-green-600 underline" %>
+        
+      </div>
+    </li>
+  <% end %>
+</ul>

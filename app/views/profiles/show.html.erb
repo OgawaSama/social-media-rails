@@ -26,6 +26,10 @@
     <% end %>
   </div>
 
+  <div class="mt-4 p-6">
+    <h4 class="text-lg font-semibold">Pontos acumulados: <%= @profile.user.points %></h4>
+  </div>
+
   <% if current_user == @profile.user %>
     <div class="mt-6 flex justify-center">
       <%= link_to "Create new post", new_post_path, class: "bg-green-500 hover:bg-green-600 text-white font-semibold px-6 py-3 rounded-lg shadow transition duration-200" %>
