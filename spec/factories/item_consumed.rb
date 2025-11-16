@@ -3,7 +3,7 @@ FactoryBot.define do
     user
     sequence(:name) { |n| "item #{n}" }
     quantity { 1 }
-    type { :beer }
+    item_type { :Beer }
     brand { "杭州千岛湖啤酒有限公司" }
     date { 2.days.ago }
   end

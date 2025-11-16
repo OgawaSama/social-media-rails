@@ -7,14 +7,14 @@ RSpec.describe ItemConsumed, type: :model do
   end
 
   it "belongs to a user" do
-    expect(item.user).to eq(@user)
+    expect(@item.user).to eq(@user)
   end
 
   it "checks for valid quantity" do
-    expect(item.user).not_to be < 0
+    expect(@item.quantity).not_to be < 0
   end
 
   it "checks for valid date" do
-    expect(item.date).not_to be_nil
+    expect(@item.date).not_to be_nil
   end
 end

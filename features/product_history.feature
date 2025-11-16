@@ -4,7 +4,7 @@ Feature: Save past drinks and brands I've consumed
 Scenario: There are no drinks in history
     Given that I'm logged in
     When I check my drink history
-    Then I should see that there are 0 drinks
+    Then I should see no drinks
 
 Scenario: There are some drinks in my history
     Given that I'm logged in
@@ -14,7 +14,7 @@ Scenario: There are some drinks in my history
 
 Scenario: I delete an item from my history
     Given that I'm logged in
-    When I add 1 drink to my drink history
+    When I add 1 drinks to my drink history
     And I remove a drink from my drink history
     And I check my drink history
-    Then I should see that there are 0 drinks
+    Then I should see no drinks

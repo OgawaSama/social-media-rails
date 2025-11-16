@@ -1,0 +1,41 @@
+<%= form_with(model: item_consumed, url: add_item_consumed_path, local: true, class: "space-y-8") do |form| %>
+    <% if item_consumed.errors.any? %>
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+        <h2 class="font-semibold mb-2"><%= pluralize(item_consumed.errors.count, "error") %> proibiu este item de ser salvo:</h2>
+        <ul class="list-disc list-inside space-y-1">
+            <% item_consumed.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+            <% end %>
+        </ul>
+        </div>
+    <% end %>
+
+    <div>
+        <%= form.label "Nome", class: "block text-gray-700 font-medium mb-1" %>
+        <%= form.text_field :name, class: "w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+    </div>
+
+    <div>
+        <%= form.label "Tipo", class: "block text-gray-700 font-medium mb-1" %>
+        <%= form.select :item_type, options_for_select(ItemConsumed.item_types.keys.map { |k| [k.humanize] }) , class: "w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+    </div>
+
+    <div>
+        <%= form.label "Quantidade", class: "block text-gray-700 font-medium mb-1" %>
+        <%= form.number_field :quantity, direct_upload: true, class: "w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+    </div>
+
+    <div>
+        <%= form.label "Marca", class: "block text-gray-700 font-medium mb-1" %>
+        <%= form.text_field :brand, class: "w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+    </div>
+
+    <div>
+        <%= form.label "Data de Consumo", class: "block text-gray-700 font-medium mb-1" %>
+        <%= form.date_field :date, class: "w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+    </div>
+
+    <div>
+        <%= form.submit "Confirmar", class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-2 rounded shadow transition duration-200" %>
+    </div>
+<% end %>

@@ -24,6 +24,7 @@
     <% if @profile.user.type == "BusinessUser" %>
       <%= link_to "Empresa", business_path(@profile), class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded shadow transition duration-200" %>
     <% end %>
+    <%= link_to "Histórico de Items", items_consumed_index_path(user_id: @profile.user.id), class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded shadow transition duration-200" %>
   </div>
 
   <div class="mt-4 p-6">

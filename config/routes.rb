@@ -18,6 +18,9 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :items_consumed
+  post :add_item_consumed, to: "items_consumed#create", as: "add_item_consumed"
+
   # Rota para remover imagem de um post
   delete "remove_image/:signed_id", to: "posts#remove_image", as: :remove_image
 
