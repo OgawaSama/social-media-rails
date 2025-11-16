@@ -1,0 +1,38 @@
+<div class="pt-24 max-w-3xl mx-auto px-4">
+  <h1 class="text-3xl font-bold mb-6 text-center">Results for shops with items matching "<%= @query %>"</h1>
+    <% if @shops.any? %>
+        <ul class="space-y-4">
+            <% @shops.each do |shop| %>
+                <div id="shop-item">
+                    <li class="flex items-center justify-between">
+                        <div class="flex items-center space-x-3">
+                            <p class="font-bold" ><%= shop.company_name %>  </p> 
+                            <p class="text-grey">Rating: <%= shop.rating %>/5 </p>
+                            <% if shop.business_addresses.any? %>
+                                <% shop.business_addresses.each do |address| %>
+                                    <li class="p-4 bg-white rounded shadow flex justify-between items-center">
+                                    <div>
+                                        <%= address.street %>, <%= address.city %> - <%= address.state %> (CEP: <%= address.zip %>)
+                                    </div>
+                                    <div class="space-x-2">
+                                        <% if address.cardapio.present? %>
+                                            <%= link_to "See Menu", business_business_address_cardapio_path(shop, address), class: "bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded" %>
+                                        <% else %>
+                                            <p> No menus registered. </p>
+                                        <% end %>
+                                    </div>
+                                    </li>
+                                <% end %>  
+                            <% else %>
+                                <p> Shop has no addresses registered. </p>
+                            <% end %>
+                        </div>
+                    </li>
+                    <br>
+                <% end %>
+            </div>
+        </ul>
+    <% else %>
+        <p class="text-center text-gray-500 mt-12"> No shops found. </p> <!-- matching <query> -->
+    <% end %>
+</div>

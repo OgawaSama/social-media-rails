@@ -4,8 +4,7 @@ class Business < ApplicationRecord
   has_many :business_addresses, dependent: :destroy
   accepts_nested_attributes_for :business_addresses, allow_destroy: true
 
-  has_one :cardapio, dependent: :destroy
-  accepts_nested_attributes_for :cardapio
+  has_many :rates, dependent: :destroy
 
   validates :company_name, :cnpj, presence: true
   validate :cnpj_valido_simples

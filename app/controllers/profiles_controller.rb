@@ -31,14 +31,22 @@ class ProfilesController < ApplicationController
   def edit
   end
 
-  # PATCH/PUT /profiles/1
-  def update
-    if @profile.update(profile_params)
-      redirect_to @profile, notice: "Profile was successfully updated!"
-    else
-      render :edit
-    end
+# PATCH/PUT /profiles/1
+# app/controllers/profiles_controller.rb
+def update
+  if @profile.update(profile_params)
+    redirect_to @profile, notice: "Profile was successfully updated!"
+  else
+    flash.now[:alert] = @profile.errors.full_messages.to_sentence
+    render :edit, status: :unprocessable_entity
   end
+  rescue ActiveSupport::MessageVerifier::InvalidSignature
+    redirect_to edit_profile_path(@profile), alert: "O arquivo enviado é inválido."
+  rescue => e
+    Rails.logger.error("Erro ao atualizar perfil: #{e.message}")
+    redirect_to edit_profile_path(@profile), alert: "Ocorreu um erro ao atualizar o perfil. Tente novamente."
+  end
+
 
   # DELETE /profiles/1
   def destroy
@@ -53,6 +61,6 @@ class ProfilesController < ApplicationController
   end
 
   def profile_params
-    params.require(:profile).permit(:bio, :header, :avatar)
+    params.require(:profile).permit(:bio, :header, :avatar).delete_if { |k, v| v.blank? }
   end
 end

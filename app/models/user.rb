@@ -18,6 +18,15 @@ class User < ApplicationRecord
   has_many :group_participations
   has_many :groups, through: :group_participations
 
+  # Sistema de roles
+  has_many :created_events, class_name: 'Event', as: :creator
+  has_many :availabilities
+  has_many :event_invitations, as: :invitee
+  has_many :invited_events, through: :event_invitations, source: :event
+
+  # Sistema de avaliação de empresa    sim o nome ficou ruim...  :/
+  has_many :rates
+
   # Sistema de Followers/Following
   has_many :active_relationships, class_name: "Relationship",
                                   foreign_key: "follower_id",
@@ -29,12 +38,6 @@ class User < ApplicationRecord
   has_many :followers, through: :passive_relationships, source: :follower
 
   after_create :create_user_profile
-
-  # Sistema de marcar rolês
-  has_many :created_events, class_name: 'Event', as: :creator
-  has_many :availabilities
-  has_many :event_invitations, as: :invitee
-  has_many :invited_events, through: :event_invitations, source: :event
 
   # Método para decidir dono do grupo
   def owned_events

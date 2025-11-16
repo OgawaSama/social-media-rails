@@ -33,13 +33,29 @@
 
     <div id="preview_images" class="grid grid-cols-3 gap-2 mt-2">
       <% post.images.each do |image| %>
-        <div class="relative">
-          <%= image_tag image.variant(resize_to_limit: [150,150]), class: "w-full h-24 object-cover rounded" %>
-          <%= button_to "×", remove_image_path(post, image.signed_id), method: :delete, data: { confirm: "Tem certeza?" }, class: "absolute top-1 right-1 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm" %>
-        </div>
-      <% end %>
+      <div class="relative">
+        <% if image.variable? %>
+           <%#= image_tag image.variant(resize_to_limit: [150,150]), class: "w-full h-24 object-cover rounded" %>
+          <%= image_tag image, class: "w-full h-24 object-cover rounded"%>
+        <% else %>
+          <p class="text-red-500 text-sm">Arquivo inválido (tipo: <%= image.content_type %>)</p>
+        <% end %>
+      </div>
+    <% end %>
     </div>
   </div>
+
+  <% if @post.errors.any? %>
+  <div class="bg-red-100 text-red-700 p-3 rounded mb-4">
+    <strong><%= pluralize(@post.errors.count, "erro") %> impedem o post de ser salvo:</strong>
+    <ul class="list-disc ml-5">
+      <% @post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 
   <div>
     <%= form.submit "Save Post", class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-3 rounded-lg shadow-lg transition duration-200" %>

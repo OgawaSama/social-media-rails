@@ -5,8 +5,8 @@ class Post < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :reactions, dependent: :destroy
 
-  validates :images, content_type: { in: [ :png, :jpeg ], spoofing_protection: true }
-
+  # Validação dos tipos de arquivo
+  validate :acceptable_images
 
   # Redimensiona imagens após criar ou atualizar o post
   attr_accessor :resizing_images
@@ -28,6 +28,19 @@ class Post < ApplicationRecord
   end
 
   private
+
+  def acceptable_images
+    return unless images.attached?
+
+    images.each do |image|
+      unless image.content_type.in?(%w[image/jpeg image/png image/gif video/mp4 video/mpeg video/quicktime])
+        errors.add(:images, "precisam ser JPEG, PNG, GIF ou vídeo (MP4, MPEG, MOV)")
+        image.purge # remove o arquivo inválido antes de tentar mostrar
+      end
+    end
+  end
+
+
 
   def resize_images_later
     images.each do |image|

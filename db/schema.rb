@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_10_30_053355) do
+ActiveRecord::Schema[8.1].define(version: 2025_11_02_221629) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -73,17 +73,18 @@ ActiveRecord::Schema[8.1].define(version: 2025_10_30_053355) do
     t.string "cnpj"
     t.string "company_name"
     t.datetime "created_at", null: false
+    t.float "rating", default: 0.0
     t.datetime "updated_at", null: false
     t.integer "user_id", null: false
     t.index ["user_id"], name: "index_businesses_on_user_id"
   end
 
   create_table "cardapios", force: :cascade do |t|
-    t.integer "business_id", null: false
+    t.integer "business_address_id"
     t.datetime "created_at", null: false
     t.string "titulo"
     t.datetime "updated_at", null: false
-    t.index ["business_id"], name: "index_cardapios_on_business_id"
+    t.index ["business_address_id"], name: "index_cardapios_on_business_address_id"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -173,6 +174,29 @@ ActiveRecord::Schema[8.1].define(version: 2025_10_30_053355) do
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
+  create_table "promocaos", force: :cascade do |t|
+    t.integer "cardapio_id", null: false
+    t.datetime "created_at", null: false
+    t.decimal "desconto", precision: 5, scale: 2
+    t.text "descricao"
+    t.integer "item_cardapio_id", null: false
+    t.string "titulo"
+    t.datetime "updated_at", null: false
+    t.index ["cardapio_id"], name: "index_promocaos_on_cardapio_id"
+    t.index ["item_cardapio_id"], name: "index_promocaos_on_item_cardapio_id"
+  end
+
+  create_table "rates", force: :cascade do |t|
+    t.integer "business_id"
+    t.datetime "created_at", null: false
+    t.integer "rating"
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.index ["business_id"], name: "index_rates_on_business_id"
+    t.index ["user_id", "business_id"], name: "index_rates_on_user_id_and_business_id", unique: true
+    t.index ["user_id"], name: "index_rates_on_user_id"
+  end
+
   create_table "reactions", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "name"
@@ -230,7 +254,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_10_30_053355) do
   add_foreign_key "availabilities", "users"
   add_foreign_key "business_addresses", "businesses"
   add_foreign_key "businesses", "users"
-  add_foreign_key "cardapios", "businesses"
+  add_foreign_key "cardapios", "business_addresses"
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
   add_foreign_key "event_invitations", "events"
@@ -239,6 +263,8 @@ ActiveRecord::Schema[8.1].define(version: 2025_10_30_053355) do
   add_foreign_key "item_cardapios", "cardapios"
   add_foreign_key "posts", "users"
   add_foreign_key "profiles", "users"
+  add_foreign_key "promocaos", "cardapios"
+  add_foreign_key "promocaos", "item_cardapios"
   add_foreign_key "reactions", "posts"
   add_foreign_key "reactions", "users"
   add_foreign_key "relationships", "users", column: "followed_id"

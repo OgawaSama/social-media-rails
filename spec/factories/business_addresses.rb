@@ -5,5 +5,8 @@ FactoryBot.define do
     city { "Sao Paulo" }
     state { "Sao Paulo" }
     zip { "0140-001" }
+    after(:create) do |business_address|
+      create(:cardapio, business_address: business_address)
+    end
   end
 end
