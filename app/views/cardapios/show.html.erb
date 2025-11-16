@@ -7,8 +7,27 @@
       <li class="p-4 bg-white rounded shadow">
         <div class="flex justify-between items-center">
           <span>
-            <%= item.nome %> - R$ <%= number_with_precision(item.preco, precision: 2, separator: ",") %> (<%= item.tipo == 0 ? "Comida" : "Bebida" %>)
+            <%= item.nome %> - R$ <%= number_with_precision(item.preco, precision: 2, separator: ",") %> (<%= item.tipo == 0 ? "Comida" : "Bebida" %>) | Avaliação: 
+            <% if item.rating.present? && item.rating > 0 %>
+              <%= number_with_precision(item.rating, precision: 1) %>/5
+            <% else %>
+              Sem avaliações
+            <% end %>
           </span>
+        </div>
+        <div class="mt-2">
+          <% if user_signed_in? %>
+            <%= form_with url: add_item_rating_path, method: :post, local: true do |f| %>
+              <%= f.hidden_field :id, value: item.id %>
+              <div class="flex items-center gap-2">
+                <label for="rating_<%= item.id %>" class="text-sm">Sua avaliação:</label>
+                <%= f.select :rating, [["Selecione...", ""], ["1 - Ruim", 1], ["2 - Não recomendo", 2], ["3 - Normal", 3], ["4 - Bom", 4], ["5 - Excelente", 5]], { class: "p-1 border rounded" }, id: "rating_#{item.id}" %>
+                <%= f.submit "Avaliar", class: "bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded text-sm" %>
+              </div>
+            <% end %>
+          <% else %>
+            <p class="text-sm text-gray-600">Faça login para avaliar este item.</p>
+          <% end %>
         </div>
         <div class="mt-3">
           <%= link_to 'Ver comentários', business_business_address_cardapio_item_cardapio_comments_path(@cardapio.business_address.business, @cardapio.business_address, @cardapio, item_cardapio_id: item.id), data: { turbo_frame: "item_comments_#{item.id}" }, class: 'text-blue-600 underline' %>

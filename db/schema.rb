@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_11_15_232528) do
+ActiveRecord::Schema[8.1].define(version: 2025_11_16_105150) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -162,9 +162,21 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_15_232528) do
     t.text "descricao"
     t.string "nome"
     t.decimal "preco"
+    t.float "rating", default: 0.0
     t.integer "tipo"
     t.datetime "updated_at", null: false
     t.index ["cardapio_id"], name: "index_item_cardapios_on_cardapio_id"
+  end
+
+  create_table "item_rates", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "item_cardapio_id", null: false
+    t.integer "rating"
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["item_cardapio_id"], name: "index_item_rates_on_item_cardapio_id"
+    t.index ["user_id", "item_cardapio_id"], name: "index_item_rates_on_user_id_and_item_cardapio_id", unique: true
+    t.index ["user_id"], name: "index_item_rates_on_user_id"
   end
 
   create_table "items_consumed", force: :cascade do |t|
@@ -280,6 +292,8 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_15_232528) do
   add_foreign_key "item_cardapio_comments", "item_cardapios"
   add_foreign_key "item_cardapio_comments", "users"
   add_foreign_key "item_cardapios", "cardapios"
+  add_foreign_key "item_rates", "item_cardapios"
+  add_foreign_key "item_rates", "users"
   add_foreign_key "items_consumed", "users"
   add_foreign_key "posts", "users"
   add_foreign_key "profiles", "users"
