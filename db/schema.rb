@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_11_15_002100) do
+ActiveRecord::Schema[8.1].define(version: 2025_11_15_232528) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -167,6 +167,18 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_15_002100) do
     t.index ["cardapio_id"], name: "index_item_cardapios_on_cardapio_id"
   end
 
+  create_table "items_consumed", force: :cascade do |t|
+    t.string "brand"
+    t.datetime "created_at", null: false
+    t.date "date"
+    t.integer "item_type", default: 0
+    t.string "name"
+    t.integer "quantity", default: 1
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["user_id"], name: "index_items_consumed_on_user_id"
+  end
+
   create_table "posts", force: :cascade do |t|
     t.string "caption"
     t.integer "comments_count", default: 0, null: false
@@ -268,6 +280,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_15_002100) do
   add_foreign_key "item_cardapio_comments", "item_cardapios"
   add_foreign_key "item_cardapio_comments", "users"
   add_foreign_key "item_cardapios", "cardapios"
+  add_foreign_key "items_consumed", "users"
   add_foreign_key "posts", "users"
   add_foreign_key "profiles", "users"
   add_foreign_key "promocaos", "cardapios"

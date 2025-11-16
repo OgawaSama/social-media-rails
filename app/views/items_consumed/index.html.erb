@@ -1,0 +1,21 @@
+<div class="flex-column space-y-4">
+    <h1 class="text-xl font-bold"> Histórico de items do <%= @user.username %> </h1>
+
+    <div class="mt-4">
+        <p>
+        <% if @user == current_user %>
+            <%= link_to "Adicionar novo item", new_items_consumed_path, class: "bg-green-500 hover:bg-green-600 text-white font-semibold px-3 py-3 rounded-lg shadow transition duration-200"%>
+        <% end %>
+        </p>
+    </div>
+
+    <div class="mt-4">
+        <% if @items.any? %>
+            <h3 id="item_consumed">
+                <%= render partial: "item", collection: @items, as: :item %>
+            </h3>
+        <% else %>
+            <p class="text-gray-500 italic">Nenhum item ainda.</p>
+        <% end %>
+    </div>
+</div>

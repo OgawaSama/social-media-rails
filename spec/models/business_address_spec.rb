@@ -45,6 +45,6 @@ RSpec.describe BusinessAddress, type: :model do
    it "checks for cardapio presence" do
     cardapio = create(:cardapio, business_address: @business_address)
 
-    expect(@business_address.cardapios).to include(cardapio)
+    expect(@business_address).to have_one(:cardapio)
   end
 end

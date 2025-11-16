@@ -1,0 +1,13 @@
+<% content_for :title, "Novo item" %>
+
+<div class="min-h-screen flex flex-col items-center bg-gray-50 py-12">
+  <h1 class="text-3xl font-bold text-blue-600 mb-8">Novo item</h1>
+
+  <div class="bg-white shadow-md rounded-lg p-8 w-full max-w-lg mb-6">
+    <%= render "form", item_consumed: @item %>
+  </div>
+
+  <div>
+    <%= link_to "Back to feed", feed_path, class: "text-gray-600 hover:text-gray-800 font-semibold" %>
+  </div>
+</div>

@@ -16,6 +16,8 @@ class User < ApplicationRecord
   has_many :event_participations, dependent: :destroy
   has_many :participated_events, through: :event_participations, source: :event
 
+  has_many :items_consumed, class_name: "ItemConsumed"
+
   # Sistema de grupos
   has_many :group_participations
   has_many :groups, through: :group_participations

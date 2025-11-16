@@ -1,0 +1,11 @@
+<div class="border rounded-lg mt-2">
+    <p class="font-bold"> <%= item.name %></p>
+    <p> <%= item.quantity %> comprados</p>
+    <p class="text-gray-600"> <%= item.item_type.titleize %></p>
+    <p class="text-gray-600"> Feito por <%= item.brand %> </p>
+    <p class="text-gray-600"> Última vez comprado: <%= time_tag item.date, class: "text-gray-500" %> </p>
+
+    <% if current_user == item.user %>
+        <%= button_to "EXCLUIR ITEM", item, method: :delete, id: "remove_item", class: "bg-red-500 px-4 py-1 text-white underline underline-offset-3", data: { confirm: "Are you sure?" } %>
+    <% end %>
+</div>
