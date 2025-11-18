@@ -36,13 +36,12 @@ class Profile < ApplicationRecord
     end
   end
 
-  def resize_attachments_later
+def resize_attachments_later
     [ avatar, header ].each do |attachment|
       next unless attachment.attached?
       next unless attachment.variable?
       next unless attachment.blob.saved_change_to_id?
-
-      ResizeProfileImageJob.perform_later(attachment)
+      ResizeProfileImageJob.perform_later(attachment.blob)
     end
   end
 end

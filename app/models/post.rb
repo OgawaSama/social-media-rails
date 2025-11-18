@@ -41,16 +41,11 @@ class Post < ApplicationRecord
     end
   end
 
-  # --- MÉTODO CORRIGIDO ---
-  def resize_images_later
+def resize_images_later
     images.each do |image|
-      next unless image.variable? # É processável?
-
-      # A mesma verificação chave: só processa se o blob for novo.
+      next unless image.variable?
       next unless image.blob.saved_change_to_id?
-
-      # O teu código aqui já estava correto ao passar `image`
-      ResizeImageJob.perform_later(image)
+      ResizeImageJob.perform_later(image.blob)
     end
   end
 end
