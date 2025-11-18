@@ -2,30 +2,23 @@
 class ResizeImageJob < ApplicationJob
   queue_as :default
 
-  def perform(blob)
-    return unless blob.variable?
+  # Recebe um ActiveStorage::Attachment
+  def perform(image_attachment)
+    # Define os tamanhos que queres pré-processar para Posts
+    variants_to_process = {
+      thumb: { resize_to_limit: [ 200, 200 ] },
+      medium: { resize_to_limit: [ 800, 800 ] }
+    }
 
-    tempfile = Tempfile.new([ "original", File.extname(blob.filename.to_s) ])
-    tempfile.binmode
-    tempfile.write(blob.download)
-    tempfile.rewind
+    Rails.logger.info "ResizeImageJob: Processing variants for Attachment #{image_attachment.id}..."
 
-    resized = ImageProcessing::MiniMagick
-                .source(tempfile)
-                .resize_to_limit(1000, 1000)
-                .call
+    variants_to_process.each do |key, transformations|
+      # A mesma lógica: processa a variante, não toca no modelo.
+      image_attachment.variant(transformations).processed
+      Rails.logger.info "ResizeImageJob: Variant ':#{key}' processed."
+    end
 
-    # reanexa a imagem sem disparar callbacks
-    record = blob.attachments.first.record
-    name   = blob.attachments.first.name
-    record.public_send(name).detach
-    record.public_send(name).attach(
-      io: File.open(resized.path),
-      filename: blob.filename.to_s,
-      content_type: blob.content_type
-    )
-
-    tempfile.close
-    tempfile.unlink
+  rescue ActiveStorage::IntegrityError
+    Rails.logger.warn "ResizeImageJob: Failed to process attachment #{image_attachment.id} (IntegrityError). File may be missing."
   end
 end

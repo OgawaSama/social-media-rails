@@ -1,23 +1,21 @@
 class ResizeProfileImageJob < ApplicationJob
   queue_as :default
 
-  def perform(blob_id)
-    blob = ActiveStorage::Blob.find(blob_id)
-    attachment = blob.attachments.first
+  def perform(attachment)
+    variants_to_process = {
+      thumb: { resize_to_limit: [ 150, 150 ] },
+      large: { resize_to_limit: [ 1024, 1024 ] }
+    }
 
-    return unless attachment&.attached?
+    Rails.logger.info "ResizeProfileImageJob: Processing variants for Attachment #{attachment.id}..."
 
-    resized = ImageProcessing::MiniMagick
-      .source(blob.download)
-      .resize_to_limit(800, 800)
-      .call
+    variants_to_process.each do |key, transformations|
+      attachment.variant(transformations).processed
 
-    attachment.attach(
-      io: File.open(resized.path),
-      filename: blob.filename.to_s,
-      content_type: blob.content_type
-    )
+      Rails.logger.info "ResizeProfileImageJob: Variant ':#{key}' processed."
+    end
 
-    resized.close!
+  rescue ActiveStorage::IntegrityError
+    Rails.logger.warn "ResizeProfileImageJob: Failed to process attachment #{attachment.id} (IntegrityError). File may be missing."
   end
 end

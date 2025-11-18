@@ -22,7 +22,6 @@ class Profile < ApplicationRecord
 
       unless attachment.content_type.in?(%w[image/jpeg image/png image/gif video/mp4 video/mpeg video/quicktime])
         errors.add(:base, "Os arquivos do perfil devem ser JPEG, PNG, GIF ou vídeo (MP4, MPEG, MOV)")
-
         attachment.instance_variable_set(:@should_purge, true)
       end
     end
@@ -33,7 +32,6 @@ class Profile < ApplicationRecord
   def purge_invalid_attachments
     [ avatar, header ].each do |attachment|
       next unless attachment.attached? && attachment.instance_variable_get(:@should_purge)
-
       attachment.purge
     end
   end
@@ -42,9 +40,9 @@ class Profile < ApplicationRecord
     [ avatar, header ].each do |attachment|
       next unless attachment.attached?
       next unless attachment.variable?
-      next unless attachment.blob.present? && attachment.blob.service.exist?(attachment.key)
+      next unless attachment.blob.saved_change_to_id?
 
-      ResizeProfileImageJob.perform_later(attachment.blob.id)
+      ResizeProfileImageJob.perform_later(attachment)
     end
   end
 end

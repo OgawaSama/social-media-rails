@@ -5,11 +5,12 @@ class Post < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :reactions, dependent: :destroy
 
-  # Validação dos tipos de arquivo
   validate :acceptable_images
 
-  # Redimensiona imagens após criar ou atualizar o post
   attr_accessor :resizing_images
+  def resizing_images?
+    @resizing_images == true
+  end
 
   after_commit :resize_images_later, on: :create, if: -> { images.attached? }
   def resizing_images?
@@ -40,11 +41,15 @@ class Post < ApplicationRecord
     end
   end
 
-
-
+  # --- MÉTODO CORRIGIDO ---
   def resize_images_later
     images.each do |image|
-      next unless image.variable?
+      next unless image.variable? # É processável?
+
+      # A mesma verificação chave: só processa se o blob for novo.
+      next unless image.blob.saved_change_to_id?
+
+      # O teu código aqui já estava correto ao passar `image`
       ResizeImageJob.perform_later(image)
     end
   end
