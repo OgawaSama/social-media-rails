@@ -50,9 +50,6 @@ jobs:
           ruby-version: .ruby-version
           bundler-cache: true
   
-      - name: AutoCorrect
-        uses: huacnlee/autocorrect-action@main
-  
       - name: Lint code for consistent style
         run: bin/rubocop -f github
 
