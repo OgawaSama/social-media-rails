@@ -1,8 +1,24 @@
 <div class="max-w-4xl mx-auto mt-12 bg-gray-100 shadow-md rounded-lg p-6 space-y-6">
 
-  <h1 class="text-2xl font-bold mb-2"><%= @business.company_name %></h1>
-  <p class="text-l font-bold mb-4">Rating: <%= @business.rating %>/5</p>
-  <p class="text-gray-700 mb-2">CNPJ: <%= @business.cnpj %></p>
+  <div class="flex justify-between items-start">
+    <div>
+      <h1 class="text-2xl font-bold mb-2"><%= @business.company_name %></h1>
+      <p class="text-gray-700 mb-2">
+        <span class="font-semibold">Tipo:</span> 
+        <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm">
+          <%= @business.business_type.humanize %>
+        </span>
+      </p>
+      <p class="text-l font-bold mb-4">Rating: <%= @business.rating %>/5</p>
+      <p class="text-gray-700 mb-2">CNPJ: <%= @business.cnpj %></p>
+    </div>
+    
+    <% if current_user != @business.user %>
+      <div id="follow-business-button-<%= @business.id %>">
+        <%= render 'business_relationships/follow_button', business: @business %>
+      </div>
+    <% end %>
+  </div>
 
   <div class="mt-6">
     <%= link_to 'Ver comentários', business_business_comments_path(@business), data: { turbo_frame: "business_comments_#{@business.id}" }, class: 'text-blue-600 underline' %>
@@ -10,7 +26,6 @@
     <%= turbo_frame_tag "business_comments_#{@business.id}" do %>
     <% end %>
   </div>
-
 
   <h2 class="text-xl font-semibold mb-2 flex justify-between items-center">
     Endereços
@@ -25,7 +40,6 @@
       <%= button_to "4", add_rating_path(id: @business.id, rating: 4), method: :post, id: "rating-4", class: "bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded" %>
       <%= button_to "5", add_rating_path(id: @business.id, rating: 5), method: :post, id: "rating-5", class: "bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded" %>
     </div>
-    <%# <p class="text-l-gray-700 mb-2">Your rating here: <%= %>
   <% end %>
 
   <% if @addresses.any? %>

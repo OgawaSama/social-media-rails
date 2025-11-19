@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :businesses, only: [ :new, :create, :edit, :update, :show ] do
+  resources :businesses, only: [ :index, :new, :create, :edit, :update, :show ] do
     resources :business_comments, only: [ :create, :index, :destroy ]
     resources :business_addresses do
       resources :events do
@@ -9,7 +9,14 @@ Rails.application.routes.draw do
         resources :item_cardapio_comments, only: [ :create, :index, :destroy ]
       end
     end
+    
+    # Rotas para seguir/deixar de seguir bares
+    member do
+      post :follow, to: "business_relationships#create"
+      delete :unfollow, to: "business_relationships#destroy"
+    end
   end
+  
   resources :profiles
   resources :posts, only: [ :show, :new, :edit, :create, :update, :destroy ] do
     scope module: :posts do
@@ -27,23 +34,23 @@ Rails.application.routes.draw do
   resources :groups
   resources :friendships
   resources :relationships, only: [ :create, :destroy ]
-
-
+  resources :business_relationships, only: [ :create, :destroy ]
 
   devise_for :users, controllers: {
     sessions: "users/sessions",
     registrations: "users/registrations"
   }
 
-  # Rotas para followers/following
+
+  # Rotas para followers/following de usuários
   resources :users, only: [] do
     member do
       get :followers
       get :following
       post :follow, to: "relationships#create"
       delete :unfollow, to: "relationships#destroy"
-
       get :groups
+      get :following_businesses
     end
   end
 
@@ -60,6 +67,7 @@ Rails.application.routes.draw do
 
   get "feed/search", to: "feed#search", as: "search_users"
   get "feed/search_shops", to: "feed#search_shops", as: "search_shops"
+  get "feed/search_bars", to: "feed#search_bars", as: "search_bars"
 
   authenticated :user do
     root to: "feed#show", as: :authenticated_user_root

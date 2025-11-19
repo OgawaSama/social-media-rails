@@ -7,7 +7,8 @@ class User < ApplicationRecord
   # Restrict unique attributes
   validates :username, uniqueness: { case_sensitive: false }
   validates :email, uniqueness: { case_sensitive: false }
-
+  
+  has_one :business, dependent: :destroy
   has_many :posts, dependent: :destroy
   has_many :reactions, dependent: :destroy
   has_many :comments, dependent: :destroy
@@ -22,10 +23,10 @@ class User < ApplicationRecord
   has_many :group_participations
   has_many :groups, through: :group_participations
 
-  # Sistema de avaliação de empresa    sim o nome ficou ruim...  :/
+  # Sistema de avaliação de empresa
   has_many :rates
 
-  # Sistema de Followers/Following
+  # Sistema de Followers/Following para usuários
   has_many :active_relationships, class_name: "Relationship",
                                   foreign_key: "follower_id",
                                   dependent: :destroy
@@ -35,6 +36,22 @@ class User < ApplicationRecord
   has_many :following, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
 
+  # Sistema de Followers/Following para bares
+  has_many :active_business_relationships, class_name: "BusinessRelationship",
+                                          foreign_key: "follower_id",
+                                          dependent: :destroy,
+                                          as: :follower
+  has_many :passive_business_relationships, class_name: "BusinessRelationship",
+                                           foreign_key: "followed_id",
+                                           dependent: :destroy,
+                                           as: :followed
+  has_many :following_businesses, through: :active_business_relationships, 
+                                 source: :followed, 
+                                 source_type: 'Business'
+  has_many :business_followers, through: :passive_business_relationships, 
+                               source: :follower, 
+                               source_type: 'User'
+
   after_create :create_user_profile
 
   # Método para decidir dono do grupo
@@ -42,7 +59,7 @@ class User < ApplicationRecord
     group_participations.ownerships.map(&:group)
   end
 
-  # Métodos para seguir/deixar de seguir
+  # Métodos para seguir/deixar de seguir usuários
   def follow(other_user)
     following << other_user unless self == other_user || following?(other_user)
   end
@@ -55,9 +72,27 @@ class User < ApplicationRecord
     following.include?(other_user)
   end
 
+  # Métodos para seguir/deixar de seguir bares
+  def follow_business(business)
+    following_businesses << business unless following_business?(business)
+  end
+
+  def unfollow_business(business)
+    following_businesses.delete(business)
+  end
+
+  def following_business?(business)
+    following_businesses.include?(business)
+  end
+
   def feed
-    # Posts do usuário + posts de quem ele segue
-    Post.where(user_id: following_ids + [ id ]).order(created_at: :desc)
+    # Posts do usuário + posts de quem ele segue + posts dos bares que segue
+    following_user_ids = following_ids + [id]
+    following_business_user_ids = following_businesses.pluck(:user_id)
+    
+    all_user_ids = following_user_ids + following_business_user_ids
+    
+    Post.where(user_id: all_user_ids.uniq).order(created_at: :desc)
   end
 
   validates :username, length: { maximum: 30 }
