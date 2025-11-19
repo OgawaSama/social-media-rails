@@ -28,7 +28,7 @@ class Business < ApplicationRecord
   scope :bars, -> { where(business_type: "bar") }
   scope :by_type, ->(type) { where(business_type: type) }
   scope :search, ->(query) {
-    where("company_name LIKE ? OR business_type LIKE ?", "%#{query}%", "%#{query}%") 
+    where("company_name LIKE ? OR business_type LIKE ?", "%#{query}%", "%#{query}%")
   }
 
   # Validações
@@ -55,16 +55,16 @@ class Business < ApplicationRecord
   end
 
   def bar?
-    business_type == 'bar'
+    business_type == "bar"
   end
 
   def humanized_business_type
     case business_type
-    when 'bar' then 'Bar'
-    when 'restaurant' then 'Restaurante'
-    when 'cafe' then 'Café'
-    when 'store' then 'Loja'
-    when 'other' then 'Outro'
+    when "bar" then "Bar"
+    when "restaurant" then "Restaurante"
+    when "cafe" then "Café"
+    when "store" then "Loja"
+    when "other" then "Outro"
     else business_type.humanize
     end
   end
