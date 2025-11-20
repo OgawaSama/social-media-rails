@@ -9,14 +9,14 @@ Rails.application.routes.draw do
         resources :item_cardapio_comments, only: [ :create, :index, :destroy ]
       end
     end
-    
+
     # Rotas para seguir/deixar de seguir bares
     member do
       post :follow, to: "business_relationships#create"
       delete :unfollow, to: "business_relationships#destroy"
     end
   end
-  
+
   resources :profiles
   resources :posts, only: [ :show, :new, :edit, :create, :update, :destroy ] do
     scope module: :posts do

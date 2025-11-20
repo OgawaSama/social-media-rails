@@ -7,7 +7,7 @@ class User < ApplicationRecord
   # Restrict unique attributes
   validates :username, uniqueness: { case_sensitive: false }
   validates :email, uniqueness: { case_sensitive: false }
-  
+
   has_one :business, dependent: :destroy
   has_many :posts, dependent: :destroy
   has_many :reactions, dependent: :destroy
@@ -45,12 +45,12 @@ class User < ApplicationRecord
                                            foreign_key: "followed_id",
                                            dependent: :destroy,
                                            as: :followed
-  has_many :following_businesses, through: :active_business_relationships, 
-                                 source: :followed, 
-                                 source_type: 'Business'
-  has_many :business_followers, through: :passive_business_relationships, 
-                               source: :follower, 
-                               source_type: 'User'
+  has_many :following_businesses, through: :active_business_relationships,
+                                 source: :followed,
+                                 source_type: "Business"
+  has_many :business_followers, through: :passive_business_relationships,
+                               source: :follower,
+                               source_type: "User"
 
   after_create :create_user_profile
 
@@ -87,11 +87,11 @@ class User < ApplicationRecord
 
   def feed
     # Posts do usuário + posts de quem ele segue + posts dos bares que segue
-    following_user_ids = following_ids + [id]
+    following_user_ids = following_ids + [ id ]
     following_business_user_ids = following_businesses.pluck(:user_id)
-    
+
     all_user_ids = following_user_ids + following_business_user_ids
-    
+
     Post.where(user_id: all_user_ids.uniq).order(created_at: :desc)
   end
 

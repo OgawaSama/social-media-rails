@@ -17,18 +17,18 @@ class Business < ApplicationRecord
                                            foreign_key: "followed_id",
                                            dependent: :destroy,
                                            as: :followed
-  has_many :followers, through: :passive_business_relationships, 
-                      source: :follower, 
-                      source_type: 'User'
-  has_many :following_businesses, through: :active_business_relationships, 
-                                 source: :followed, 
-                                 source_type: 'Business'
+  has_many :followers, through: :passive_business_relationships,
+                      source: :follower,
+                      source_type: "User"
+  has_many :following_businesses, through: :active_business_relationships,
+                                 source: :followed,
+                                 source_type: "Business"
 
   # Scopes para tipos de negócios
-  scope :bars, -> { where(business_type: 'bar') }
+  scope :bars, -> { where(business_type: "bar") }
   scope :by_type, ->(type) { where(business_type: type) }
-  scope :search, ->(query) { 
-    where("company_name LIKE ? OR business_type LIKE ?", "%#{query}%", "%#{query}%") 
+  scope :search, ->(query) {
+    where("company_name LIKE ? OR business_type LIKE ?", "%#{query}%", "%#{query}%")
   }
 
   # Validações
@@ -55,16 +55,16 @@ class Business < ApplicationRecord
   end
 
   def bar?
-    business_type == 'bar'
+    business_type == "bar"
   end
 
   def humanized_business_type
     case business_type
-    when 'bar' then 'Bar'
-    when 'restaurant' then 'Restaurante'
-    when 'cafe' then 'Café'
-    when 'store' then 'Loja'
-    when 'other' then 'Outro'
+    when "bar" then "Bar"
+    when "restaurant" then "Restaurante"
+    when "cafe" then "Café"
+    when "store" then "Loja"
+    when "other" then "Outro"
     else business_type.humanize
     end
   end
