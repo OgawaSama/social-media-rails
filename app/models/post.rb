@@ -28,6 +28,13 @@ class Post < ApplicationRecord
     body_chars > feed_body_count
   end
 
+  # Scope para posts de bares
+  scope :from_bars, -> {
+    joins(:user)
+      .where(users: { id: Business.select(:user_id) })
+      .includes(user: :businesses)
+  }
+
   private
 
   def acceptable_images
@@ -41,7 +48,7 @@ class Post < ApplicationRecord
     end
   end
 
-def resize_images_later
+  def resize_images_later
     images.each do |image|
       next unless image.variable?
       next unless image.blob.saved_change_to_id?

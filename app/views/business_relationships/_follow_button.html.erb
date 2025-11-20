@@ -1,0 +1,13 @@
+<div id="follow-business-button-<%= business.id %>">
+  <% if current_user.following_business?(business) %>
+    <%= button_to "Deixar de Seguir", unfollow_business_path(business), 
+                  method: :delete, 
+                  class: "bg-red-500 hover:bg-red-600 text-white font-semibold px-4 py-2 rounded-lg shadow transition duration-200",
+                  form: { data: { turbo_stream: true } } %>
+  <% else %>
+    <%= button_to "Seguir", follow_business_path(business), 
+                  method: :post, 
+                  class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded-lg shadow transition duration-200",
+                  form: { data: { turbo_stream: true } } %>
+  <% end %>
+</div>

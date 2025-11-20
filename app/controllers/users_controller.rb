@@ -15,4 +15,8 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @following = @user.following.includes(:profile)
   end
+   def following_businesses
+    @user = User.find(params[:id])
+    @following_businesses = @user.following_businesses.includes(:business_addresses, user: :profile)
+  end
 end
