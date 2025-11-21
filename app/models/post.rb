@@ -5,11 +5,12 @@ class Post < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :reactions, dependent: :destroy
 
-  # Validação dos tipos de arquivo
   validate :acceptable_images
 
-  # Redimensiona imagens após criar ou atualizar o post
   attr_accessor :resizing_images
+  def resizing_images?
+    @resizing_images == true
+  end
 
   after_commit :resize_images_later, on: :create, if: -> { images.attached? }
   def resizing_images?
@@ -50,7 +51,8 @@ class Post < ApplicationRecord
   def resize_images_later
     images.each do |image|
       next unless image.variable?
-      ResizeImageJob.perform_later(image)
+      next unless image.blob.saved_change_to_id?
+      ResizeImageJob.perform_later(image.blob)
     end
   end
 end
