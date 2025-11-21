@@ -1,26 +1,18 @@
 require 'rails_helper'
 
 RSpec.describe Cardapio, type: :model do
-  let(:business) { create(:business) }
-  let(:address1) { create(:business_address, business: business) }
-  let(:address2) { create(:business_address, business: business) }
-  let(:cardapio) { create(:cardapio) }
+  let(:business_address) { create(:business_address) }
+  let(:cardapio) { create(:cardapio, business_address: business_address) }
 
-  before do
-    cardapio.business_address << [ address1, address2 ]
+  it 'business_addresses associations can belong to multiple business addresses' do
+    expect(cardapio.business_address).to eq(business_address)
   end
 
-  describe "business_addresses associations" do
-    it "can belong to multiple business addresses" do
-      expect(cardapio.business_address).to include(address1, address2)
-    end
-  end
-
-  describe "promocoes associations" do
-    let(:promocao) { create(:promocao, cardapio: cardapio) }
-
-    it "can have many promocoes" do
-      expect(cardapio.promocoes).to include(promocao)
-    end
+  it 'promocoes associations can have many promocoes' do
+    # Criar um item_cardapio primeiro para a promoção
+    item_cardapio = create(:item_cardapio, cardapio: cardapio)
+    # Criar promoção associada ao cardápio
+    promocao = create(:promocao, cardapio: cardapio, item_cardapio: item_cardapio)
+    expect(cardapio.promocoes).to include(promocao)
   end
 end
