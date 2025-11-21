@@ -1,9 +1,9 @@
 FactoryBot.define do
   factory :item_cardapio do
-    cardapio
-    sequence(:nome) { |n| "item #{n}" }
-    sequence(:descricao) { |n| "Descrição do item #{n}" }
-    preco { 9.99 }
-    tipo { 0 }
+    nome { "Item Teste" }
+    descricao { "Descrição do item teste" }
+    preco { 25.50 }
+    tipo { 0 } # comida
+    association :cardapio
   end
 end
