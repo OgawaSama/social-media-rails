@@ -28,7 +28,12 @@ class Business < ApplicationRecord
   scope :bars, -> { where(business_type: "bar") }
   scope :by_type, ->(type) { where(business_type: type) }
   scope :search, ->(query) {
+    return all if query.blank?
+
     where("company_name LIKE ? OR business_type LIKE ?", "%#{query}%", "%#{query}%")
+      .or(where(id: BusinessAddress.joins(cardapio: :itens_cardapio)
+                                  .where("item_cardapios.nome LIKE ?", "%#{query}%")
+                                  .select(:business_id)))
   }
 
   # Validações
