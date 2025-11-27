@@ -12,6 +12,7 @@
       <%= link_to "Edit account", edit_user_registration_path, class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded shadow transition duration-200" %>
       <%= link_to "Edit profile", edit_profile_path(@profile), class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded shadow transition duration-200" %>
       <%= link_to "Meus grupos", groups_user_path(current_user), class: "bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold px-4 py-2 rounded shadow transition duration-200" %>
+      <%= link_to "Bares que sigo", following_businesses_user_path(current_user), class: "bg-green-500 hover:bg-green-600 text-white font-semibold px-4 py-2 rounded shadow transition duration-200" %>
     </div>
     <% if user_signed_in? && current_user.type != "BusinessUser" %>
       <div class="mt-4 p-6">
@@ -21,8 +22,8 @@
   <% end %>
   
   <div class="mt-4 p-6">
-    <% if @profile.user.type == "BusinessUser" %>
-      <%= link_to "Empresa", business_path(@profile), class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded shadow transition duration-200" %>
+    <% if @profile.user.type == "BusinessUser" && @profile.user.business %>
+      <%= link_to "Empresa", business_path(@profile.user.business), class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded shadow transition duration-200" %>
     <% end %>
     <%= link_to "Histórico de Items", items_consumed_index_path(user_id: @profile.user.id), class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded shadow transition duration-200" %>
   </div>

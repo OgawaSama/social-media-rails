@@ -14,6 +14,21 @@
     <%= f.text_field :cnpj, class: "input", placeholder: "00.000.000/0001-00" %>
   </div>
 
+  <div>
+    <%= f.label :business_type, "Tipo de Empresa", class: "block font-semibold mb-1" %>
+    <%= f.select :business_type, 
+          [
+            ['Bar', 'bar'],
+            ['Restaurante', 'restaurant'],
+            ['Café', 'cafe'],
+            ['Loja', 'store'],
+            ['Outro', 'other']
+          ], 
+          {}, 
+          class: "w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400" %>
+    <p class="text-sm text-gray-600 mt-1">Selecione "Bar" para aparecer na lista de bares</p>
+  </div>
+
   <h3 class="text-lg font-semibold mt-4">Endereço</h3>
   <div id="addresses-container" class="space-y-4">
     <%= f.fields_for :business_addresses do |address_fields| %>

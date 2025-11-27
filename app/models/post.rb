@@ -29,6 +29,13 @@ class Post < ApplicationRecord
     body_chars > feed_body_count
   end
 
+  # Scope para posts de bares
+  scope :from_bars, -> {
+    joins(:user)
+      .where(users: { id: Business.select(:user_id) })
+      .includes(user: :businesses)
+  }
+
   private
 
   def acceptable_images

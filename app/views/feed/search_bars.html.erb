@@ -1,0 +1,59 @@
+<div class="max-w-5xl mx-auto mt-8 px-4">
+  <h1 class="text-2xl font-bold mb-6">
+    <% if @query.present? %>
+      Resultados para "<%= @query %>"
+    <% else %>
+      Todos os Bares e Lojas
+    <% end %>
+  </h1>
+
+  <% if @bars.any? %>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 business-list">
+      <% @bars.each do |business| %>
+        <div class="bg-white shadow-md rounded-lg p-4 flex flex-col business-item">
+          <div class="flex items-center gap-4 mb-3">
+            <% if business.user.profile&.avatar&.attached? %>
+              <%= image_tag(business.user.profile.avatar, class: "w-12 h-12 rounded-full object-cover") %>
+            <% else %>
+              <div class="w-12 h-12 rounded-full bg-gray-300 flex items-center justify-center text-gray-600 font-semibold">
+                <%= business.company_name[0].upcase %>
+              </div>
+            <% end %>
+            <div>
+              <h5 class="text-lg font-semibold"><%= business.company_name %></h5>
+              <p class="text-gray-600 text-sm">Avaliação: <%= business.rating %> ⭐</p>
+              <p class="text-gray-500 text-sm">Tipo: <%= business.humanized_business_type %></p>
+              <% if business.business_addresses.any? %>
+                <p class="text-gray-500 text-sm">
+                  <%= business.business_addresses.first.city %>, <%= business.business_addresses.first.state %>
+                </p>
+              <% end %>
+            </div>
+          </div>
+          
+          <div class="flex gap-2 mt-2">
+            <%= link_to "Ver Detalhes", business_path(business), 
+                class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded shadow transition duration-200 text-sm" %>
+            
+            <% if user_signed_in? && current_user != business.user %>
+              <%= render 'business_relationships/follow_button', business: business %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="text-gray-500 italic">
+      <% if @query.present? %>
+        Nenhum bar ou loja encontrado para "<%= @query %>"
+      <% else %>
+        Nenhum bar ou loja cadastrado.
+      <% end %>
+    </p>
+  <% end %>
+
+  <div class="mt-6">
+    <%= link_to "Voltar para Feed", feed_path, 
+                class: "bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold px-4 py-2 rounded shadow transition duration-200" %>
+  </div>
+</div>

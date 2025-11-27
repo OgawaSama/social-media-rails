@@ -4,6 +4,10 @@ class BusinessesController < ApplicationController
   before_action :set_user, only: [ :add_rating ]
   after_action :calculate_rating, only: [ :add_rating ]
 
+  def index
+    @bars = Business.bars.includes(:business_addresses, :user).order("rating DESC")
+  end
+
   def show
     @addresses = @business.business_addresses.includes(:cardapio)
     @business_comments = @business.business_comments.includes(:user).order(created_at: :desc)
@@ -20,9 +24,9 @@ class BusinessesController < ApplicationController
       @business = Business.new(business_params.merge(user: current_user))
       @business.save!
     end
-    redirect_to root_path, notice: "Perfil empresarial criado com sucesso!"
-  rescue ActiveRecord::RecordInvalid
-    flash.now[:alert] = "Erro ao criar perfil empresarial."
+    redirect_to business_path(@business), notice: "Perfil empresarial criado com sucesso!"
+  rescue ActiveRecord::RecordInvalid => e
+    flash.now[:alert] = "Erro ao criar perfil empresarial: #{e.message}"
     render :new
   end
 
@@ -32,7 +36,7 @@ class BusinessesController < ApplicationController
 
   def update
     if @business.update(business_params)
-      redirect_to root_path, notice: "Perfil empresarial atualizado com sucesso!"
+      redirect_to business_path(@business), notice: "Perfil empresarial atualizado com sucesso!"
     else
       flash.now[:alert] = "Erro ao atualizar perfil empresarial."
       render :edit
@@ -51,13 +55,15 @@ class BusinessesController < ApplicationController
   private
 
   def set_business
-    @business = Business.find(params[:id])
-    redirect_to root_path, alert: "Perfil empresarial não encontrado." unless @business
+    @business = Business.find_by(id: params[:id])
+    unless @business
+      redirect_to root_path, alert: "Perfil empresarial não encontrado."
+    end
   end
 
   def business_params
     params.require(:business).permit(
-      :company_name, :cnpj,
+      :company_name, :cnpj, :business_type,
       business_addresses_attributes: [ :id, :street, :city, :state, :zip, :_destroy ]
     )
   end
