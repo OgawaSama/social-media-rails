@@ -72,13 +72,28 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_27_033057) do
     t.index ["user_id"], name: "index_business_comments_on_user_id"
   end
 
+  create_table "business_relationships", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "followed_id", null: false
+    t.string "followed_type", null: false
+    t.integer "follower_id", null: false
+    t.string "follower_type", null: false
+    t.datetime "updated_at", null: false
+    t.index ["followed_id", "followed_type"], name: "index_business_relationships_on_followed_id_and_followed_type"
+    t.index ["followed_type", "followed_id"], name: "index_business_relationships_on_followed"
+    t.index ["follower_id", "follower_type", "followed_id", "followed_type"], name: "index_business_relationships_on_follower_and_followed", unique: true
+    t.index ["follower_type", "follower_id"], name: "index_business_relationships_on_follower"
+  end
+
   create_table "businesses", force: :cascade do |t|
+    t.string "business_type", default: "other"
     t.string "cnpj"
     t.string "company_name"
     t.datetime "created_at", null: false
     t.float "rating", default: 0.0
     t.datetime "updated_at", null: false
     t.integer "user_id", null: false
+    t.index ["business_type"], name: "index_businesses_on_business_type"
     t.index ["user_id"], name: "index_businesses_on_user_id"
   end
 

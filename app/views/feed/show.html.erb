@@ -24,6 +24,19 @@
   </div>
 <% end %>
 
+<!-- Nova busca por bares -->
+<%= form_with url: search_bars_path, method: :get, local: true do |f| %>
+  <div class="flex items-center mt-4 space-x-2 max-w-5xl mx-auto px-4">
+    <%= f.text_field :query,
+          id: "search_bars_query",
+          placeholder: "Search bars...",
+          class: "flex-1 border rounded p-2 focus:outline-none focus:ring-2 focus:ring-blue-400" %>
+    <%= f.submit "Search bars",
+          class: "px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600" %>
+    <%= link_to "All Bars", businesses_path,
+          class: "px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600" %>
+  </div>
+<% end %>
 
 <div class="bg-gray-100 min-h-screen pt-24">
   <div class="px-4 max-w-5xl mx-auto">
@@ -41,7 +54,7 @@
       </div>
     <% else %>
       <h3 class="text-gray-500 text-center mt-12">
-        Vazio aqui... Comece a seguir alguém para ver posts no seu feed!
+        Vazio aqui... Comece a seguir alguém ou algum bar para ver posts no seu feed!
       </h3>
     <% end %>
   </div>
