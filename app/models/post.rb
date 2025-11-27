@@ -43,12 +43,9 @@ class Post < ApplicationRecord
   end
 
   def purge_invalid_images
-    # Devemos iterar sobre 'images.attachments' (a coleção de registos de anexo)
     images.attachments.each do |attachment|
-      # ANTES (bugado): next unless image.attached? && ...
-      # DEPOIS:
       next unless attachment.instance_variable_get(:@should_purge)
-      
+
       attachment.purge
     end
   end
@@ -60,4 +57,4 @@ class Post < ApplicationRecord
         ResizeImageJob.perform_later(image.blob)
       end
     end
-  end
+end

@@ -27,7 +27,6 @@ RSpec.describe Post, type: :model do
   end
 
   describe 'validações de anexo (acceptable_images)' do
-    
     def attach_file(filename, content_type)
       {
         io: File.open(Rails.root.join('spec', 'fixtures', 'files', filename)),
@@ -51,19 +50,19 @@ RSpec.describe Post, type: :model do
       expect(@post).not_to be_valid
       expect(@post.errors[:images]).to include('precisam ser JPEG, PNG, GIF ou vídeo (MP4, MPEG, MOV)')
     end
-    
+
 
     it 'faz o purge automático de um ficheiro inválido' do
       @post.images.attach(attach_file('pdf.pdf', 'application/pdf'))
-      
+
       # Em vez de espiar uma instância específica, esperamos que QUALQUER anexo receba purge
       expect_any_instance_of(ActiveStorage::Attachment).to receive(:purge)
-      
-      @post.valid? 
+
+      @post.valid?
     end
   end
 
-  # ADICIONADO: Bloco completo de testes de job
+  # Bloco completo de testes de job
   describe 'callbacks de job (resize_images_later)' do
     def attach_image
       {

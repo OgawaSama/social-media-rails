@@ -14,33 +14,30 @@ RSpec.describe ResizeProfileImageJob, type: :job do
 
 it 'executa o processamento das variantes definidas no blob' do
     processed_variant = instance_double(ActiveStorage::Variant, processed: true)
-    
-    # --- CORREÇÃO (Falha 4) ---
+
     # Usamos hash_including para não depender da ordem
-    allow(image_blob).to receive(:variant).with(hash_including(resize_to_limit: [150, 150])).and_return(processed_variant)
-    allow(image_blob).to receive(:variant).with(hash_including(resize_to_limit: [1024, 1024])).and_return(processed_variant)
-    
+    allow(image_blob).to receive(:variant).with(hash_including(resize_to_limit: [ 150, 150 ])).and_return(processed_variant)
+    allow(image_blob).to receive(:variant).with(hash_including(resize_to_limit: [ 1024, 1024 ])).and_return(processed_variant)
+
     expect(processed_variant).to receive(:processed).twice
     ResizeProfileImageJob.perform_now(image_blob)
   end
 
   it 'NÃO cria um novo Blob no ActiveStorage' do
-    # --- CORREÇÃO (Falha 5) ---
     # Adicionar este mock para evitar o LoadError do vips
     processed_variant = instance_double(ActiveStorage::Variant, processed: true)
     allow(image_blob).to receive(:variant).and_return(processed_variant)
-    
+
     expect {
       ResizeProfileImageJob.perform_now(image_blob)
     }.not_to change(ActiveStorage::Blob, :count)
   end
 
   it 'NÃO enfileira nenhum job adicional (garante que não há loops)' do
-    # --- CORREÇÃO (Falha 6) ---
     # Adicionar este mock para evitar o LoadError do vips
     processed_variant = instance_double(ActiveStorage::Variant, processed: true)
     allow(image_blob).to receive(:variant).and_return(processed_variant)
-    
+
     expect {
       ResizeProfileImageJob.perform_now(image_blob)
     }.not_to have_enqueued_job

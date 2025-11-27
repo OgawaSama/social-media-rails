@@ -6,11 +6,11 @@ class Profile < ApplicationRecord
 
   validate :acceptable_files
 
-  # MUDANÇA 1: Usamos after_save para detetar a mudança antes que ela limpe
+  # Usamos after_save para detetar a mudança antes que ela limpe
   after_save :check_for_attachment_changes
-  
-  # MUDANÇA 2: Usamos after_commit apenas para agendar o job
-  after_commit :resize_attachments_later, on: [:create, :update]
+
+  # Usamos after_commit apenas para agendar o job
+  after_commit :resize_attachments_later, on: [ :create, :update ]
 
   def bio_limit_char
     char_limit = 512
@@ -20,11 +20,11 @@ class Profile < ApplicationRecord
 
   private
 
-  # Método para detetar se houve upload (funciona mesmo se o blob já existir)
+  # Método para detectar se houve upload (funciona mesmo se o blob já existir)
   def check_for_attachment_changes
     # 'attachment_changes' é um hash interno do ActiveStorage que guarda as mudanças pendentes
-    @avatar_changed = attachment_changes['avatar'].present?
-    @header_changed = attachment_changes['header'].present?
+    @avatar_changed = attachment_changes["avatar"].present?
+    @header_changed = attachment_changes["header"].present?
   end
 
   def resize_attachments_later
@@ -37,13 +37,12 @@ class Profile < ApplicationRecord
     if @header_changed && header.attached? && header.variable?
       ResizeProfileImageJob.perform_later(header.blob)
     end
-    
+
     # Limpa as flags para evitar falsos positivos futuros na mesma instância
     @avatar_changed = false
     @header_changed = false
   end
 
-  # ... (teus métodos acceptable_files e purge_invalid_attachments mantêm-se iguais) ...
   def acceptable_files
     [ avatar, header ].each do |attachment|
       next unless attachment.attached?

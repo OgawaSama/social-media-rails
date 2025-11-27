@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Profile, type: :model do
-  include ActiveJob::TestHelper 
-  
+  include ActiveJob::TestHelper
+
   before(:each) do
     @user = build(:user)
     @profile = build(:profile, user: @user)
@@ -23,7 +23,6 @@ RSpec.describe Profile, type: :model do
 
 
   describe 'validações de anexo (acceptable_files)' do
-
     def attach_file(filename, content_type)
       {
         io: File.open(Rails.root.join('spec', 'fixtures', 'files', filename)),
@@ -55,10 +54,10 @@ RSpec.describe Profile, type: :model do
 
       it 'faz o purge automático de um ficheiro inválido' do
         @profile.avatar.attach(attach_file('pdf.pdf', 'application/pdf'))
-        
+
         # Espia o método 'purge'
         allow(@profile.avatar).to receive(:purge).and_call_original
-        
+
         @profile.valid? # Dispara validações e callbacks de validação
 
         expect(@profile.avatar).to have_received(:purge)
@@ -67,16 +66,15 @@ RSpec.describe Profile, type: :model do
       it 'NÃO faz o purge de um ficheiro válido' do
         @profile.avatar.attach(attach_file('valid_avatar.png', 'image/png'))
         allow(@profile.avatar).to receive(:purge)
-        
+
         @profile.valid?
-        
+
         expect(@profile.avatar).not_to have_received(:purge)
       end
     end
   end
 
   describe 'callbacks de job (resize_attachments_later)' do
-    
     def attach_image
       {
         io: File.open(Rails.root.join('spec', 'fixtures', 'files', 'valid_avatar.png')),
@@ -86,9 +84,8 @@ RSpec.describe Profile, type: :model do
     end
 
       it 'enfileira o ResizeProfileImageJob quando um novo header é anexado (update)' do
-        @profile.save! 
+        @profile.save!
 
-        # CORREÇÃO: Removemos o .with(@profile.header.blob)
         # Verificamos apenas a classe do Job, o que é suficiente e seguro.
         expect {
           @profile.header.attach(attach_image)
