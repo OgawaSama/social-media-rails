@@ -7,12 +7,12 @@ RSpec.describe Cardapio, type: :model do
   let(:cardapio) { create(:cardapio) }
 
   before do
-    cardapio.business_address << [ address1, address2 ]
+    cardapio.business_addresses << [ address1, address2 ]
   end
 
   describe "business_addresses associations" do
     it "can belong to multiple business addresses" do
-      expect(cardapio.business_address).to include(address1, address2)
+      expect(cardapio.business_addresses).to include(address1, address2)
     end
   end
 

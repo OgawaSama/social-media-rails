@@ -6,5 +6,7 @@ class Cardapio < ApplicationRecord
 
   has_many :promocoes, class_name: "Promocao", dependent: :destroy
 
+  has_many :business_addresses
+  
   validates :titulo, presence: true
 end
