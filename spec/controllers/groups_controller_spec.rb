@@ -10,7 +10,7 @@ RSpec.describe GroupsController, type: :controller do
   describe "POST #create" do
     it "cria um grupo válido" do
       expect {
-        post :create, params: { group: { name: "Novo Grupo", header: fixture_file_upload(Rails.root.join('spec', 'fixtures', 'files', 'teste.png'), 'image/jpeg') } }
+        post :create, params: { group: { name: "Novo Grupo", header: fixture_file_upload('teste.png', 'image/jpeg') } }
       }.to change(Group, :count).by(1)
       expect(response).to redirect_to(group_path(Group.last))
     end

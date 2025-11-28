@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_11_16_115200) do
+ActiveRecord::Schema[8.1].define(version: 2025_11_27_033057) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -51,6 +51,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_16_115200) do
 
   create_table "business_addresses", force: :cascade do |t|
     t.integer "business_id", null: false
+    t.integer "cardapio_id"
     t.string "city"
     t.datetime "created_at", null: false
     t.string "state"
@@ -58,6 +59,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_16_115200) do
     t.datetime "updated_at", null: false
     t.string "zip"
     t.index ["business_id"], name: "index_business_addresses_on_business_id"
+    t.index ["cardapio_id"], name: "index_business_addresses_on_cardapio_id"
   end
 
   create_table "business_comments", force: :cascade do |t|
@@ -228,7 +230,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_16_115200) do
     t.datetime "created_at", null: false
     t.decimal "desconto", precision: 5, scale: 2
     t.text "descricao"
-    t.integer "item_cardapio_id", null: false
+    t.integer "item_cardapio_id", null: true
     t.string "titulo"
     t.datetime "updated_at", null: false
     t.index ["cardapio_id"], name: "index_promocaos_on_cardapio_id"
@@ -293,6 +295,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_16_115200) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "business_addresses", "businesses"
+  add_foreign_key "business_addresses", "cardapios"
   add_foreign_key "business_comments", "businesses"
   add_foreign_key "business_comments", "users"
   add_foreign_key "businesses", "users"
