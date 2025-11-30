@@ -27,6 +27,7 @@ gem "jbuilder"
 
 # Authentication and secure passwords
 gem "devise", github: "heartcombo/devise", branch: "main"
+gem "devise-i18n"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[ windows jruby ]
@@ -79,6 +80,7 @@ group :test do
   gem "database_cleaner-active_record"
   gem "rails-controller-testing"
 end
+
 
 # Daniel pediu, ta aqui
 gem "coveralls_reborn", require: false
