@@ -6,5 +6,6 @@ FactoryBot.define do
     item_type { :Beer }
     brand { "杭州千岛湖啤酒有限公司" }
     date { 2.days.ago }
+    worth { 10 }
   end
 end

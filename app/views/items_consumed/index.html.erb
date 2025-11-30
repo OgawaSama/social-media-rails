@@ -9,6 +9,10 @@
         </p>
     </div>
 
+    <div>
+        <p><%= link_to "Ranking de Usuários", consumption_ranking_path, class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded shadow transition duration-200" %> </p>
+    </div>
+    
     <div class="mt-4">
         <% if @items.any? %>
             <h3 id="item_consumed">

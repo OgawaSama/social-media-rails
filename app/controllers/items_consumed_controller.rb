@@ -11,11 +11,20 @@ class ItemsConsumedController < ApplicationController
                 .order("total_quantity DESC")
   end
 
+  def ranking
+    @rankings = User
+                .joins(:items_consumed)
+                .select("user_id, username, SUM(worth * quantity) AS points")
+                .group(:username)
+                .order("points DESC")
+  end
+
   def show
   end
 
   def new
     @item = current_user.items_consumed.build
+    @items = ItemCardapio.order(cardapio_id: :desc)
   end
 
   def index
@@ -39,10 +48,18 @@ class ItemsConsumedController < ApplicationController
     @brand = items_consumed_params[:brand]
     @name = items_consumed_params[:name]
     @type = items_consumed_params[:item_type]
+
+    # worth = existing_item.worth. if doesnt exist, = 0
+    @business = Business.find_by(id: BusinessAddress.where(id: Cardapio.where(id: ItemCardapio.where(nome: @name).pluck(:cardapio_id)).pluck(:business_address_id)).pluck(:business_id))
+    if @business&.company_name == @brand
+      @worth = ItemCardapio.find_by(cardapio: Cardapio.find_by(business_address_id: @business.business_addresses)).worth
+    else
+      @worth = 0
+    end
     if ItemConsumed.where(user: @user, brand: @brand, item_type: @type, name: @name).exists?
       @old_item = ItemConsumed.find_by(user: @user, brand: @brand, item_type: @type, name: @name)
       new_quantity = @old_item.quantity + @item.quantity
-      @old_item.update(quantity: new_quantity)
+      @old_item.update(quantity: new_quantity, worth: @worth)
       if @old_item.save
         redirect_to items_consumed_index_path(user_id: @user.id), notice: "item updated!"
       else
@@ -97,6 +114,6 @@ class ItemsConsumedController < ApplicationController
   end
 
   def items_consumed_params
-    params.require(:item_consumed).permit(:item_consumed_id, :name, :quantity, :brand, :item_type, :date)
+    params.require(:item_consumed).permit(:item_consumed_id, :name, :quantity, :brand, :item_type, :date, :worth)
   end
 end

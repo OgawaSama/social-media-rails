@@ -6,9 +6,9 @@ RSpec.describe ItemsConsumedController, type: :controller do
       @user1 = create(:user)
       @user2 = create(:user)
 
-      create(:item_consumed, user: @user1, name: "Beer", brand: "Itaipava", item_type: "Bebida", quantity: 2)
-      create(:item_consumed, user: @user2, name: "Beer", brand: "Itaipava", item_type: "Bebida", quantity: 3)
-      create(:item_consumed, user: @user1, name: "Gin", brand: "GinCompany", item_type: "Bebida", quantity: 1)
+      create(:item_consumed, user: @user1, name: "Beer", brand: "Itaipava", item_type: "Beer", quantity: 2)
+      create(:item_consumed, user: @user2, name: "Beer", brand: "Itaipava", item_type: "Beer", quantity: 3)
+      create(:item_consumed, user: @user1, name: "Gin", brand: "GinCompany", item_type: "Beer", quantity: 1)
     end
 
     it "returns success" do

@@ -30,6 +30,8 @@ Rails.application.routes.draw do
       get :summary
     end
   end
+  get :consumption_ranking, to: "items_consumed#ranking", as: "consumption_ranking"
+  post :celebrate_user, to: "users#celebrate_user", as: "celebrate_user"
   post :add_item_consumed, to: "items_consumed#create", as: "add_item_consumed"
 
   # Rota para remover imagem de um post

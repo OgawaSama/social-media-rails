@@ -1,8 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Cardapio, type: :model do
-  let(:business_address) { create(:business_address) }
-  let(:cardapio) { create(:cardapio, business_address: business_address) }
+  let(:address1) { create(:business_address) }
+  let(:address2) { create(:business_address) }
+  let(:cardapio) { create(:cardapio, business_address: address1) }
 
   before do
     cardapio.business_addresses << [ address1, address2 ]
