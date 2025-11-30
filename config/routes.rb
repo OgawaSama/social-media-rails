@@ -30,9 +30,10 @@ Rails.application.routes.draw do
       get :summary
     end
   end
+  post :add_item_consumed, to: "items_consumed#create", as: "add_item_consumed"
   get :consumption_ranking, to: "items_consumed#ranking", as: "consumption_ranking"
   post :celebrate_user, to: "users#celebrate_user", as: "celebrate_user"
-  post :add_item_consumed, to: "items_consumed#create", as: "add_item_consumed"
+  get :friends_ranking, to: "items_consumed#friends_ranking", as: "friends_ranking"
 
   # Rota para remover imagem de um post
   delete "remove_image/:signed_id", to: "posts#remove_image", as: :remove_image

@@ -26,10 +26,13 @@
       <%= link_to "Empresa", business_path(@profile.user.business), class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded shadow transition duration-200" %>
     <% end %>
     <%= link_to "Histórico de Itens", items_consumed_index_path(user_id: @profile.user.id), class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded shadow transition duration-200" %>
+    <%= link_to "Ranking de Amigos", friends_ranking_path(start_date: Date.yesterday, end_date: Date.today), class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded shadow transition duration-200" %>
+
   </div>
 
   <div class="mt-4 p-6">
-    <h4 class="text-lg font-semibold">Pontos acumulados: <%= @profile.user.points %></h4>
+    <!-- troquei os .points por outra coisa temporaria só pra não ficar sempre no 0 -->
+    <h4 class="text-lg font-semibold">Pontos acumulados: <%= @profile.user.items_consumed.sum(:worth) %></h4>
   </div>
 
   <% if current_user == @profile.user %>

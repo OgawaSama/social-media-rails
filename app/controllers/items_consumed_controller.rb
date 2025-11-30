@@ -19,6 +19,20 @@ class ItemsConsumedController < ApplicationController
                 .order("points DESC")
   end
 
+  def friends_ranking
+    connections = User.where(id: current_user.following_ids).or(User.where(id: current_user.follower_ids))
+    @friends = User
+                  .joins(:items_consumed)
+                  .select("user_id, username, SUM(worth*quantity) AS points, date")
+                  .group(:username)
+                  .order("points DESC")
+    @start = params[:start_date]
+    @end = params[:end_date]
+    if @start != "" && @end != ""
+      @friends = @friends.where("date BETWEEN ? AND ?", @start, @end)
+    end
+  end
+
   def show
   end
 

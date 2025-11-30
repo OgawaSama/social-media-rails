@@ -1,5 +1,5 @@
 Given("that I'm logged in") do
-  @current_user = FactoryBot.create(:user, email: "test@example.com", password: "password123", password_confirmation: "password123")
+  @current_user = FactoryBot.create(:user, username: "my name", email: "test@example.com", password: "password123", password_confirmation: "password123")
 
   # Fazer login via Devise
   visit new_user_session_path
