@@ -4,6 +4,13 @@ class ItemsConsumedController < ApplicationController
   before_action :set_user, only: %i[ index ]
   before_action :check_user, only: %i[ destroy ]
 
+  def summary
+    @summary = ItemConsumed
+                .select("name, brand, item_type, SUM(quantity) AS total_quantity")
+                .group(:name, :brand, :item_type)
+                .order("total_quantity DESC")
+  end
+
   def show
   end
 

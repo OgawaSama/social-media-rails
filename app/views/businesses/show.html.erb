@@ -90,6 +90,9 @@
   <% if current_user == @business.user %>
     <div class="mt-6">
       <%= link_to "Editar Perfil", edit_business_path(@business), class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded shadow" %>
+      <%= link_to "Resumo geral", 
+      summary_items_consumed_index_path, 
+      class: "inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-lg shadow" %>
     </div>
   <% end %>
 

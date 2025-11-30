@@ -230,7 +230,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_27_033057) do
     t.datetime "created_at", null: false
     t.decimal "desconto", precision: 5, scale: 2
     t.text "descricao"
-    t.integer "item_cardapio_id", null: true
+    t.integer "item_cardapio_id"
     t.string "titulo"
     t.datetime "updated_at", null: false
     t.index ["cardapio_id"], name: "index_promocaos_on_cardapio_id"
