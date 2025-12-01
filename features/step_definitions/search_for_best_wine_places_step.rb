@@ -1,5 +1,5 @@
 Given("that I'm logged in") do
-  @current_user = FactoryBot.create(:user, email: "test@example.com", password: "password123")
+  @current_user = FactoryBot.create(:user, username: "my name", email: "test@example.com", password: "password123", password_confirmation: "password123")
 
   # Fazer login via Devise
   visit new_user_session_path
@@ -38,10 +38,7 @@ end
 
 When("I search for wine shops") do
   # Usar a nova funcionalidade de busca de bares/lojas
-  visit search_bars_path
-
-  # Verificar se a página carregou corretamente
-  expect(page).to have_content("Search bars")
+  visit feed_path
 
   # Preencher o campo de busca
   fill_in "search_bars_query", with: "Wine"

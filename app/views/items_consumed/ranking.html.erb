@@ -1,0 +1,19 @@
+<div class="max-w-4xl text-center flex flex-col justify-items-center">
+    <h1 class="font-bold text-xl"> Ranking de Consumo </h1>
+    <table class="w-full spacing-x-3">
+        <thead>
+            <tr class="text-center">
+                <th> Username </th>
+                <th> Pontuação </th>
+            </tr>
+        </thead>
+        <tbody>
+        <% @rankings.each do |user| %>
+            <tr class="text-center border border-2 p-3">
+                <td class="border"><%= user.username %> </td>
+                <td class="border"><%= user.points %> </td>
+                <td class="border inline-block text-purple-700 font-semibold border-b-2 border-transparent hover:border-purple-600 transition-colors"><%= button_to "Parabenizar usuário", celebrate_user_path(user: user.user_id, points: user.points)%>
+            <tr>
+        <% end %>
+        </tbody>
+    </table>

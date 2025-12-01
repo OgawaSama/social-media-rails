@@ -1,0 +1,27 @@
+<div>
+    <h2 class="font-bold text-xl text-center"> Itens em Cardápios </h2>
+    <table class="w-full spacing-x-3">
+        <thead>
+            <tr class="text-center">
+                <th> Marca </th>
+                <th> Nome </th>
+                <th> Tipo </th>
+                <th> Valor em Pontos </th>
+            </tr>
+        </thead>
+        <tbody>
+        <% @items.each do |item| %>
+            <tr class="text-center border border-2 p-3">
+                <td class="border"><%= item.cardapio.business_address.business&.company_name %> </td>
+                <td class="border"><%= item.nome %> </td>
+                <% if item.tipo == 0 %>
+                    <td class="border">Other</td>
+                <% else%>
+                    <td class="border">Beer</td>
+                <% end%>
+                <td class="border"><%= item.worth %> </td>
+            <tr>
+        <% end %>
+        </tbody>
+    </table>
+</div>

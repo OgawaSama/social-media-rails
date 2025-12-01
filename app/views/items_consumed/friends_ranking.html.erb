@@ -1,0 +1,40 @@
+<div class="text-center">
+    <h1 class="font-bold text-2xl"> Ranking dos amigos de < @<%= current_user.username %> ></h1>
+    <div class="m-5">
+    <% if @start != "" && @end != "" %>
+        <h2 class="text-xl"> Filtrando pelo período de <strong><%= @start&.to_date&.strftime("%d/%m/%Y")%></strong> a <strong><%= @end&.to_date&.strftime("%d/%m/%Y")%></strong> </h2>
+    <% else %>
+        <h2 class="text-xl"> Sem filtros de data </h2>
+    <% end %>
+    </div>
+    <div class=""> 
+        <p> Ver ranking de <strong><%=link_to "Today", friends_ranking_path(start_date: Date.today, end_date: Date.today) %></strong></p>
+    </div>
+
+    <div>
+        <%= form_with url: friends_ranking_path, method: :get, local: true do |f| %>
+            <p> Filtrar por data </p>
+            <div class="flex items-center mt-4 space-x-2 max-w-5xl mx-auto px-4">
+                <%= f.date_field :start_date,
+                    label: "Data início",
+                    placeholder: Date.today,
+                    class: "flex-1 border rounded p-2 focus:outline-none focus:ring-2 focus:ring-blue-400" %>
+                <%= f.date_field :end_date,
+                label: "Data término",
+                placeholder: Date.today,
+                class: "flex-1 border rounded p-2 focus:outline-none focus:ring-2 focus:ring-blue-400" %>
+                <%= f.submit "Filtrar",
+                    class: "px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600" %>
+            </div>
+        <% end %>
+    </div>
+
+    <div class="border border-2 flex flex-col items-center justify-center mt-4 p-4"">
+        <% @friends.each_with_index do |user, index| %> 
+            <div class="flex flex-row justify-center items-center text-center w-full">
+            <p class="border py-1 w-32"> <%= index+1 %> -- <%= user.username %> </p>
+            <p class="border py-1 w-32"> <%= user.points %> pontos</p> 
+            </div>
+        <%end%>
+    </div>
+</div>

@@ -49,7 +49,7 @@ class CardapiosController < ApplicationController
   def cardapio_params
     params.require(:cardapio).permit(
       :titulo,
-      itens_cardapio_attributes: [ :id, :nome, :preco, :tipo, :_destroy ]
+      itens_cardapio_attributes: [ :id, :nome, :preco, :tipo, :_destroy, :worth ]
     )
   end
 end

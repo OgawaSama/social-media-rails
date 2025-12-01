@@ -2,7 +2,7 @@
       model: @cardapio,
       url: @cardapio.persisted? ? business_business_address_cardapio_path(@business, @business_address) : business_business_address_cardapio_path(@business, @business_address),
       local: true,
-      class: "max-w-2xl mx-auto bg-gray-100 shadow-md rounded-lg p-6 space-y-6 mt-12"
+      class: "max-w-4xl mx-auto bg-gray-100 shadow-md rounded-lg p-6 space-y-6 mt-12"
     ) do |f| %>
 
   <div>
@@ -28,6 +28,7 @@
         <option value="0">Comida</option>
         <option value="1">Bebida</option>
       </select>
+      <input type="number" step="1" name="cardapio[itens_cardapio_attributes][NEW_RECORD][worth]" placeholder="Pontuação" class="input border rounded p-2 w-24" />
       <button type="button" class="remove-item bg-red-500 text-white px-2 rounded">Remover</button>
     </div>
   </template>

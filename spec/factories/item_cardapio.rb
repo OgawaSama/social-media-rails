@@ -4,6 +4,7 @@ FactoryBot.define do
     descricao { "Descrição do item teste" }
     preco { 25.50 }
     tipo { 0 } # comida
+    worth { 10 }
     association :cardapio
   end
 end

@@ -7,7 +7,7 @@
       <li class="p-4 bg-white rounded shadow">
         <div class="flex justify-between items-center">
           <span>
-            <%= item.nome %> - R$ <%= number_with_precision(item.preco, precision: 2, separator: ",") %> (<%= item.tipo == 0 ? "Comida" : "Bebida" %>) | Avaliação: 
+            <%= item.nome %> - R$ <%= number_with_precision(item.preco, precision: 2, separator: ",") %> (<%= item.tipo == 0 ? "Comida" : "Bebida" %>) | Pontos: <%= item.worth %> | Avaliação: 
             <% if item.rating.present? && item.rating > 0 %>
               <%= number_with_precision(item.rating, precision: 1) %>/5
             <% else %>
