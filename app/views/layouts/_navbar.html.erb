@@ -27,6 +27,10 @@
           My Profile
         <% end %>
 
+        <%= link_to new_event_path, class: "bg-white shadow-md rounded-lg px-4 py-2 hover:bg-gray-100 transition duration-200 font-medium text-gray-700 flex items-center gap-2" do %>
+        <span></span>Criar Rolê
+      <% end %>
+
         <!-- Mouse não mostra que é clicável mais, mas agora funciona... -->
         <div>
           <%= button_to "Sign Out", destroy_user_session_path, method: :delete,  class: "bg-white shadow-md rounded-lg px-4 py-2 hover:bg-red-50 transition duration-200 font-medium text-red-500 hover:text-red-700 flex items-center"%>

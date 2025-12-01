@@ -16,6 +16,8 @@ class User < ApplicationRecord
   has_one :profile, dependent: :destroy
   has_many :event_participations, dependent: :destroy
   has_many :participated_events, through: :event_participations, source: :event
+  has_many :created_events, class_name: 'Event', as: :creator
+  has_many :availabilities
 
   has_many :items_consumed, class_name: "ItemConsumed"
 

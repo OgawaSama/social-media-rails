@@ -24,6 +24,10 @@ Rails.application.routes.draw do
       resources :comments, only: [ :new, :create, :index, :destroy ]
     end
   end
+  
+  resources :events, only: [:new, :create, :show] do
+    resource :my_availability, only: [:show, :create, :update], controller: 'event_availabilities'
+  end
 
   resources :items_consumed do
     collection do

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_11_30_034636) do
+ActiveRecord::Schema[8.1].define(version: 2025_12_01_045055) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -47,6 +47,17 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_30_034636) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "availabilities", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "status"
+    t.integer "time_slot_id", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["time_slot_id"], name: "index_availabilities_on_time_slot_id"
+    t.index ["user_id", "time_slot_id"], name: "index_availabilities_on_user_id_and_time_slot_id", unique: true
+    t.index ["user_id"], name: "index_availabilities_on_user_id"
   end
 
   create_table "business_addresses", force: :cascade do |t|
@@ -125,8 +136,10 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_30_034636) do
   end
 
   create_table "events", force: :cascade do |t|
-    t.integer "business_address_id", null: false
+    t.integer "business_address_id"
     t.datetime "created_at", null: false
+    t.integer "creator_id", null: false
+    t.string "creator_type", null: false
     t.text "description"
     t.datetime "end_time"
     t.string "name", null: false
@@ -134,6 +147,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_30_034636) do
     t.datetime "start_time", null: false
     t.datetime "updated_at", null: false
     t.index ["business_address_id"], name: "index_events_on_business_address_id"
+    t.index ["creator_type", "creator_id"], name: "index_events_on_creator"
   end
 
   create_table "friendships", force: :cascade do |t|
@@ -270,6 +284,15 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_30_034636) do
     t.index ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
   end
 
+  create_table "time_slots", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "end_time"
+    t.integer "event_id", null: false
+    t.datetime "start_time"
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_time_slots_on_event_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.boolean "critic", default: false, null: false
@@ -296,6 +319,8 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_30_034636) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "availabilities", "time_slots"
+  add_foreign_key "availabilities", "users"
   add_foreign_key "business_addresses", "businesses"
   add_foreign_key "business_addresses", "cardapios"
   add_foreign_key "business_comments", "businesses"
@@ -323,4 +348,5 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_30_034636) do
   add_foreign_key "reactions", "users"
   add_foreign_key "relationships", "users", column: "followed_id"
   add_foreign_key "relationships", "users", column: "follower_id"
+  add_foreign_key "time_slots", "events"
 end

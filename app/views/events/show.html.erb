@@ -1,30 +1,155 @@
-<h2 class="text-xl font-bold mb-4"><%= @event.name %></h2>
-<p><%= @event.description %></p>
-<p>Início: <%= l(@event.start_time, format: :short) %></p>
-<% if @event.end_time %>
-  <p>Fim: <%= l(@event.end_time, format: :short) %></p>
-<% end %>
-<% if @event.points_rewarded.present? %>
-  <p>Pontos: <%= @event.points_rewarded %></p>
-<% end %>
+<%# app/views/events/show.html.erb %>
 
-<% unless @event.participants.include?(current_user) %>
-  <% if user_signed_in? %>
-    <%= form_with url: business_business_address_event_event_participations_path(@event.business_address.business, @event.business_address, @event), method: :post do %>
-      <%= submit_tag "Participar deste evento", class: "bg-green-500 text-white px-4 py-2 rounded" %>
-    <% end %>
-  <% else %>
-    <p class="text-gray-500">Faça login para participar deste evento.</p>
-  <% end %>
+<% if @event.respond_to?(:time_slots) && @event.time_slots.any? %>
+  <%# ========================================== %>
+  <%#        MODO ROLÊ (WHEN2MEET)               %>
+  <%# ========================================== %>
+  <div class="max-w-7xl mx-auto mt-8 px-4 sm:px-6 lg:px-8">
+    
+    <%# Cabeçalho do Evento %>
+    <div class="bg-white shadow rounded-lg p-6 mb-6 text-center">
+      <h1 class="text-4xl font-extrabold text-gray-900 mb-2"><%= @event.name %></h1>
+      <p class="text-lg text-gray-600"><%= @event.description %></p>
+      <div class="mt-6">
+        <%= link_to "✅ Marcar Minha Disponibilidade", event_my_availability_path(@event), class: "inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 shadow-sm transition" %>
+      </div>
+    </div>
+
+    <%# A Grade de Horários (Calendário) %>
+    <div class="bg-white shadow rounded-lg overflow-hidden border border-gray-200">
+      <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider sticky left-0 bg-gray-50 z-10 border-r">Data / Hora</th>
+              <%# Garante que @participants existe %>
+              <% participants = @participants || [] %>
+              <% participants.each do |user| %>
+                <th class="px-2 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider min-w-[80px]">
+                  <%= user.username %>
+                </th>
+              <% end %>
+              <th class="px-2 py-3 text-center text-xs font-bold text-gray-700 uppercase tracking-wider bg-gray-100 border-l">Total</th>
+            </tr>
+          </thead>
+          
+          <tbody class="bg-white divide-y divide-gray-200">
+            <%# Recupera slots e disponibilidades %>
+            <% time_slots = @time_slots_by_day || @event.time_slots.order(:start_time).group_by { |slot| slot.start_time.to_date } %>
+            <% availabilities = @availabilities || @event.availabilities.index_by { |a| [a.user_id, a.time_slot_id] } %>
+
+            <% time_slots.each do |date, slots| %>
+              <%# Cabeçalho do Dia %>
+              <tr class="bg-blue-50">
+                <td colspan="<%= participants.count + 2 %>" class="px-4 py-2 text-sm font-bold text-blue-800 border-t border-b text-center">
+                  <%= l(date, format: :short) %>
+                </td>
+              </tr>
+
+              <% slots.each do |slot| %>
+                <tr class="hover:bg-gray-50 transition duration-150">
+                  <%# Coluna da Hora %>
+                  <td class="px-4 py-2 text-sm text-gray-900 font-medium sticky left-0 bg-white border-r whitespace-nowrap">
+                    <%= slot.start_time.strftime("%H:%M") %>
+                  </td>
+                  
+                  <% yes_count = 0 %>
+                  
+                  <%# Colunas dos Participantes (Células Coloridas) %>
+                  <% participants.each do |participant| %>
+                    <% 
+                       availability = availabilities[[participant.id, slot.id]] 
+                       status = availability&.status
+                       
+                       # Cores estilo When2Meet
+                       bg_class = case status
+                                  when 'available' then 
+                                    yes_count += 1
+                                    'bg-green-500'
+                                  when 'maybe' then 'bg-yellow-400'
+                                  when 'unavailable' then 'bg-red-400'
+                                  else 'bg-gray-100' # Não respondeu
+                                  end
+                    %>
+                    <td class="px-1 py-1 text-center border-r border-white p-0">
+                      <div class="h-8 w-full <%= bg_class %> opacity-80 hover:opacity-100 transition" title="<%= participant.username %>: <%= status %>"></div>
+                    </td>
+                  <% end %>
+                  
+                  <%# Coluna de Total (Mapa de Calor) %>
+                  <% 
+                     # Calcula intensidade do verde baseado em quantos podem ir
+                     max = participants.count > 0 ? participants.count : 1
+                     opacity = (yes_count.to_f / max).round(2)
+                     # Garante um mínimo de cor se alguém puder ir
+                     bg_style = yes_count > 0 ? "background-color: rgba(34, 197, 94, #{0.2 + (opacity * 0.8)})" : "background-color: #f3f4f6"
+                  %>
+                  <td class="px-2 py-2 text-center font-bold text-gray-800 border-l text-sm" style="<%= bg_style %>">
+                    <%= yes_count %> / <%= participants.count %>
+                  </td>
+                </tr>
+              <% end %>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    
+    <div class="mt-8 text-center">
+      <%= link_to "← Voltar para Home", feed_path, class: "text-gray-600 hover:text-blue-600 font-medium" %>
+    </div>
+  </div>
+
 <% else %>
-  <p class="text-green-600 font-bold">Você já está participando deste evento!</p>
+  <%# ========================================== %>
+  <%#        MODO BUSINESS (SEU CÓDIGO)          %>
+  <%# ========================================== %>
+  <div class="max-w-4xl mx-auto mt-8 px-4 bg-white shadow rounded-lg p-6">
+    <h2 class="text-2xl font-bold mb-4 text-gray-800"><%= @event.try(:name) || @event.title %></h2>
+    <p class="text-gray-700 mb-6 leading-relaxed"><%= @event.description %></p>
+    
+    <div class="flex gap-6 mb-6 text-sm text-gray-600 bg-gray-50 p-4 rounded-lg">
+      <div><span class="font-bold">Início:</span> <%= l(@event.try(:start_time) || @event.start_date, format: :short) %></div>
+      <% if @event.respond_to?(:end_time) && @event.end_time %>
+        <div><span class="font-bold">Fim:</span> <%= l(@event.end_time, format: :short) %></div>
+      <% end %>
+    </div>
+
+    <% if @event.respond_to?(:points_rewarded) && @event.points_rewarded.present? %>
+      <div class="mb-6 inline-block bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full font-semibold text-sm">
+        🏆 Pontos: <%= @event.points_rewarded %>
+      </div>
+    <% end %>
+
+    <% if @event.respond_to?(:participants) %>
+      <div class="border-t pt-6">
+        <% unless @event.participants.include?(current_user) %>
+          <% if user_signed_in? && @event.respond_to?(:business_address) && @event.business_address %>
+              <%= form_with url: business_business_address_event_event_participations_path(@event.business_address.business, @event.business_address, @event), method: :post do %>
+                <%= submit_tag "Participar deste evento", class: "bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg font-bold cursor-pointer transition" %>
+              <% end %>
+          <% else %>
+            <p class="text-gray-500 italic">Faça login para participar.</p>
+          <% end %>
+        <% else %>
+          <p class="text-green-600 font-bold flex items-center gap-2">✅ Você já está participando!</p>
+        <% end %>
+
+        <h3 class="text-lg font-semibold mt-6 mb-3 text-gray-800">Participantes</h3>
+        <ul class="list-disc list-inside space-y-1 text-gray-600">
+          <% @event.participants.each do |user| %>
+            <li><%= user.username || user.email %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="mt-8">
+      <% if @business_address %>
+        <%= link_to "Voltar", business_business_address_events_path(@business_address.business, @business_address), class: "text-blue-600 hover:underline" %>
+      <% else %>
+        <%= link_to "Voltar", :back, class: "text-blue-600 hover:underline" %>
+      <% end %>
+    </div>
+  </div>
 <% end %>
-
-<h3 class="text-lg font-semibold mt-6 mb-2">Participantes</h3>
-<ul>
-  <% @event.participants.each do |user| %>
-    <li><%= user.username || user.email %></li>
-  <% end %>
-</ul>
-
-<%= link_to "Voltar", business_business_address_events_path(@business_address.business, @business_address), class: "text-blue-600 underline" %>
