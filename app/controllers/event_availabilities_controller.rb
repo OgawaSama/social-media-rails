@@ -23,10 +23,10 @@ class EventAvailabilitiesController < ApplicationController
         end
 
         if records.any?
-            Availability.upsert_all(records, unique_by: [:user_id, :time_slot_id])
-            redirect_to event_path(@event), notice: 'Disponibilidade salva!'
+            Availability.upsert_all(records, unique_by: [ :user_id, :time_slot_id ])
+            redirect_to event_path(@event), notice: "Disponibilidade salva!"
         else
-            redirect_to event_my_availability_path(@event), alert: 'Nada alterado.'
+            redirect_to event_my_availability_path(@event), alert: "Nada alterado."
         end
     end
 

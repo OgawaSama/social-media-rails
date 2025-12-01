@@ -1,12 +1,12 @@
 class EventsController < ApplicationController
   before_action :authenticate_user!
-  
+
   before_action :set_business_address, if: -> { params[:business_address_id].present? }
-  
+
   # Só exige ser dono se achou um endereço de negócio
-  before_action :require_business_owner, only: [:new, :create, :edit, :update, :destroy], if: -> { @business_address.present? }
-  
-  before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :require_business_owner, only: [ :new, :create, :edit, :update, :destroy ], if: -> { @business_address.present? }
+
+  before_action :set_event, only: [ :show, :edit, :update, :destroy ]
 
   def index
     if @business_address
@@ -21,8 +21,8 @@ class EventsController < ApplicationController
     # Se tiver slots (é um Rolê), carrega dados do When2Meet
     if @event.respond_to?(:time_slots) && @event.time_slots.any?
       @time_slots_by_day = @event.time_slots.order(:start_time).group_by { |slot| slot.start_time.to_date }
-      @availabilities = @event.availabilities.index_by { |a| [a.user_id, a.time_slot_id] }
-      
+      @availabilities = @event.availabilities.index_by { |a| [ a.user_id, a.time_slot_id ] }
+
       # Pega participantes únicos
       ids = @availabilities.keys.map(&:first).uniq
       ids << @event.creator_id if @event.creator_id
@@ -52,7 +52,7 @@ class EventsController < ApplicationController
       @event.creator = current_user
       if @event.save
         create_time_slots_for_event(@event)
-        redirect_to @event, notice: 'Rolê criado com sucesso!'
+        redirect_to @event, notice: "Rolê criado com sucesso!"
       else
         render :new, status: :unprocessable_entity
       end
