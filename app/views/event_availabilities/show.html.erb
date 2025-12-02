@@ -1,0 +1,59 @@
+<div class="max-w-4xl mx-auto mt-12 bg-white shadow-lg rounded-lg p-8">
+  <h1 class="text-2xl font-bold text-center text-gray-900 mb-2">Sua Disponibilidade</h1>
+  <h2 class="text-lg text-center text-blue-600 mb-8 font-medium"><%= @event.name %></h2>
+
+  <%= form_with url: event_my_availability_path(@event), method: :patch, local: true do |form| %>
+
+    <div class="space-y-6">
+      <% @time_slots_by_day.each do |date, slots| %>
+        <div class="border rounded-lg overflow-hidden shadow-sm">
+          <%# Cabeçalho da Data %>
+          <div class="bg-gray-100 px-6 py-3 border-b flex justify-between items-center">
+            <span class="font-bold text-gray-800"><%= l(date, format: :long) %></span>
+            <span class="text-xs text-gray-500 uppercase tracking-wide font-semibold">Selecione uma opção</span>
+          </div>
+
+          <div class="divide-y divide-gray-100 bg-white">
+            <% slots.each do |slot| %>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-center px-6 py-4 hover:bg-gray-50 transition">
+
+                <%# Hora %>
+                <div class="text-sm font-medium text-gray-700 flex items-center gap-2">
+                  🕒 <%= slot.start_time.strftime("%H:%M") %> - <%= slot.end_time.strftime("%H:%M") %>
+                </div>
+
+                <%# Opções de Voto %>
+                <div class="md:col-span-2 flex justify-end space-x-4 sm:space-x-6">
+                  <% current_status = @my_availabilities[slot.id]&.status %>
+
+                  <%# SIM %>
+                  <label class="flex items-center cursor-pointer group">
+                    <%= radio_button_tag "availabilities[#{slot.id}]", "available", current_status == "available", class: "w-4 h-4 text-green-600 focus:ring-green-500 border-gray-300" %>
+                    <span class="ml-2 text-sm font-medium text-gray-700 group-hover:text-green-700">Sim</span>
+                  </label>
+
+                  <%# TALVEZ %>
+                  <label class="flex items-center cursor-pointer group">
+                    <%= radio_button_tag "availabilities[#{slot.id}]", "maybe", current_status == "maybe", class: "w-4 h-4 text-yellow-500 focus:ring-yellow-400 border-gray-300" %>
+                    <span class="ml-2 text-sm font-medium text-gray-700 group-hover:text-yellow-600">Talvez</span>
+                  </label>
+
+                  <%# NÃO %>
+                  <label class="flex items-center cursor-pointer group">
+                    <%= radio_button_tag "availabilities[#{slot.id}]", "unavailable", current_status == "unavailable", class: "w-4 h-4 text-red-500 focus:ring-red-400 border-gray-300" %>
+                    <span class="ml-2 text-sm font-medium text-gray-700 group-hover:text-red-600">Não</span>
+                  </label>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="mt-8 flex items-center justify-center gap-4 border-t pt-6">
+      <%= link_to "Cancelar", event_path(@event), class: "px-6 py-3 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50" %>
+      <%= form.submit "Salvar Disponibilidade", class: "px-8 py-3 border border-transparent text-sm font-bold rounded-md text-white bg-blue-600 hover:bg-blue-700 shadow-lg cursor-pointer transform hover:scale-105 transition" %>
+    </div>
+  <% end %>
+</div>
